@@ -1,0 +1,41 @@
+version: '1.0'
+
+services:
+  web:
+    build: .
+    container_name: django
+    command: python manage.py runserver 0.0.0.0:8000
+    env_file:
+      - ./.env.dev
+    volumes:
+      - .:/home/djproj
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db   
+      - redis
+  db:
+    image: mysql
+    container_name: mysql
+    env_file:
+      - ./db_config.env
+    volumes:
+      - mysqldata:/var/lib/mysql
+  redis:
+    image: redis
+    expose:
+      - 6379
+    command: [ "redis-server"]
+  celery:
+    build: .
+    depends_on:
+      - redis
+      - web
+    env_file:
+      - ./.env.dev
+    restart: unless-stopped
+    command: celery -A dairy worker -l INFO
+    
+
+volumes:
+  mysqldata:

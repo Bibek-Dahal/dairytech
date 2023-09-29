@@ -1,0 +1,21 @@
+{%extends 'base.html'%}
+{% load i18n %}
+{% block navbar%}
+{% endblock navbar%}
+{%block title%}{% trans "Account Inactive" %}{%endblock%}
+{% block content%}
+
+<div class="container mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6 col-sm-8 col-lg-5 col-11 p-1">
+            <h1>{% trans "Account Inactive" %}</h1>
+            
+            <p>{% trans "This account is inactive." %}</p>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock content%}
+{%block footer%}{%endblock %}

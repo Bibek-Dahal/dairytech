@@ -1,0 +1,37 @@
+{%extends 'base.html'%}
+{%block title%}Sign Out{%endblock%}
+{% load i18n %}
+{% block content%}
+
+{%block messageinfo%}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <p class="alert alert-primary">{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
+        {% endfor %}
+</ul>
+{% endif %}
+{%endblock%}
+
+
+<div class="container mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6 col-sm-8 col-lg-5 col-11 p-1 card shadow-2">
+            <p>{% trans 'Are you sure you want to sign out?' %}</p>
+            
+            <form method="post" class="form-control" action="{% url 'account_logout' %}">
+                {% csrf_token %}
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <button type="submit" class="btn btn-danger">{% trans 'Sign Out'%}</button>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock content%}
+{%block footer%}{%endblock %}

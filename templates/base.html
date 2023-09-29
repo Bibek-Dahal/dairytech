@@ -1,0 +1,161 @@
+{%load static%}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%} {%endblock%}</title>
+    <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{%static 'css/nepali-date-picker.min.css'%}">
+    
+    <script src="{%static 'js/bootstrap.min.js'%}"></script>
+    <script src="{%static 'js/fontawesome.min.js'%}"></script>
+    <script src="{%static 'js/jquery.min.js'%}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    
+    
+
+    {%block additionalcss%}{%endblock%}
+    {%block additionaljs%} {%endblock%}
+    
+</head>
+
+
+<body>
+    {%block navbar%}
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{%url 'user:homepage'%}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{%url 'dairyapp:homepage'%}">Dashboard</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            
+                            <li><a class="dropdown-item" href="#">{%include './includes/lang_select.html'%}</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">{%include './includes/lang_select.html'%}</a>
+                    </li>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </ul>
+                <div class="d-flex justify-content-end">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link mx-12">{%trans 'Welcome'%},{{request.user.first_name|title}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    {%endblock navbar%}
+
+    {%block content%}
+    
+    {%block left_side_bar%}
+    
+    <div class="container-fluid ">
+
+        <div class="left-side-bar">
+            <div class="row">
+                <div class="col-sm-4 col-xs-12 bg-primary">
+                    <div class="row">
+                        <div class="col">
+                            <a href="{% url 'dairyapp:homepage' %}" class="nav-link p-3 active">Dairies</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <a href="{% url 'dairyapp:fat_list' %}" class="nav-link p-3 text-light">Fat Rates</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <a href="#" class="nav-link p-3 text-light">Milk Reports</a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col">
+                    {%block messageinfo%}{%endblock%}
+                    {%block table_data%}
+                    {%endblock%}
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {%endblock left_side_bar%}
+    {%block pagination%}
+    {%if is_paginated%}
+    <div class="pagination">
+        <ul class="pagination justify-content-center flex-wrap mt-2 mb-4">
+            {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+            <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
+            {% endif %}
+            {% for i in page_range|default_if_none:page_obj.paginator.get_elided_page_range %}
+            {% if page_obj.number == i %}
+            <li class="active page-item"><span class="page-link">{{ i }} <span class="sr-only"></span></span>
+            </li>
+            {% else %}
+            {% if i == page_obj.paginator.ELLIPSIS %}
+            <li class="page-item"><span class="page-link">{{ i }}</span></li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+            {% else %}
+            <li class="disabled page-item"><span class="page-link">&raquo;</span></li>
+            {% endif %}
+        </ul>
+    
+    </div>
+    {%endif%}
+    {%endblock pagination%}
+    
+    
+    
+
+    {%endblock content%}
+
+    
+    
+    {%block footer%} {%endblock%}
+    
+</body>
+
+</html>
