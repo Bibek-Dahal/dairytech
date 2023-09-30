@@ -13,7 +13,7 @@ class CreateFatForm(forms.ModelForm):
     # fat_rate = forms.FloatField(widget=forms.NumberInput(attrs={"class": "form-control","placeholder":"enter your email"}))
     dairy = forms.ModelChoiceField(queryset=None,widget=forms.Select(attrs={"class":"form-control","maxlength":6}))
     # foo_select = forms.ModelMultipleChoiceField(queryset=None)
-
+    bonous_amount = forms.CharField(label=_("Bonus amount"),widget=forms.NumberInput(attrs={'class':'form-control'}))
     def __init__(self,request,*args, **kwargs):
         super().__init__(*args, **kwargs)
         print("------------")
@@ -25,7 +25,7 @@ class CreateFatForm(forms.ModelForm):
         widgets ={
             # 'country':CountrySelectWidget(attrs={"class": "form-select"}),
             'fat_rate':forms.NumberInput(attrs={"class": "form-control","placeholder":"enter fat rate"}),
-            'bonous_amount':forms.NumberInput(attrs={'class':'form-control'})
+            # 'bonous_amount':forms.NumberInput(attrs={'class':'form-control'})
             # 'dairy':forms.ChoiceField(widget=forms.ModelChoiceIterator())
             # 'username':forms.TextInput(attrs={"class": "form-control","placeholder":"enter your name","minlength":3})
             #'password':forms.PasswordInput(attrs={"class": "form-control"})
