@@ -1,5 +1,6 @@
 {%extends "../base.html"%}
 {% load i18n %}
+{%load static%}
 {%block title%}{%trans 'Milk Record' %}{%endblock title%}
 {%block messageinfo%}
 {% if messages %}
@@ -12,58 +13,68 @@
 
 {%endblock%}
 {%block table_data%}
-<div>
-    {{count}}
-    {%if fat_rate%}
-        <h1>fat rate:{{fat_rate}}</h1>
-        <h1>bonous:{{bonous}}</h1>
-        <h1>total fat rate:{{total_fat_rate}}</h1>
-    {%endif%}
-    <p>{%trans 'Filter' %}</p>
-    Date:{{date}}
-    <p>{%trans 'Date' %}:<input type="date" id="date" value="{{date}}"></p>
-    <p>{%trans 'Start Date' %}:<input type="date" id="start_date" name="start-date" value="{{start_date}}"></p>
-    <p>{%trans 'End Date' %}:<input type="date" id="end_date" name="end-date" value="{{end_date}}"></p>
-    <p>{%trans 'Shift:select' %}</p>
+<div >
+    <div class="container">
+        <div class="row">
+            
+        </div>
+         <div id="filter">
+        <div class="row " >
+            <div class="col-lg-4 p-2" >
+                <p class="fw-bold p-2 " data-mdb-inline="true" style="background-color: #f6f6f0" >{%trans 'Date' %}:  <input type="date" data-single="true" class="date-picker"  id="date" {%if date %} value="{{date}}" {%endif%}></p>
+                <br/>
+                <p class="fw-bold p-2" style="background-color: #FFFADD" >{%trans 'Start Date' %}:  <input type="date" data-single="true" id="start_date" name="start-date" class="date-picker" {%if start_date %} value="{{start_date}}" {%endif%}></p>
+            </div>
 
+            <div class="col-lg-4 p-2">
+                <p class="fw-bold p-2" style="background-color: #FFFADD" >{%trans 'End Date' %}: <input type="date" data-single="true" id="end_date" data-single="true" name="end-date" class="date-picker" {%if end_date %} value="{{end_date}}" {%endif%}></p>
+                <br/>
+                <div style="background-color: #FFFADD;">
+                <p class="fw-bold ps-2 pt-2" style="display: inline-block;">{%trans 'Shift' %}:</p>
+                {%if shift and shift == "morning" %}
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="shift" id="morning" value="morning" checked>
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        {%trans 'morning' %}
+                    </label>
+                </div>
+                {%else%}
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="shift" id="morning" value="morning">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        {%trans 'morning' %}
+                    </label>
+                </div>
+                {%endif%}
+                {% if shift and shift == 'night' %}
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="shift" id="night" value="night" checked>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        {%trans 'night' %}
+                    </label>
+                </div>
+                {%else%}
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="shift" id="night" value="night">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        {%trans 'night' %}
+                    </label>
+                </div>
+                {%endif%}
+                </div>
+            </div>
 
-    {%if shift and shift == "morning" %}
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="shift" id="morning" value="morning" checked>
-        <label class="form-check-label" for="flexRadioDefault1">
-            {%trans 'morning' %}
-        </label>
+        </div>
+        <script src="{% static 'js/nepali-date-picker.min.js'%}"></script>
+        <!-- Dateq<input type="text" data-single="true" class="date-picker" placeholder="Select Date(s)"> -->
     </div>
-    {%else%}
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="shift" id="morning" value="morning">
-        <label class="form-check-label" for="flexRadioDefault1">
-            {%trans 'morning' %}
-        </label>
-    </div>
-
-
-    {%endif%}
-
-    {% if shift and shift == 'night' %}
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="shift" id="night" value="night" checked>
-        <label class="form-check-label" for="flexRadioDefault2">
-            {%trans 'night' %}
-        </label>
-    </div>
-    {%else%}
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="shift" id="night" value="night">
-        <label class="form-check-label" for="flexRadioDefault2">
-            {%trans 'night' %}
-        </label>
-    </div>
-
-    {%endif%}
-
 </div>
-<table class="table">
+</div>
+
+<div class="container">
+
+
+<table class="table table-striped table-bordered">
 
     <thead>
         <tr>
@@ -107,20 +118,22 @@
             <td>
                 <h3>{{milkrecord.date}}</h3>
             </td>
-            <td>
-                <h3>total amount:{{total_price}}</h3>
-            </td>
 
+        </tr>
+        <tr>
+                <th scope="row">{% trans 'Total Amount' %}:</th>
+                <td colspan="3">{{ total_price }}</td>
         </tr>
 
 
 
     </tbody>
 </table>
+</div>
 
-{%for member in members%}
+<!-- {%for member in members%}
 {{member.first_name}}|{{member.last_name}}|{{member.phone_number}}
-{%endfor%}
+{%endfor%} -->
 
 
 <script>
