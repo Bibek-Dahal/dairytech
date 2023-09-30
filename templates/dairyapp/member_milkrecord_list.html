@@ -11,12 +11,9 @@
 <h1>total fat rate:{{total_fat_rate}}</h1>
 {%endif%}
 <div  onclick="handleToggle()">
-    <p class="fw-bold">{%trans 'Filter' %}:<span class="mx-2"><button id="filter_btn_value" class="btn btn-primary btn-sm"><h5>+</h5></button></span> </p>
-    <div id="filter" class="d-none">
+    <p class="fw-bold d-inline">{%trans 'Filter' %}:<span class="mx-2"></span> </p>
+    <div id="filter">
     
-        
-       
-        
         <div class="row">
             <div class="col-lg-4">
                 <p>{%trans 'Date' %}:<input type="date" data-single="true" class="date-picker"  id="date" {%if date %} value="{{date}}" {%endif%}></p>
@@ -80,18 +77,20 @@
         let filterdiv = document.getElementById("filter");
         let cl = filterdiv.classList.value
         console.log(cl)
-        if(cl === 'd-inline'){
+        if(cl == 'd-inline'){
             filterdiv.classList.remove("d-inline");
             filterdiv.classList.add("d-none");
             let btn = document.getElementById('filter_btn_value')
             btn.textContent = '+'
             console.log("inside if")
+            //updateFiltersAndGetData()
         }else{
             filterdiv.classList.remove("d-none");
             filterdiv.classList.add("d-inline");
             let btn = document.getElementById('filter_btn_value')
             btn.textContent = '-'
             console.log("inside else")
+            //updateFiltersAndGetData()
             
         }
     }
@@ -192,6 +191,7 @@
 <script>
     // Function to construct the query string with the provided filter parameters
     function constructQueryString() {
+        console.log("construct called")
         const shift = getSelectedShift();
         const date = document.getElementById('date').value;
         console.log("date", date)
@@ -199,7 +199,10 @@
         const endDate = document.getElementById('end_date').value;
 
         // Construct the query string based on the provided filter parameters
-        let queryString = '';
+        let filterdiv = document.getElementById("filter");
+        let cl = filterdiv.classList.value
+        console.log("cl",cl)
+        let queryString = `display=${cl}&`;
         if (shift) queryString += `shift=${encodeURIComponent(shift)}&`;
         if (date) queryString += `date=${encodeURIComponent(date)}&`;
         if (startDate) queryString += `start_date=${encodeURIComponent(startDate)}&`;
@@ -225,6 +228,7 @@
 
     // Function to trigger the GET request with the updated filter parameters
     function updateFiltersAndGetData(e) {
+        event.preventDefault()
         console.log("update filtre called", e)
         const queryString = constructQueryString();
         console.log(queryString)
@@ -257,7 +261,7 @@
     document.getElementById('date').addEventListener('input', updateFiltersAndGetData);
     document.getElementById('start_date').addEventListener('input', updateFiltersAndGetData);
     document.getElementById('end_date').addEventListener('input', updateFiltersAndGetData);
-
+    //document.getElementById('filter').addEventListener('click',updateFiltersAndGetData) -->
     function addValue() {
 
     }

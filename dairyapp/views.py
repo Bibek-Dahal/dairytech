@@ -351,6 +351,7 @@ class ListMemberMilkRecord(ListView):
         context['end_date'] = self.request.GET.get('end_date')
         context['shift'] = self.request.GET.get('shift')
         context['date'] = self.request.GET.get('date')
+        context['display'] = self.request.GET.get('display','d-none')
         context['count'] = self.kwargs['count']
         context['total_milk_wieght'] = self.kwargs['total_milk_wieght']
         context['avg_fat'] = round(self.kwargs['avg_fat'],3)
