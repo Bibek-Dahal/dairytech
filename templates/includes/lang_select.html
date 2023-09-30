@@ -1,18 +1,41 @@
 {% load i18n %}
 
+
+<p style="visibility: hidden;" id="current_lang">{% get_current_language as LANGUAGE_CODE %}
+
+    {{LANGUAGE_CODE}}
+</p>
 <form  id="lang_select" action="{% url 'set_language' %}" method="post">
     {% csrf_token %}
     <input name="next" type="hidden" value="{{ redirect_to }}">
-    <select onchange="this.form.submit()" name="language" id="language-select">
-        {% get_current_language as LANGUAGE_CODE %}
-        {% get_available_languages as LANGUAGES %}
-        {% get_language_info_list for LANGUAGES as languages %}
-        {% for language in languages %}
-        <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected{% endif %}>
-            {{ language.name_local }} ({{ language.code }})
-        </option>
-        {% endfor %}
-    </select>
-    <!-- <input type="submit" value="Go"> -->
-</form>
 
+    <input type="hidden" value=" " id="input_id" name="language" >
+</form>
+<button class="btn btn-danger d-inline" id="myButton" onclick="submitform()">
+    {% get_current_language as LANGUAGE_CODE %}
+    {%if LANGUAGE_CODE == 'ne' %}
+        EN
+    {% else %}
+        NE
+    {%endif%}
+    
+</button>
+<script>
+    function submitform(event){
+        let lang = document.getElementById('current_lang').textContent.trim()
+        console.log(lang)
+        console.log(typeof lang)
+        input_id = document.getElementById("input_id")
+        form = document.getElementById("lang_select")
+
+        if(lang === 'en'){
+            console.log("inside english")
+            input_id.value = 'ne'
+        }else{
+            console.log("inside nepali")
+            input_id.value = 'en'
+        }
+        form.submit()
+        console.log('Button CLicked')
+    };
+</script>
