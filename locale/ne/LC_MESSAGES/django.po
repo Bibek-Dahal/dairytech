@@ -2,13 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-20 15:57+0000\n"
+"POT-Creation-Date: 2023-09-30 15:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,17 +16,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: dairy/settings.py:188
+#: dairy/settings.py:191
 msgid "Nepali"
 msgstr "नेपाली"
 
-#: dairy/settings.py:189
+#: dairy/settings.py:192
 msgid "English"
 msgstr "अंग्रेजी"
 
 #: dairyapp/forms.py:37
 msgid "fat rate should be positive"
-msgstr "फ्याट दर सकारात्मक हुनुपर्छ"
+msgstr "फ्याट दर positive हुनुपर्छ"
 
 #: dairyapp/forms.py:43 dairyapp/models.py:14
 msgid "members"
@@ -41,7 +39,7 @@ msgstr "प्रयोगकर्ता"
 #: dairyapp/forms.py:60 dairyapp/models.py:23 dairyapp/models.py:32
 #: dairyapp/models.py:49 dairyapp/models.py:68
 msgid "dairy"
-msgstr "डेयरी"
+msgstr "डेरी"
 
 #: dairyapp/forms.py:61 dairyapp/models.py:54
 msgid "date"
@@ -54,7 +52,7 @@ msgstr "शिफ्ट"
 #: dairyapp/forms.py:90 dairyapp/forms.py:124
 #, python-format
 msgid "Milk fat should be between %(low_range)d and %(high_range)d"
-msgstr ""
+msgstr "दूधको फ्याट %(low_range)d र %(high_range)d को बीचमा हुनुपर्छ"
 
 #: dairyapp/models.py:8
 msgid "name"
@@ -71,16 +69,16 @@ msgstr "प्रमाणित"
 #: dairyapp/models.py:12 dairyapp/models.py:34 dairyapp/models.py:55
 #: dairyapp/models.py:77
 msgid "created at"
-msgstr ""
+msgstr "स्थापित भएको"
 
 #: dairyapp/models.py:13 dairyapp/models.py:35 dairyapp/models.py:56
 #: dairyapp/models.py:78
 msgid "updated at"
-msgstr ""
+msgstr "अद्यावधिक भएको"
 
 #: dairyapp/models.py:24
 msgid "dairies"
-msgstr "डेयरीहरू"
+msgstr "डेरीहरू"
 
 #: dairyapp/models.py:31 dairyapp/models.py:70
 msgid "fat rate"
@@ -110,1250 +108,41 @@ msgstr "औसत फ्याट"
 msgid "Total amount"
 msgstr "कुल रकम"
 
-#: dairyapp/views.py:273
+#: dairyapp/views.py:286
 msgid "Record added successfully"
 msgstr "रेकर्ड सफलतापूर्वक थपियो"
 
-#: dairyapp/views.py:452 dairyapp/views.py:606 user/views.py:161
+#: dairyapp/views.py:466 dairyapp/views.py:622 user/views.py:161
 msgid "Cannot apply filter witin date range. Multiple fat rate exists."
 msgstr "मिति दायरा भित्र फिल्टर लागू गर्न सकिँदैन। धेरै फ्याट दर अवस्थित छ।"
 
-#: dairyapp/views.py:479 dairyapp/views.py:636 user/views.py:177
+#: dairyapp/views.py:493 dairyapp/views.py:652 user/views.py:177
 msgid "Fat rate with in specified date range is not defined."
 msgstr "निर्दिष्ट मिति दायरा संग फ्याट दर परिभाषित गरिएको छैन।"
 
-#: dairyapp/views.py:571
+#: dairyapp/views.py:587
 msgid "Please select start date and end date"
 msgstr "कृपया सुरु मिति र अन्त्य मिति चयन गर्नुहोस्"
 
-#: dairyapp/views.py:578
+#: dairyapp/views.py:594
 msgid "Sorry,dairy with username doesnot exists."
-msgstr "माफ गर्नुहोस्, प्रयोगकर्ता नाम भएको डेयरी अवस्थित छैन।"
+msgstr "माफ गर्नुहोस्, प्रयोगकर्ता नाम भएको डेरी अवस्थित छैन।"
 
-#: dairyapp/views.py:655
+#: dairyapp/views.py:671
 msgid "Sorry,invalid userid"
 msgstr "माफ गर्नुहोस्, अमान्य प्रयोगकर्ता आईडी"
 
-#: dairyapp/views.py:661
+#: dairyapp/views.py:677
 msgid "Please select valid information before genarating milk report"
 msgstr "कृपया दूध रिपोर्ट उत्पन्न गर्नु अघि मान्य जानकारी चयन गर्नुहोस्"
 
-#: dairyapp/views.py:752
+#: dairyapp/views.py:780
 msgid "milk report email sent"
 msgstr "दूध रेकर्डको रिपोर्ट इमेलमा पठाइयो"
 
-#: env/lib/python3.10/site-packages/django/contrib/messages/apps.py:15
-msgid "Messages"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/contrib/sitemaps/apps.py:8
-msgid "Site Maps"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/contrib/staticfiles/apps.py:9
-msgid "Static Files"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/contrib/syndication/apps.py:7
-msgid "Syndication"
-msgstr ""
-
-#. Translators: String used to replace omitted page numbers in elided page
-#. range generated by paginators, e.g. [1, 2, '…', 5, 6, 7, '…', 9, 10].
-#: env/lib/python3.10/site-packages/django/core/paginator.py:30
-msgid "…"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/core/paginator.py:50
-msgid "That page number is not an integer"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/core/paginator.py:52
-msgid "That page number is less than 1"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/core/paginator.py:54
-msgid "That page contains no results"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/core/validators.py:22
-msgid "Enter a valid value."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/core/validators.py:104
-#: env/lib/python3.10/site-packages/django/forms/fields.py:752
-msgid "Enter a valid URL."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/core/validators.py:165
-msgid "Enter a valid integer."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/core/validators.py:176
-msgid "Enter a valid email address."
-msgstr ""
-
-#. Translators: "letters" means latin letters: a-z and A-Z.
-#: env/lib/python3.10/site-packages/django/core/validators.py:259
-msgid ""
-"Enter a valid “slug” consisting of letters, numbers, underscores or hyphens."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/core/validators.py:267
-msgid ""
-"Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or "
-"hyphens."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/core/validators.py:279
-#: env/lib/python3.10/site-packages/django/core/validators.py:287
-#: env/lib/python3.10/site-packages/django/core/validators.py:316
-msgid "Enter a valid IPv4 address."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/core/validators.py:296
-#: env/lib/python3.10/site-packages/django/core/validators.py:317
-msgid "Enter a valid IPv6 address."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/core/validators.py:308
-#: env/lib/python3.10/site-packages/django/core/validators.py:315
-msgid "Enter a valid IPv4 or IPv6 address."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/core/validators.py:351
-msgid "Enter only digits separated by commas."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/core/validators.py:357
-#, python-format
-msgid "Ensure this value is %(limit_value)s (it is %(show_value)s)."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/core/validators.py:392
-#, python-format
-msgid "Ensure this value is less than or equal to %(limit_value)s."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/core/validators.py:401
-#, python-format
-msgid "Ensure this value is greater than or equal to %(limit_value)s."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/core/validators.py:410
-#, python-format
-msgid "Ensure this value is a multiple of step size %(limit_value)s."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/core/validators.py:420
-#, python-format
-msgid ""
-"Ensure this value has at least %(limit_value)d character (it has "
-"%(show_value)d)."
-msgid_plural ""
-"Ensure this value has at least %(limit_value)d characters (it has "
-"%(show_value)d)."
-msgstr[0] ""
-msgstr[1] ""
-
-#: env/lib/python3.10/site-packages/django/core/validators.py:438
-#, python-format
-msgid ""
-"Ensure this value has at most %(limit_value)d character (it has "
-"%(show_value)d)."
-msgid_plural ""
-"Ensure this value has at most %(limit_value)d characters (it has "
-"%(show_value)d)."
-msgstr[0] ""
-msgstr[1] ""
-
-#: env/lib/python3.10/site-packages/django/core/validators.py:461
-#: env/lib/python3.10/site-packages/django/forms/fields.py:347
-#: env/lib/python3.10/site-packages/django/forms/fields.py:386
-msgid "Enter a number."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/core/validators.py:463
-#, python-format
-msgid "Ensure that there are no more than %(max)s digit in total."
-msgid_plural "Ensure that there are no more than %(max)s digits in total."
-msgstr[0] ""
-msgstr[1] ""
-
-#: env/lib/python3.10/site-packages/django/core/validators.py:468
-#, python-format
-msgid "Ensure that there are no more than %(max)s decimal place."
-msgid_plural "Ensure that there are no more than %(max)s decimal places."
-msgstr[0] ""
-msgstr[1] ""
-
-#: env/lib/python3.10/site-packages/django/core/validators.py:473
-#, python-format
-msgid ""
-"Ensure that there are no more than %(max)s digit before the decimal point."
-msgid_plural ""
-"Ensure that there are no more than %(max)s digits before the decimal point."
-msgstr[0] ""
-msgstr[1] ""
-
-#: env/lib/python3.10/site-packages/django/core/validators.py:544
-#, python-format
-msgid ""
-"File extension “%(extension)s” is not allowed. Allowed extensions are: "
-"%(allowed_extensions)s."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/core/validators.py:605
-msgid "Null characters are not allowed."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/base.py:1423
-#: env/lib/python3.10/site-packages/django/forms/models.py:893
-msgid "and"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/base.py:1425
-#, python-format
-msgid "%(model_name)s with this %(field_labels)s already exists."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/constraints.py:17
-#, python-format
-msgid "Constraint “%(name)s” is violated."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:128
-#, python-format
-msgid "Value %(value)r is not a valid choice."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:129
-msgid "This field cannot be null."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:130
-msgid "This field cannot be blank."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:131
-#, python-format
-msgid "%(model_name)s with this %(field_label)s already exists."
-msgstr ""
-
-#. Translators: The 'lookup_type' is one of 'date', 'year' or
-#. 'month'. Eg: "Title must be unique for pub_date year"
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:135
-#, python-format
-msgid ""
-"%(field_label)s must be unique for %(date_field_label)s %(lookup_type)s."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:173
-#, python-format
-msgid "Field of type: %(field_type)s"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1094
-#, python-format
-msgid "“%(value)s” value must be either True or False."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1095
-#, python-format
-msgid "“%(value)s” value must be either True, False, or None."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1097
-msgid "Boolean (Either True or False)"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1147
-#, python-format
-msgid "String (up to %(max_length)s)"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1149
-msgid "String (unlimited)"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1253
-msgid "Comma-separated integers"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1354
-#, python-format
-msgid ""
-"“%(value)s” value has an invalid date format. It must be in YYYY-MM-DD "
-"format."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1358
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1493
-#, python-format
-msgid ""
-"“%(value)s” value has the correct format (YYYY-MM-DD) but it is an invalid "
-"date."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1362
-msgid "Date (without time)"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1489
-#, python-format
-msgid ""
-"“%(value)s” value has an invalid format. It must be in YYYY-MM-DD HH:MM[:ss[."
-"uuuuuu]][TZ] format."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1497
-#, python-format
-msgid ""
-"“%(value)s” value has the correct format (YYYY-MM-DD HH:MM[:ss[.uuuuuu]]"
-"[TZ]) but it is an invalid date/time."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1502
-msgid "Date (with time)"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1626
-#, python-format
-msgid "“%(value)s” value must be a decimal number."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1628
-msgid "Decimal number"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1789
-#, python-format
-msgid ""
-"“%(value)s” value has an invalid format. It must be in [DD] [[HH:]MM:]ss[."
-"uuuuuu] format."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1793
-msgid "Duration"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1845
-msgid "Email address"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1870
-msgid "File path"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1948
-#, python-format
-msgid "“%(value)s” value must be a float."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1950
-msgid "Floating point number"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1990
-#, python-format
-msgid "“%(value)s” value must be an integer."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1992
-msgid "Integer"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2088
-msgid "Big (8 byte) integer"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2105
-msgid "Small integer"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2113
-msgid "IPv4 address"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2144
-msgid "IP address"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2237
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2238
-#, python-format
-msgid "“%(value)s” value must be either None, True or False."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2240
-msgid "Boolean (Either True, False or None)"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2291
-msgid "Positive big integer"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2306
-msgid "Positive integer"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2321
-msgid "Positive small integer"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2337
-#, python-format
-msgid "Slug (up to %(max_length)s)"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2373
-msgid "Text"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2448
-#, python-format
-msgid ""
-"“%(value)s” value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] "
-"format."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2452
-#, python-format
-msgid ""
-"“%(value)s” value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
-"invalid time."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2456
-msgid "Time"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2564
-msgid "URL"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2588
-msgid "Raw binary data"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2653
-#, python-format
-msgid "“%(value)s” is not a valid UUID."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:2655
-msgid "Universally unique identifier"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/files.py:232
-msgid "File"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/files.py:393
-msgid "Image"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/json.py:26
-msgid "A JSON object"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/json.py:28
-msgid "Value must be valid JSON."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/related.py:919
-#, python-format
-msgid "%(model)s instance with %(field)s %(value)r does not exist."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/related.py:921
-msgid "Foreign Key (type determined by related field)"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/related.py:1212
-msgid "One-to-one relationship"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/related.py:1269
-#, python-format
-msgid "%(from)s-%(to)s relationship"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/related.py:1271
-#, python-format
-msgid "%(from)s-%(to)s relationships"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/db/models/fields/related.py:1319
-msgid "Many-to-many relationship"
-msgstr ""
-
-#. Translators: If found as last label character, these punctuation
-#. characters will prevent the default label_suffix to be appended to the label
-#: env/lib/python3.10/site-packages/django/forms/boundfield.py:184
-msgid ":?.!"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/fields.py:91
-msgid "This field is required."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/fields.py:298
-msgid "Enter a whole number."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/fields.py:467
-#: env/lib/python3.10/site-packages/django/forms/fields.py:1241
-msgid "Enter a valid date."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/fields.py:490
-#: env/lib/python3.10/site-packages/django/forms/fields.py:1242
-msgid "Enter a valid time."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/fields.py:517
-msgid "Enter a valid date/time."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/fields.py:551
-msgid "Enter a valid duration."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/fields.py:552
-#, python-brace-format
-msgid "The number of days must be between {min_days} and {max_days}."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/fields.py:621
-msgid "No file was submitted. Check the encoding type on the form."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/fields.py:622
-msgid "No file was submitted."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/fields.py:623
-msgid "The submitted file is empty."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/fields.py:625
-#, python-format
-msgid "Ensure this filename has at most %(max)d character (it has %(length)d)."
-msgid_plural ""
-"Ensure this filename has at most %(max)d characters (it has %(length)d)."
-msgstr[0] ""
-msgstr[1] ""
-
-#: env/lib/python3.10/site-packages/django/forms/fields.py:630
-msgid "Please either submit a file or check the clear checkbox, not both."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/fields.py:694
-msgid ""
-"Upload a valid image. The file you uploaded was either not an image or a "
-"corrupted image."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/fields.py:857
-#: env/lib/python3.10/site-packages/django/forms/fields.py:949
-#: env/lib/python3.10/site-packages/django/forms/models.py:1566
-#, python-format
-msgid "Select a valid choice. %(value)s is not one of the available choices."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/fields.py:951
-#: env/lib/python3.10/site-packages/django/forms/fields.py:1070
-#: env/lib/python3.10/site-packages/django/forms/models.py:1564
-msgid "Enter a list of values."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/fields.py:1071
-msgid "Enter a complete value."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/fields.py:1310
-msgid "Enter a valid UUID."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/fields.py:1340
-msgid "Enter a valid JSON."
-msgstr ""
-
-#. Translators: This is the default suffix added to form field labels
-#: env/lib/python3.10/site-packages/django/forms/forms.py:98
-msgid ":"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/forms.py:244
-#: env/lib/python3.10/site-packages/django/forms/forms.py:328
-#, python-format
-msgid "(Hidden field %(name)s) %(error)s"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/formsets.py:63
-#, python-format
-msgid ""
-"ManagementForm data is missing or has been tampered with. Missing fields: "
-"%(field_names)s. You may need to file a bug report if the issue persists."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/formsets.py:67
-#, python-format
-msgid "Please submit at most %(num)d form."
-msgid_plural "Please submit at most %(num)d forms."
-msgstr[0] ""
-msgstr[1] ""
-
-#: env/lib/python3.10/site-packages/django/forms/formsets.py:72
-#, python-format
-msgid "Please submit at least %(num)d form."
-msgid_plural "Please submit at least %(num)d forms."
-msgstr[0] ""
-msgstr[1] ""
-
-#: env/lib/python3.10/site-packages/django/forms/formsets.py:484
-#: env/lib/python3.10/site-packages/django/forms/formsets.py:491
-msgid "Order"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/formsets.py:499
-msgid "Delete"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/models.py:886
-#, python-format
-msgid "Please correct the duplicate data for %(field)s."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/models.py:891
-#, python-format
-msgid "Please correct the duplicate data for %(field)s, which must be unique."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/models.py:898
-#, python-format
-msgid ""
-"Please correct the duplicate data for %(field_name)s which must be unique "
-"for the %(lookup)s in %(date_field)s."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/models.py:907
-msgid "Please correct the duplicate values below."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/models.py:1338
-msgid "The inline value did not match the parent instance."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/models.py:1429
-msgid "Select a valid choice. That choice is not one of the available choices."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/models.py:1568
-#, python-format
-msgid "“%(pk)s” is not a valid value."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/utils.py:226
-#, python-format
-msgid ""
-"%(datetime)s couldn’t be interpreted in time zone %(current_timezone)s; it "
-"may be ambiguous or it may not exist."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/widgets.py:463
-msgid "Clear"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/widgets.py:464
-msgid "Currently"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/widgets.py:465
-msgid "Change"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/widgets.py:794
-msgid "Unknown"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/widgets.py:795
-msgid "Yes"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/forms/widgets.py:796
-msgid "No"
-msgstr ""
-
-#. Translators: Please do not add spaces around commas.
-#: env/lib/python3.10/site-packages/django/template/defaultfilters.py:861
-msgid "yes,no,maybe"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/template/defaultfilters.py:891
-#: env/lib/python3.10/site-packages/django/template/defaultfilters.py:908
-#, python-format
-msgid "%(size)d byte"
-msgid_plural "%(size)d bytes"
-msgstr[0] ""
-msgstr[1] ""
-
-#: env/lib/python3.10/site-packages/django/template/defaultfilters.py:910
-#, python-format
-msgid "%s KB"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/template/defaultfilters.py:912
-#, python-format
-msgid "%s MB"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/template/defaultfilters.py:914
-#, python-format
-msgid "%s GB"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/template/defaultfilters.py:916
-#, python-format
-msgid "%s TB"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/template/defaultfilters.py:918
-#, python-format
-msgid "%s PB"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dateformat.py:73
-msgid "p.m."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dateformat.py:74
-msgid "a.m."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dateformat.py:79
-msgid "PM"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dateformat.py:80
-msgid "AM"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dateformat.py:152
-msgid "midnight"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dateformat.py:154
-msgid "noon"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:7
-msgid "Monday"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:8
-msgid "Tuesday"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:9
-msgid "Wednesday"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:10
-msgid "Thursday"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:11
-msgid "Friday"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:12
-msgid "Saturday"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:13
-msgid "Sunday"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:16
-msgid "Mon"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:17
-msgid "Tue"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:18
-msgid "Wed"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:19
-msgid "Thu"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:20
-msgid "Fri"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:21
-msgid "Sat"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:22
-msgid "Sun"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:25
-msgid "January"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:26
-msgid "February"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:27
-msgid "March"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:28
-msgid "April"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:29
-msgid "May"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:30
-msgid "June"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:31
-msgid "July"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:32
-msgid "August"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:33
-msgid "September"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:34
-msgid "October"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:35
-msgid "November"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:36
-msgid "December"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:39
-msgid "jan"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:40
-msgid "feb"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:41
-msgid "mar"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:42
-msgid "apr"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:43
-msgid "may"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:44
-msgid "jun"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:45
-msgid "jul"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:46
-msgid "aug"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:47
-msgid "sep"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:48
-msgid "oct"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:49
-msgid "nov"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:50
-msgid "dec"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:53
-msgctxt "abbrev. month"
-msgid "Jan."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:54
-msgctxt "abbrev. month"
-msgid "Feb."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:55
-msgctxt "abbrev. month"
-msgid "March"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:56
-msgctxt "abbrev. month"
-msgid "April"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:57
-msgctxt "abbrev. month"
-msgid "May"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:58
-msgctxt "abbrev. month"
-msgid "June"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:59
-msgctxt "abbrev. month"
-msgid "July"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:60
-msgctxt "abbrev. month"
-msgid "Aug."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:61
-msgctxt "abbrev. month"
-msgid "Sept."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:62
-msgctxt "abbrev. month"
-msgid "Oct."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:63
-msgctxt "abbrev. month"
-msgid "Nov."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:64
-msgctxt "abbrev. month"
-msgid "Dec."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:67
-msgctxt "alt. month"
-msgid "January"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:68
-msgctxt "alt. month"
-msgid "February"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:69
-msgctxt "alt. month"
-msgid "March"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:70
-msgctxt "alt. month"
-msgid "April"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:71
-msgctxt "alt. month"
-msgid "May"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:72
-msgctxt "alt. month"
-msgid "June"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:73
-msgctxt "alt. month"
-msgid "July"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:74
-msgctxt "alt. month"
-msgid "August"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:75
-msgctxt "alt. month"
-msgid "September"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:76
-msgctxt "alt. month"
-msgid "October"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:77
-msgctxt "alt. month"
-msgid "November"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/dates.py:78
-msgctxt "alt. month"
-msgid "December"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/ipv6.py:8
-msgid "This is not a valid IPv6 address."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/text.py:78
-#, python-format
-msgctxt "String to return when truncating text"
-msgid "%(truncated_text)s…"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/text.py:254
-msgid "or"
-msgstr ""
-
-#. Translators: This string is used as a separator between list elements
-#: env/lib/python3.10/site-packages/django/utils/text.py:273
-#: env/lib/python3.10/site-packages/django/utils/timesince.py:135
-msgid ", "
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/utils/timesince.py:8
-#, python-format
-msgid "%(num)d year"
-msgid_plural "%(num)d years"
-msgstr[0] ""
-msgstr[1] ""
-
-#: env/lib/python3.10/site-packages/django/utils/timesince.py:9
-#, python-format
-msgid "%(num)d month"
-msgid_plural "%(num)d months"
-msgstr[0] ""
-msgstr[1] ""
-
-#: env/lib/python3.10/site-packages/django/utils/timesince.py:10
-#, python-format
-msgid "%(num)d week"
-msgid_plural "%(num)d weeks"
-msgstr[0] ""
-msgstr[1] ""
-
-#: env/lib/python3.10/site-packages/django/utils/timesince.py:11
-#, python-format
-msgid "%(num)d day"
-msgid_plural "%(num)d days"
-msgstr[0] ""
-msgstr[1] ""
-
-#: env/lib/python3.10/site-packages/django/utils/timesince.py:12
-#, python-format
-msgid "%(num)d hour"
-msgid_plural "%(num)d hours"
-msgstr[0] ""
-msgstr[1] ""
-
-#: env/lib/python3.10/site-packages/django/utils/timesince.py:13
-#, python-format
-msgid "%(num)d minute"
-msgid_plural "%(num)d minutes"
-msgstr[0] ""
-msgstr[1] ""
-
-#: env/lib/python3.10/site-packages/django/views/csrf.py:111
-msgid "Forbidden"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/csrf.py:112
-msgid "CSRF verification failed. Request aborted."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/csrf.py:116
-msgid ""
-"You are seeing this message because this HTTPS site requires a “Referer "
-"header” to be sent by your web browser, but none was sent. This header is "
-"required for security reasons, to ensure that your browser is not being "
-"hijacked by third parties."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/csrf.py:122
-msgid ""
-"If you have configured your browser to disable “Referer” headers, please re-"
-"enable them, at least for this site, or for HTTPS connections, or for “same-"
-"origin” requests."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/csrf.py:127
-msgid ""
-"If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or "
-"including the “Referrer-Policy: no-referrer” header, please remove them. The "
-"CSRF protection requires the “Referer” header to do strict referer checking. "
-"If you’re concerned about privacy, use alternatives like <a "
-"rel=\"noreferrer\" …> for links to third-party sites."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/csrf.py:136
-msgid ""
-"You are seeing this message because this site requires a CSRF cookie when "
-"submitting forms. This cookie is required for security reasons, to ensure "
-"that your browser is not being hijacked by third parties."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/csrf.py:142
-msgid ""
-"If you have configured your browser to disable cookies, please re-enable "
-"them, at least for this site, or for “same-origin” requests."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/csrf.py:148
-msgid "More information is available with DEBUG=True."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/generic/dates.py:44
-msgid "No year specified"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/generic/dates.py:64
-#: env/lib/python3.10/site-packages/django/views/generic/dates.py:115
-#: env/lib/python3.10/site-packages/django/views/generic/dates.py:214
-msgid "Date out of range"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/generic/dates.py:94
-msgid "No month specified"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/generic/dates.py:147
-msgid "No day specified"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/generic/dates.py:194
-msgid "No week specified"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/generic/dates.py:349
-#: env/lib/python3.10/site-packages/django/views/generic/dates.py:380
-#, python-format
-msgid "No %(verbose_name_plural)s available"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/generic/dates.py:652
-#, python-format
-msgid ""
-"Future %(verbose_name_plural)s not available because %(class_name)s."
-"allow_future is False."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/generic/dates.py:692
-#, python-format
-msgid "Invalid date string “%(datestr)s” given format “%(format)s”"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/generic/detail.py:56
-#, python-format
-msgid "No %(verbose_name)s found matching the query"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/generic/list.py:70
-msgid "Page is not “last”, nor can it be converted to an int."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/generic/list.py:77
-#, python-format
-msgid "Invalid page (%(page_number)s): %(message)s"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/generic/list.py:169
-#, python-format
-msgid "Empty list and “%(class_name)s.allow_empty” is False."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/static.py:38
-msgid "Directory indexes are not allowed here."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/static.py:40
-#, python-format
-msgid "“%(path)s” does not exist"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/static.py:79
-#, python-format
-msgid "Index of %(directory)s"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/templates/default_urlconf.html:7
-#: env/lib/python3.10/site-packages/django/views/templates/default_urlconf.html:220
-msgid "The install worked successfully! Congratulations!"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/templates/default_urlconf.html:206
-#, python-format
-msgid ""
-"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
-"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/templates/default_urlconf.html:221
-#, python-format
-msgid ""
-"You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
-"%(version)s/ref/settings/#debug\" target=\"_blank\" "
-"rel=\"noopener\">DEBUG=True</a> is in your settings file and you have not "
-"configured any URLs."
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/templates/default_urlconf.html:229
-msgid "Django Documentation"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/templates/default_urlconf.html:230
-msgid "Topics, references, &amp; how-to’s"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/templates/default_urlconf.html:238
-msgid "Tutorial: A Polling App"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/templates/default_urlconf.html:239
-msgid "Get started with Django"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/templates/default_urlconf.html:247
-msgid "Django Community"
-msgstr ""
-
-#: env/lib/python3.10/site-packages/django/views/templates/default_urlconf.html:248
-msgid "Connect, get help, or contribute"
-msgstr ""
-
 #: my_account/adapters.py:12
-#, fuzzy
-#| msgid "User with phone numbre already exists"
 msgid "User with email address already exists."
-msgstr "फोन नम्बर भएको प्रयोगकर्ता पहिले नै अवस्थित छ"
+msgstr "इमेल ठेगाना भएको प्रयोगकर्ता पहिले नै अवस्थित छ।"
 
 #: my_account/adapters.py:21
 msgid ""
@@ -1393,10 +182,6 @@ msgstr "नयाँ पासवर्ड (फेरि)"
 msgid "First name"
 msgstr "पहिलो नाम"
 
-#: my_account/forms.py:90 my_account/models.py:86
-msgid "Middle name"
-msgstr "बीचको नाम"
-
 #: my_account/forms.py:91 my_account/models.py:87
 msgid "Last name"
 msgstr "थर"
@@ -1407,7 +192,7 @@ msgstr "फोन नम्बर"
 
 #: my_account/forms.py:116
 msgid "Password"
-msgstr "पासवर्ड"
+msgstr "पास  वर्ड"
 
 #: my_account/forms.py:118
 msgid "Password confirmation"
@@ -1437,6 +222,10 @@ msgstr "प्रयोगकर्ताहरूको अन्तिम न�
 msgid "User with email or phone number already exists."
 msgstr "फोन नम्बर भएको प्रयोगकर्ता पहिले नै अवस्थित छ"
 
+#: my_account/models.py:86
+msgid "Middle name"
+msgstr "बीचको नाम"
+
 #: my_account/models.py:88
 msgid "Email"
 msgstr "इमेल"
@@ -1459,7 +248,7 @@ msgstr "कर्मचारी स्थिति"
 
 #: my_account/models.py:96
 msgid "Designates whether the user can log into this admin site."
-msgstr "प्रयोगकर्ताले यो प्रशासक साइटमा लग इन गर्न सक्छ कि भनेर निर्दिष्ट गर्दछ।"
+msgstr "प्रयोगकर्ताले यो admin साइटमा लग इन गर्न सक्छ कि भनेर निर्दिष्ट गर्दछ।"
 
 #: my_account/models.py:99
 msgid "active"
@@ -1470,6 +259,8 @@ msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
+"यो प्रयोगकर्तालाई active रूपमा व्यवहार गर्नुपर्छ कि भनेर तोक्छ। खाताहरू मेटाउनुको सट्टा "
+"यसलाई Unselect गर्नुहोस्।"
 
 #: my_account/models.py:106
 msgid "date joined"
@@ -1490,15 +281,15 @@ msgstr "इमेल ठेगानाहरू"
 
 #: templates/account/email.html:10
 msgid "The following e-mail addresses are associated with your account:"
-msgstr "निम्न इ-मेल ठेगानाहरू तपाईंको खातासँग सम्बन्धित छन्:"
+msgstr "निम्‍न इ-मेल ठेगानाहरू तपाईंको खातासँग सम्बन्धित छन्:"
 
-#: templates/account/email.html:24 templates/dairyapp/index.html:14
+#: templates/account/email.html:24 templates/dairyapp/index.html:15
 msgid "Verified"
-msgstr "प्रमाणित"
+msgstr "प्रमाणित भयो"
 
 #: templates/account/email.html:26
 msgid "Unverified"
-msgstr "अप्रमाणित"
+msgstr "अप्रमाणित भयो"
 
 #: templates/account/email.html:28
 msgid "Primary"
@@ -1525,6 +316,8 @@ msgid ""
 "You currently do not have any e-mail address set up. You should really add "
 "an e-mail address so you can receive notifications, reset your password, etc."
 msgstr ""
+"तपाईंसँग हाल कुनै पनि इमेल ठेगाना सेटअप छैन। तपाईंले इ-मेल ठेगाना थप्नु पर्छ ताकि तपाईं "
+"सूचनाहरू प्राप्त गर्न सक्नुहुन्छ, आफ्नो पासवर्ड रिसेट गर्न सक्नुहुन्छ, आदि।"
 
 #: templates/account/email.html:48
 msgid "Add E-mail Address"
@@ -1539,39 +332,49 @@ msgid "Do you really want to remove the selected e-mail address?"
 msgstr "के तपाई साँच्चै चयन गरिएको इ-मेल ठेगाना हटाउन चाहनुहुन्छ?"
 
 #: templates/account/email_confirm.html:6
-#: templates/account/email_confirm.html:10
 msgid "Confirm E-mail Address"
 msgstr "इमेल ठेगाना पुष्टि गर्नुहोस्"
 
-#: templates/account/email_confirm.html:16
+#: templates/account/email_confirm.html:15
+
+
+msgid "Confirm your E-mail Address"
+msgstr "इमेल ठेगाना पुष्टि गर्नुहोस्"
+
+#: templates/account/email_confirm.html:23
 #, python-format
 msgid ""
 "Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-mail "
 "address for user %(user_display)s."
 msgstr ""
+"कृपया पुष्टि गर्नुहोस् कि <a href=\"mailto:%(email)s\">%(email)s</a> प्रयोगकर्ता "
+"%(user_display)s को इमेल ठेगाना हो।"
 
-#: templates/account/email_confirm.html:20
+#: templates/account/email_confirm.html:28
 msgid "Confirm"
 msgstr "पुष्टि गर्नुहोस्"
 
-#: templates/account/email_confirm.html:27
+#: templates/account/email_confirm.html:36
 #, python-format
 msgid ""
 "This e-mail confirmation link expired or is invalid. Please <a "
 "href=\"%(email_url)s\">issue a new e-mail confirmation request</a>."
 msgstr ""
+"यो इ-मेल पुष्टिकरण लिङ्कको म्याद सकिएको छ वा अमान्य छ। कृपया <a "
+"href=\"%(email_url)s\">नयाँ इमेल पुष्टि अनुरोध जारी गर्नुहोस्</a>।"
 
-#: templates/account/login.html:30
+#: templates/account/login.html:37 templates/account/signup.html:51
+#: templates/account/verification_sent.html:30
 msgid "Login"
-msgstr "लग - इन"
+msgstr "लगइन गर्नुहोस्"
 
-#: templates/account/login.html:54
+#: templates/account/login.html:64
 msgid "New to our site?"
-msgstr "हाम्रो साइटमा नयाँ?"
+msgstr "हाम्रो साइटमा नयाँ हुनुहुन्छ?"
 
-#: templates/account/login.html:55
+#: templates/account/login.html:65
 msgid "Create an Account"
-msgstr "Create an Account"
+msgstr "Account खोल्नुहोस्"
 
 #: templates/account/logout copy.html:5 copy.html:8 copy.html:17
 #: templates/account/logout.html:27
@@ -1592,18 +395,18 @@ msgstr "के तपाई साईन आउट गर्न निश्च�
 msgid "Change Password"
 msgstr "पासवर्ड परिवर्तन गर्नुहोस्"
 
-#: templates/account/password_reset.html:11
+#: templates/account/password_reset.html:24
 #: templates/account/password_reset_done.html:5
 #: templates/account/password_reset_done.html:11
 msgid "Password Reset"
 msgstr "पासवर्ड रिसेट"
 
-#: templates/account/password_reset.html:52
+#: templates/account/password_reset.html:41
 #: templates/dairyapp/create_fat.html:38
-#: templates/dairyapp/dairy_create_form.html:39
+#: templates/dairyapp/dairy_create_form.html:43
 #: templates/dairyapp/dairy_edit_form.html:38
 #: templates/dairyapp/edit_fat.html:38
-#: templates/dairyapp/milkrecord_create.html:51
+#: templates/dairyapp/milkrecord_create.html:48
 #: templates/dairyapp/milkrecord_edit.html:38
 msgid "Submit"
 msgstr "पेश गर्नुहोस्"
@@ -1614,6 +417,9 @@ msgid ""
 "spam folder. Otherwise\n"
 "                contact us if you do not receive it in a few minutes."
 msgstr ""
+"हामीले तपाईंलाई इमेल पठाएका छौं। यदि तपाईंले यो प्राप्त गर्नुभएको छैन भने कृपया तपाईंको "
+"स्प्याम फोल्डर जाँच गर्नुहोस्। अन्यथा\n"
+" यदि तपाईंले केही मिनेटमा प्राप्त गर्नुभएन भने हामीलाई सम्पर्क गर्नुहोस्।"
 
 #: templates/account/password_reset_from_key.html:11
 msgid "Bad Token"
@@ -1626,6 +432,8 @@ msgid ""
 "used. Please request a <a\n"
 "                    href=\"%(passwd_reset_url)s\">new password reset</a>."
 msgstr ""
+"पासवर्ड रिसेट लिङ्क अवैध थियो, सम्भवतः किनभने यो पहिले नै प्रयोग भइसकेको छ। कृपया <a\n"
+" href=\"%(passwd_reset_url)s\">नयाँ पासवर्ड रिसेट</a> अनुरोध गर्नुहोस्।"
 
 #: templates/account/password_reset_from_key.html:56
 msgid "change password"
@@ -1635,9 +443,24 @@ msgstr "पासवर्ड परिवर्तन गर्नुहोस�
 msgid "Your password is now changed."
 msgstr "तपाईको पासवर्ड अब परिवर्तन भएको छ।"
 
-#: templates/account/signup.html:21 templates/account/signup.html:49
+#: templates/account/signup.html:23
+
+msgid "User SignUp"
+msgstr "साइन अप"
+
+#: templates/account/signup.html:47
+
+msgid "Sign In"
+msgstr "साइन आउट गर्नुहोस्"
+
+#: templates/account/signup.html:48
 msgid "SignUp"
 msgstr "साइन अप"
+
+#: templates/account/signup.html:50
+
+msgid "Already Have an account?"
+msgstr "Account खोल्नुहोस्"
 
 #: templates/account/signup_closed.html:5
 #: templates/account/signup_closed.html:8
@@ -1646,7 +469,7 @@ msgstr "साइन अप बन्द"
 
 #: templates/account/signup_closed.html:10
 msgid "We are sorry, but the sign up is currently closed."
-msgstr "हामी क्षमाप्रार्थी छौं, तर साइन अप हाल बन्द छ।"
+msgstr "माफ गर्नुहोस्, तर साइन अप हाल बन्द छ।"
 
 #: templates/account/snippets/already_logged_in.html:5
 #: templates/account/verified_email_required.html:21
@@ -1656,22 +479,37 @@ msgstr "नोट"
 #: templates/account/snippets/already_logged_in.html:5
 #, python-format
 msgid "you are already logged in as %(user_display)s."
-msgstr "तपाईं पहिले नै यस रूपमा लग इन हुनुहुन्छ %(user_display)s."
+msgstr "तपाईं पहिले नै %(user_display)s को रूपमा लग इन हुनुहुन्छ।"
 
 #: templates/account/verification_sent.html:5
-#: templates/account/verification_sent.html:8
+#: templates/account/verification_sent.html:13
 #: templates/account/verified_email_required.html:5
 #: templates/account/verified_email_required.html:8
 msgid "Verify Your E-mail Address"
 msgstr "तपाईंको इमेल ठेगाना प्रमाणित गर्नुहोस्"
 
-#: templates/account/verification_sent.html:10
+#: templates/account/verification_sent.html:18
+
 msgid ""
-"We have sent an e-mail to you for verification. Follow the link provided to "
-"finalize the signup process. If you do not see the verification e-mail in "
-"your main inbox, check your spam folder. Please contact us if you do not "
-"receive the verification e-mail within a few minutes."
+"We have sent an <strong>e-mail</strong> to you "
+"for verification. Follow the <strong>link</strong> provided to finalize the "
+"signup process. If you do not see the verification e-mail in your main "
+"inbox, check your spam folder. Please contact us if you do not receive the "
+"verification e-mail within a few minutes.\n"
+
 msgstr ""
+
+
+#: templates/account/verification_sent.html:26
+
+msgid "Sign Up"
+msgstr "साइन अप"
+
+#: templates/account/verification_sent.html:29
+
+
+msgid "Already have an account?"
+msgstr "Account खोल्नुहोस्"
 
 #: templates/account/verified_email_required.html:12
 msgid ""
@@ -1679,6 +517,10 @@ msgid ""
 "    you are who you claim to be. For this purpose, we require that you\n"
 "    verify ownership of your e-mail address. "
 msgstr ""
+"हामीले प्रमाणीकरणको लागि तपाईलाई इमेल पठाएका छौं। साइनअप प्रक्रियालाई अन्तिम रूप दिन "
+"प्रदान गरिएको लिङ्क पछ्याउनुहोस्। यदि तपाईंले आफ्नो मुख्य इनबक्समा प्रमाणिकरण इ-मेल "
+"देख्नुभएन भने, आफ्नो स्प्याम फोल्डर जाँच गर्नुहोस्। यदि तपाईंले केही मिनेट भित्र प्रमाणिकरण इ-"
+"मेल प्राप्त गर्नुभएन भने कृपया हामीलाई सम्पर्क गर्नुहोस्।"
 
 #: templates/account/verified_email_required.html:16
 msgid ""
@@ -1688,36 +530,36 @@ msgid ""
 "    inbox, check your spam folder. Otherwise\n"
 "    contact us if you do not receive it within a few minutes."
 msgstr ""
-
-#: templates/base.html:70
-msgid "Welcome"
-msgstr "स्वागत छ"
+"हामीले प्रमाणीकरणको लागि तपाईलाई एउटा इमेल पठाएका छौं। कृपया उक्त इमेल भित्रको "
+"लिङ्कमा क्लिक गर्नुहोस्। यदि तपाईंले आफ्नो मुख्य\n"
+" इनबक्समा प्रमाणिकरण इ-मेल देख्नुभएन भने, तपाईंको स्प्याम फोल्डर जाँच गर्नुहोस्। यदि तपाईंले "
+"केही मिनेट भित्र प्राप्त गर्नुभएन भने हामीलाई सम्पर्क गर्नुहोस् ।"
 
 #: templates/dairyapp/create_fat.html:4 templates/dairyapp/create_fat.html:20
 msgid "Create Fat"
 msgstr "फ्याट सिर्जना गर्नुहोस्"
 
 #: templates/dairyapp/dairy_create_form.html:4
-#: templates/dairyapp/list_dairy_members.html:4
 msgid "Create Dairy"
-msgstr "डेयरी बनाउनुहोस्"
+msgstr "डेरी बनाउनुहोस्"
 
-#: templates/dairyapp/dairy_create_form.html:21
+#: templates/dairyapp/dairy_create_form.html:25
 msgid "Insert Dairy"
-msgstr "डेयरी बनाउनुहोस्"
+msgstr "डेरी हाल्नुहोस्"
 
-#: templates/dairyapp/dairy_create_form.html:48
+#: templates/dairyapp/dairy_create_form.html:52
 msgid "You must first pay charge to add dairy"
-msgstr "डेयरी थप्नको लागि तपाईंले पहिले शुल्क तिर्नु पर्छ"
+msgstr "डेरी थप्नको लागि तपाईंले पहिले शुल्क तिर्नु पर्छ"
 
-#: templates/dairyapp/dairy_create_form.html:59
+#: templates/dairyapp/dairy_create_form.html:63
+
 msgid "Pay with esewa"
-msgstr "esewa मार्फत भुक्तानी गर्नुहोस्"
+msgstr "Esewa मार्फत भुक्तानी गर्नुहोस्"
 
 #: templates/dairyapp/dairy_edit_form.html:4
 #: templates/dairyapp/dairy_edit_form.html:20
 msgid "Edit Dairy"
-msgstr "डेयरी सम्पादन गर्नुहोस्"
+msgstr "डेरी सम्पादन गर्नुहोस्"
 
 #: templates/dairyapp/edit_fat.html:4
 msgid "Edit Fat"
@@ -1727,95 +569,107 @@ msgstr "फ्याट सम्पादन गर्नुहोस्"
 msgid "Update Fat"
 msgstr "फ्याट अपडेट गर्नुहोस्"
 
-#: templates/dairyapp/email/report.html:24
-#: templates/dairyapp/email/report.html:84
-#: templates/dairyapp/fatrate_list.html:9 templates/dairyapp/index.html:10
-#: templates/dairyapp/member_milkrecord_list.html:78
-#: templates/dairyapp/milkrecord_list.html:10
+#: templates/dairyapp/email/report.html:25
+#: templates/dairyapp/email/report.html:76
+#: templates/dairyapp/email/report.html:170
+#: templates/dairyapp/email/report.html:207
+#: templates/dairyapp/fatrate_list.html:16 templates/dairyapp/index.html:11
+#: templates/dairyapp/list_dairy_members.html:19
+#: templates/dairyapp/member_milkrecord_list.html:125
+#: templates/dairyapp/milkrecord_list.html:17
 #: templates/user/member_milkrecord_list.html:70
 msgid "Id"
 msgstr "आईडी"
 
-#: templates/dairyapp/email/report.html:25
-#: templates/dairyapp/email/report.html:85
-#: templates/dairyapp/fatrate_list.html:11
-#: templates/dairyapp/member_milkrecord_list.html:79
-#: templates/dairyapp/milkrecord_list.html:11
-#: templates/user/member_milkrecord_list.html:71
-msgid "Dairy"
-msgstr "डेयरी"
-
 #: templates/dairyapp/email/report.html:26
-#: templates/dairyapp/email/report.html:86 templates/dairyapp/index.html:12
-#: templates/dairyapp/member_milkrecord_list.html:80
-#: templates/dairyapp/milkrecord_list.html:12
-#: templates/user/member_milkrecord_list.html:72
-msgid "User"
-msgstr "प्रयोगकर्ता"
-
-#: templates/dairyapp/email/report.html:27
-#: templates/dairyapp/email/report.html:87
-#: templates/dairyapp/member_milkrecord_list.html:81
-#: templates/dairyapp/milkrecord_list.html:13
-#: templates/user/member_milkrecord_list.html:73
-msgid "Shift"
-msgstr "शिफ्ट"
-
-#: templates/dairyapp/email/report.html:28
-#: templates/dairyapp/email/report.html:88
-#: templates/dairyapp/member_milkrecord_list.html:82
-#: templates/dairyapp/milkrecord_list.html:14
+#: templates/dairyapp/email/report.html:77
+#: templates/dairyapp/email/report.html:171
+#: templates/dairyapp/email/report.html:208
+#: templates/dairyapp/member_milkrecord_list.html:129
+#: templates/dairyapp/milkrecord_list.html:21
 #: templates/user/member_milkrecord_list.html:74
 msgid "Milk Weight"
 msgstr "दूधको वजन"
 
-#: templates/dairyapp/email/report.html:29
-#: templates/dairyapp/email/report.html:89
-#: templates/dairyapp/member_milkrecord_list.html:83
-#: templates/dairyapp/milkrecord_list.html:15
+#: templates/dairyapp/email/report.html:27
+#: templates/dairyapp/email/report.html:78
+#: templates/dairyapp/email/report.html:172
+#: templates/dairyapp/email/report.html:209
+#: templates/dairyapp/member_milkrecord_list.html:130
+#: templates/dairyapp/milkrecord_list.html:22
 #: templates/user/member_milkrecord_list.html:75
 msgid "Milk Fat"
 msgstr "दूधको फ्याट"
 
-#: templates/dairyapp/email/report.html:30
-#: templates/dairyapp/email/report.html:90
-#: templates/dairyapp/member_milkrecord_list.html:24
-#: templates/dairyapp/member_milkrecord_list.html:84
-#: templates/dairyapp/milkrecord_list.html:16
+#: templates/dairyapp/email/report.html:28
+#: templates/dairyapp/email/report.html:79
+#: templates/dairyapp/email/report.html:173
+#: templates/dairyapp/email/report.html:210
+#: templates/dairyapp/member_milkrecord_list.html:22
+#: templates/dairyapp/member_milkrecord_list.html:131
+#: templates/dairyapp/milkrecord_list.html:23
 #: templates/user/member_milkrecord_list.html:24
 #: templates/user/member_milkrecord_list.html:76
 msgid "Date"
 msgstr "मिति"
 
-#: templates/dairyapp/email/report.html:50
-#: templates/dairyapp/email/report.html:110
-#: templates/dairyapp/member_milkrecord_list.html:114
+#: templates/dairyapp/email/report.html:45
+#: templates/dairyapp/email/report.html:96
+#: templates/dairyapp/email/report.html:186
+#: templates/dairyapp/email/report.html:223
+#: templates/dairyapp/member_milkrecord_list.html:161
 #: templates/user/member_milkrecord_list.html:97
 msgid "Details"
 msgstr "विवरणहरू"
 
+#: templates/dairyapp/email/report.html:56
+#: templates/dairyapp/email/report.html:106
+
+msgid "Total Amount : "
+msgstr "कुल रकम"
+
+#: templates/dairyapp/email/report.html:195
+#: templates/dairyapp/email/report.html:232
+#: templates/dairyapp/member_milkrecord_list.html:177
+
+msgid "Total Amount"
+msgstr "कुल रकम"
+
 #: templates/dairyapp/fatrate_list.html:3
+
 msgid "fatrate list"
 msgstr "फ्याट सूची"
 
 #: templates/dairyapp/fatrate_list.html:10
+
+msgid "Add Fat Rates"
+msgstr "फ्याटरेट"
+
+#: templates/dairyapp/fatrate_list.html:17
 msgid "Fat Rate"
 msgstr "फ्याटरेट"
 
-#: templates/dairyapp/fatrate_list.html:12 templates/dairyapp/index.html:17
-#: templates/dairyapp/member_milkrecord_list.html:85
+#: templates/dairyapp/fatrate_list.html:18
+#: templates/dairyapp/member_milkrecord_list.html:126
+#: templates/dairyapp/milkrecord_list.html:18
+#: templates/user/member_milkrecord_list.html:71
+msgid "Dairy"
+msgstr "डेरी"
+
+#: templates/dairyapp/fatrate_list.html:19 templates/dairyapp/index.html:18
+#: templates/dairyapp/member_milkrecord_list.html:132
 msgid "Actions"
 msgstr "कार्यहरू"
 
-#: templates/dairyapp/fatrate_list.html:24 templates/dairyapp/index.html:33
-#: templates/dairyapp/member_milkrecord_list.html:102
-#: templates/dairyapp/milkrecord_list.html:34
+#: templates/dairyapp/fatrate_list.html:31 templates/dairyapp/index.html:34
+#: templates/dairyapp/member_milkrecord_list.html:149
+#: templates/dairyapp/milkrecord_list.html:41
 msgid "edit"
 msgstr "सम्पादन"
 
-#: templates/dairyapp/fatrate_list.html:28
-#: templates/dairyapp/member_milkrecord_list.html:106
-#: templates/dairyapp/milkrecord_list.html:39
+#: templates/dairyapp/fatrate_list.html:35
+#: templates/dairyapp/member_milkrecord_list.html:153
+#: templates/dairyapp/milkrecord_list.html:46
 msgid "delete"
 msgstr "मेट्नुहोस्"
 
@@ -1823,76 +677,105 @@ msgstr "मेट्नुहोस्"
 msgid "homepage"
 msgstr "गृहपृष्ठ"
 
-#: templates/dairyapp/index.html:11
+#: templates/dairyapp/index.html:12
 msgid "Name"
 msgstr "नाम"
 
 #: templates/dairyapp/index.html:13
+#: templates/dairyapp/member_milkrecord_list.html:127
+#: templates/dairyapp/milkrecord_list.html:19
+#: templates/user/member_milkrecord_list.html:72
+msgid "User"
+msgstr "प्रयोगकर्ता"
+
+#: templates/dairyapp/index.html:14
 msgid "Location"
 msgstr "स्थान"
 
-#: templates/dairyapp/index.html:15
+#: templates/dairyapp/index.html:16
 msgid "List Records"
 msgstr "रेकर्डहरू सूची गर्नुहोस्"
 
-#: templates/dairyapp/index.html:16
+#: templates/dairyapp/index.html:17
 msgid "List Members"
 msgstr "सूची सदस्यहरू"
 
-#: templates/dairyapp/index.html:29 templates/dairyapp/index.html:30
+#: templates/dairyapp/index.html:30 templates/dairyapp/index.html:31
 msgid "view"
 msgstr "हेर्नुहोस्"
 
-#: templates/dairyapp/member_milkrecord_list.html:3
+#: templates/dairyapp/list_dairy_members.html:4
+
+msgid "List Dairy Members"
+msgstr "सूची सदस्यहरू"
+
+#: templates/dairyapp/list_dairy_members.html:20
+
+msgid "First Name"
+msgstr "पहिलो नाम"
+
+#: templates/dairyapp/list_dairy_members.html:21
+
+msgid "Middle Name"
+msgstr "बीचको नाम"
+
+#: templates/dairyapp/list_dairy_members.html:22
+
+msgid "Last Name"
+msgstr "थर"
+
+#: templates/dairyapp/list_dairy_members.html:23
+msgid "Phone Number"
+msgstr "फोन नम्बर"
+
+#: templates/dairyapp/member_milkrecord_list.html:4
 #: templates/user/member_milkrecord_list.html:3
 msgid "Milk Record"
 msgstr "दूध रेकर्ड"
 
-#: templates/dairyapp/member_milkrecord_list.html:22
+#: templates/dairyapp/member_milkrecord_list.html:14
 #: templates/user/member_milkrecord_list.html:22
 msgid "Filter"
 msgstr "फिल्टर"
 
-#: templates/dairyapp/member_milkrecord_list.html:25
+#: templates/dairyapp/member_milkrecord_list.html:23
 #: templates/user/member_milkrecord_list.html:25
 msgid "Start Date"
 msgstr "सुरू मिति"
 
-#: templates/dairyapp/member_milkrecord_list.html:26
+#: templates/dairyapp/member_milkrecord_list.html:27
 #: templates/user/member_milkrecord_list.html:26
 msgid "End Date"
 msgstr "अन्त्य मिति"
 
-#: templates/dairyapp/member_milkrecord_list.html:27
+#: templates/dairyapp/member_milkrecord_list.html:28
 #: templates/user/member_milkrecord_list.html:27
 msgid "Shift:select"
-msgstr "शिफ्ट"
+msgstr "शिफ्ट: चयन गर्नुहोस्"
 
-#: templates/dairyapp/member_milkrecord_list.html:34
-#: templates/dairyapp/member_milkrecord_list.html:41
+#: templates/dairyapp/member_milkrecord_list.html:33
+#: templates/dairyapp/member_milkrecord_list.html:40
 #: templates/user/member_milkrecord_list.html:34
 #: templates/user/member_milkrecord_list.html:41
 msgid "morning"
-msgstr ""
+msgstr "बिहान"
 
-#: templates/dairyapp/member_milkrecord_list.html:52
-#: templates/dairyapp/member_milkrecord_list.html:59
+#: templates/dairyapp/member_milkrecord_list.html:51
+#: templates/dairyapp/member_milkrecord_list.html:58
 #: templates/user/member_milkrecord_list.html:52
 #: templates/user/member_milkrecord_list.html:59
 msgid "night"
-msgstr ""
+msgstr "रात"
+
+#: templates/dairyapp/member_milkrecord_list.html:128
+#: templates/dairyapp/milkrecord_list.html:20
+#: templates/user/member_milkrecord_list.html:73
+msgid "Shift"
+msgstr "शिफ्ट"
 
 #: templates/dairyapp/milkrecord_create.html:25
 msgid "Create Milk Record"
 msgstr "दूध रेकर्ड बनाउनुहोस्"
-
-#: templates/dairyapp/milkrecord_create.html:32
-#, python-format
-msgid ""
-"\n"
-"                                    %(lable)s\n"
-"                                "
-msgstr ""
 
 #: templates/dairyapp/milkrecord_edit.html:20
 msgid "Update Milk Record"
@@ -1901,3 +784,378 @@ msgstr "दूध रेकर्ड बनाउनुहोस्"
 #: templates/dairyapp/milkrecord_list.html:3
 msgid "List Milk Record"
 msgstr "दूध रेकर्ड सूची"
+
+#: templates/includes/authenticated_nav.html:19
+#, 
+#| msgid "dairies"
+msgid "Dairies"
+msgstr "डेरीहरू"
+
+#: templates/includes/authenticated_nav.html:23
+#, 
+#| msgid "Fat Rate"
+msgid "Fat Rates"
+msgstr "फ्याटरेट"
+
+#: templates/includes/authenticated_nav.html:32
+
+msgid "Account"
+msgstr "खाता"
+
+#: templates/includes/authenticated_nav.html:35
+
+msgid "Log Out"
+msgstr "साइन आउट गर्नुहोस्"
+
+#: templates/includes/authenticated_nav.html:54
+msgid "Welcome"
+msgstr "स्वागत छ"
+
+#~ msgid "Messages"
+#~ msgstr "सन्देशहरू"
+
+#~ msgid "Site Maps"
+#~ msgstr "नक्सा"
+
+#~ msgid "That page number is not an integer"
+#~ msgstr "त्यो पृष्ठ नम्बर integer होइन।"
+
+#~ msgid "That page number is less than 1"
+#~ msgstr "त्यो पृष्ठ संख्या १ भन्दा कम छ"
+
+#~ msgid "That page contains no results"
+#~ msgstr "त्यो पृष्ठमा कुनै परिणाम छैन"
+
+#~ msgid "Enter a valid value."
+#~ msgstr "मान्य मात्रा प्रविष्ट गर्नुहोस्।"
+
+#~ msgid "Enter a valid URL."
+#~ msgstr "मान्य URL प्रविष्ट गर्नुहोस्।"
+
+#~ msgid "Enter a valid integer."
+#~ msgstr "मान्य integer प्रविष्ट गर्नुहोस्।"
+
+#~ msgid "Enter a valid email address."
+#~ msgstr "मान्य इ-मेल ठेगाना प्रविष्ट गर्नुहोस्।"
+
+#~ msgid ""
+#~ "Enter a valid “slug” consisting of letters, numbers, underscores or "
+#~ "hyphens."
+#~ msgstr ""
+#~ "अक्षरहरू, संख्याहरू, अन्डरस्कोरहरू वा हाइफनहरू समावेश भएको मान्य “slug” प्रविष्ट "
+#~ "गर्नुहोस्।"
+
+#~ msgid ""
+#~ "Enter a valid “slug” consisting of Unicode letters, numbers, underscores, "
+#~ "or hyphens."
+#~ msgstr ""
+#~ "युनिकोड अक्षरहरू, संख्याहरू, अन्डरस्कोरहरू वा हाइफनहरू समावेश भएको मान्य “slug” "
+#~ "प्रविष्ट गर्नुहोस्।"
+
+#~ msgid "Enter a valid IPv4 address."
+#~ msgstr "मान्य IPv4 address प्रविष्ट गर्नुहोस्।"
+
+#~ msgid "Enter a valid IPv6 address."
+#~ msgstr "मान्य IPv6 address प्रविष्ट गर्नुहोस्।"
+
+#~ msgid "Enter a valid IPv4 or IPv6 address."
+#~ msgstr "मान्य IPv4 address प्रविष्ट गर्नुहोस्।"
+
+#~ msgid "Enter only digits separated by commas."
+#~ msgstr "अल्पविरामद्वारा छुट्याइएको अंकहरू मात्र प्रविष्ट गर्नुहोस्।"
+
+#, python-format
+#~ msgid "Ensure this value is %(limit_value)s (it is %(show_value)s)."
+#~ msgstr "यो मान %(limit_value)s सुनिश्चित गर्नुहोस्। (यो %(show_value)s हो) "
+
+#, python-format
+#~ msgid "Ensure this value is less than or equal to %(limit_value)s."
+#~ msgstr "यो मान %(limit_value)s भन्दा कम वा बराबर छ भनी सुनिश्चित गर्नुहोस्।"
+
+#, python-format
+#~ msgid "Ensure this value is greater than or equal to %(limit_value)s."
+#~ msgstr "यो मान %(limit_value)s भन्दा ठूलो वा बराबर छ भनी सुनिश्चित गर्नुहोस्।"
+
+#, python-format
+#~ msgid ""
+#~ "Ensure this value has at least %(limit_value)d character (it has "
+#~ "%(show_value)d)."
+#~ msgid_plural ""
+#~ "Ensure this value has at least %(limit_value)d characters (it has "
+#~ "%(show_value)d)."
+#~ msgstr[0] ""
+#~ "यो मानमा कम्तिमा %(limit_value)d वर्ण सुनिश्चित गर्नुहोस्। (यससँग %(show_value)d) "
+#~ "छ।"
+#~ msgstr[1] ""
+#~ "यो मानमा कम्तिमा %(limit_value)d वर्णहरू सुनिश्चित गर्नुहोस्। (यससँग "
+#~ "%(show_value)d) छ।"
+
+#, python-format
+#~ msgid ""
+#~ "Ensure this value has at most %(limit_value)d character (it has "
+#~ "%(show_value)d)."
+#~ msgid_plural ""
+#~ "Ensure this value has at most %(limit_value)d characters (it has "
+#~ "%(show_value)d)."
+#~ msgstr[0] ""
+#~ "यो मानमा बढीमा %(limit_value)d वर्ण सुनिश्चित गर्नुहोस्। (यससँग %(show_value)d) "
+#~ "छ।"
+#~ msgstr[1] ""
+#~ "यो मानमा बढीमा %(limit_value)d वर्णहरू सुनिश्चित गर्नुहोस्। (यससँग "
+#~ "%(show_value)d) छ।"
+
+#~ msgid "Enter a number."
+#~ msgstr "नम्बर प्रविष्ट गर्नुहोस्।"
+
+#, python-format
+#~ msgid "Ensure that there are no more than %(max)s digit in total."
+#~ msgid_plural "Ensure that there are no more than %(max)s digits in total."
+#~ msgstr[0] "कुलमा % (अधिकतम) अंक भन्दा बढी छैन भनी सुनिश्चित गर्नुहोस्।"
+#~ msgstr[1] "कुलमा % (अधिकतम) अंकहरू भन्दा बढी छैन भनी सुनिश्चित गर्नुहोस्।"
+
+#, python-format
+#~ msgid "Ensure that there are no more than %(max)s decimal place."
+#~ msgid_plural "Ensure that there are no more than %(max)s decimal places."
+#~ msgstr[0] "निश्चित गर्नुहोस् कि त्यहाँ %(max)s दशमलव स्थान भन्दा बढी छैन।"
+#~ msgstr[1] "निश्चित गर्नुहोस् कि त्यहाँ %(max)s दशमलव स्थानहरु भन्दा बढी छैन।"
+
+#, python-format
+#~ msgid ""
+#~ "“%(value)s” value has an invalid format. It must be in HH:MM[:ss[."
+#~ "uuuuuu]] format."
+#~ msgstr ""
+#~ "“%(value)s” मानको अमान्य ढाँचा छ। यो HH:MM[:ss[.uuuuuu]] मा हुनुपर्छढाँचा।"
+
+#, python-format
+#~ msgid ""
+#~ "“%(value)s” value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is "
+#~ "an invalid time."
+#~ msgstr ""
+#~ "“%(value)s” मानको सही ढाँचा (HH:MM[:ss[.uuuuu]]) छ तर यो अमान्य समय हो।"
+
+#~ msgid "Time"
+#~ msgstr "समय"
+
+#, python-format
+#~ msgid "“%(value)s” is not a valid UUID."
+#~ msgstr "“%(value)s” मान्य UUID होइन।"
+
+#~ msgid "This field is required."
+#~ msgstr "यो क्षेत्र आवश्यक छ।"
+
+#~ msgid "Enter a whole number."
+#~ msgstr "Whole नम्बर प्रविष्ट गर्नुहोस्।"
+
+#~ msgid "Enter a valid date."
+#~ msgstr "मान्य मिति प्रविष्ट गर्नुहोस्।"
+
+#~ msgid "Enter a valid time."
+#~ msgstr "मान्य समय प्रविष्ट गर्नुहोस्।"
+
+#~ msgid "Enter a valid date/time."
+#~ msgstr "मान्य मिति/समय प्रविष्ट गर्नुहोस्।"
+
+#~ msgid "Enter a valid duration."
+#~ msgstr "मान्य अवधि प्रविष्ट गर्नुहोस्।"
+
+#, python-brace-format
+#~ msgid "The number of days must be between {min_days} and {max_days}."
+#~ msgstr "दिनहरूको सङ्ख्या {min_days} र {max_days} को बीचमा हुनुपर्छ।"
+
+#~ msgid "No file was submitted. Check the encoding type on the form."
+#~ msgstr "कुनै फाइल पेश गरिएको छैन। फारममा इन्कोडिङ प्रकार जाँच गर्नुहोस्।"
+
+#~ msgid "No file was submitted."
+#~ msgstr "कुनै फाइल पेश गरिएको छैन।"
+
+#~ msgid "The submitted file is empty."
+#~ msgstr "पेश गरिएको फाइल खाली छ।"
+
+#~ msgid "Please either submit a file or check the clear checkbox, not both."
+#~ msgstr "कृपया या त एउटा फाइल पेस गर्नुहोस् वा स्पष्ट checkbox टिक गर्नुहोस्, दुवै होइन।"
+
+#~ msgid ""
+#~ "Upload a valid image. The file you uploaded was either not an image or a "
+#~ "corrupted image."
+#~ msgstr ""
+#~ "एउटा मान्य इमेज अपलोड गर्नुहोस्। तपाईंले अपलोड गर्नुभएको फाइल या त इमेज थिएन वा "
+#~ "बिग्रिएको इमेज थियो।"
+
+#, python-format
+#~ msgid ""
+#~ "Select a valid choice. %(value)s is not one of the available choices."
+#~ msgstr "एक मान्य विकल्प चयन गर्नुहोस्। %(value)s उपलब्ध विकल्पहरू मध्ये एक होइन।"
+
+#~ msgid "Enter a list of values."
+#~ msgstr "मानहरूको सूची प्रविष्ट गर्नुहोस्।"
+
+#~ msgid "Enter a complete value."
+#~ msgstr "पूर्ण मान प्रविष्ट गर्नुहोस्।"
+
+#~ msgid "Enter a valid UUID."
+#~ msgstr "मान्य UUID प्रविष्ट गर्नुहोस्।"
+
+#~ msgid "Enter a valid JSON."
+#~ msgstr "मान्य JSON प्रविष्ट गर्नुहोस्।"
+
+#, python-format
+#~ msgid ""
+#~ "ManagementForm data is missing or has been tampered with. Missing fields: "
+#~ "%(field_names)s. You may need to file a bug report if the issue persists."
+#~ msgstr ""
+#~ "ManagementForm डेटा हराइरहेको छ वा छेडछाड गरिएको छ। हराइरहेको फिल्डहरू: "
+#~ "%(field_names)s। यदि समस्या रहिरह्यो भने तपाइँले बग रिपोर्ट फाइल गर्न आवश्यक हुन "
+#~ "सक्छ।"
+
+#, python-format
+#~ msgid "Please submit at most %(num)d form."
+#~ msgid_plural "Please submit at most %(num)d forms."
+#~ msgstr[0] "कृपया अधिकतम %(num)d फारम पेश गर्नुहोस्।"
+#~ msgstr[1] "कृपया बढीमा %(num)d फारमहरू पेश गर्नुहोस्।"
+
+#, python-format
+#~ msgid "Please submit at least %(num)d form."
+#~ msgid_plural "Please submit at least %(num)d forms."
+#~ msgstr[0] "कृपया कम्तिमा %(num)d फारम पेश गर्नुहोस्।"
+#~ msgstr[1] "कृपया कम्तिमा %(num)d फारमहरू पेश गर्नुहोस्।"
+
+#~ msgid "Order"
+#~ msgstr "अर्डर गर्नुहोस्"
+
+#~ msgid "Delete"
+#~ msgstr "मेटाउनुस्"
+
+#, python-format
+#~ msgid "Please correct the duplicate data for %(field)s."
+#~ msgstr "कृपया %(field) को लागि नक्कल डाटा सच्याउनुहोस्।"
+
+#, python-format
+#~ msgid ""
+#~ "Please correct the duplicate data for %(field)s, which must be unique."
+#~ msgstr "कृपया % (फिल्ड) को लागि नक्कल डाटा सच्याउनुहोस्।"
+
+#, python-format
+#~ msgid ""
+#~ "Please correct the duplicate data for %(field_name)s which must be unique "
+#~ "for the %(lookup)s in %(date_field)s."
+#~ msgstr ""
+#~ "कृपया %(field_name)s को लागि डुप्लिकेट डाटा सच्याउनुहोस् जुन %(date_field)s मा "
+#~ "%(lookup)s को लागि फरक हुनुपर्छ।"
+
+#~ msgid "Please correct the duplicate values below."
+#~ msgstr "कृपया तलको डुप्लिकेट मानहरू सच्याउनुहोस्।"
+
+#~ msgid "The inline value did not match the parent instance."
+#~ msgstr "इनलाइन मान मूल उदाहरणसँग मेल खाएन।"
+
+#~ msgid ""
+#~ "Select a valid choice. That choice is not one of the available choices."
+#~ msgstr "एक मान्य विकल्प चयन गर्नुहोस्। त्यो छनौट उपलब्ध विकल्पहरू मध्ये एक होइन।"
+
+#, python-format
+#~ msgid "“%(pk)s” is not a valid value."
+#~ msgstr "“%(pk)s” मान्य मान होइन।"
+
+#, python-format
+#~ msgid ""
+#~ "%(datetime)s couldn’t be interpreted in time zone %(current_timezone)s; "
+#~ "it may be ambiguous or it may not exist."
+#~ msgstr ""
+#~ "%(datetime)s लाई समय क्षेत्र %(current_timezone)s मा व्याख्या गर्न सकिँदैन; यो "
+#~ "अस्पष्ट हुन सक्छ वा यो अवस्थित छैन।"
+
+#~ msgid "Clear"
+#~ msgstr "खाली गर्नुहोस्"
+
+#~ msgid "Currently"
+#~ msgstr "हाल"
+
+#~ msgid "Change"
+#~ msgstr "परिवर्तन गर्नुहोस्"
+
+#~ msgid "Unknown"
+#~ msgstr "अपरिचित"
+
+#~ msgid "Yes"
+#~ msgstr "हो"
+
+#~ msgid "No"
+#~ msgstr "होइन"
+
+#~ msgid "yes,no,maybe"
+#~ msgstr "हो,होइन,सायद"
+
+#~ msgid "midnight"
+#~ msgstr "मध्यरात"
+
+#~ msgid "noon"
+#~ msgstr "दिउँसो"
+
+#~ msgid "Monday"
+#~ msgstr "सोमबार"
+
+#~ msgid "Tuesday"
+#~ msgstr "मंगलबार"
+
+#~ msgid "Wednesday"
+#~ msgstr "बुधवार"
+
+#~ msgid "Thursday"
+#~ msgstr "बिहिवार"
+
+#~ msgid "Friday"
+#~ msgstr "शुक्रवार"
+
+#~ msgid "Saturday"
+#~ msgstr "शनिवार"
+
+#~ msgid "Sunday"
+#~ msgstr "आइतवार "
+
+#~ msgid "This is not a valid IPv6 address."
+#~ msgstr "यो मान्य IPv6 ठेगाना होइन।"
+
+#~ msgid "or"
+#~ msgstr "वा"
+
+#~ msgid "Forbidden"
+#~ msgstr "निषेध गरिएको"
+
+#~ msgid "CSRF verification failed. Request aborted."
+#~ msgstr "CSRF प्रमाणीकरण असफल भयो। अनुरोध रद्द गरियो।"
+
+#~ msgid "More information is available with DEBUG=True."
+#~ msgstr "थप जानकारी DEBUG=True मा उपलब्ध छ।"
+
+#~ msgid "No year specified"
+#~ msgstr "कुनै वर्ष तोकिएको छैन।"
+
+#~ msgid "Date out of range"
+#~ msgstr "मिति दायरा बाहिर छ।"
+
+#~ msgid "No month specified"
+#~ msgstr "महिना तोकिएको छैन"
+
+#~ msgid "No day specified"
+#~ msgstr "दिन तोकिएको छैन"
+
+#~ msgid "No week specified"
+#~ msgstr "हप्ता तोकिएको छैन"
+
+#, python-format
+#~ msgid "No %(verbose_name_plural)s available"
+#~ msgstr "कुनै %(verbose_name_plural) उपलब्ध छैन।"
+
+#, python-format
+#~ msgid "No %(verbose_name)s found matching the query"
+#~ msgstr "Query मेल खाने कुनै %(verbose_name) फेला परेन।"
+
+#, python-format
+#~ msgid "“%(path)s” does not exist"
+#~ msgstr "“%(path)s” does not exist"
+
+#~ msgid "The install worked successfully! Congratulations!"
+#~ msgstr "Install सफलतापूर्वक काम गर्यो! बधाई छ!"
+
+#~ msgid "Connect, get help, or contribute"
+#~ msgstr "जडान गर्नुहोस्, मद्दत प्राप्त गर्नुहोस्, वा योगदान गर्नुहोस्"

@@ -1,12 +1,39 @@
-{% extends "account/base.html" %}
-
+{%extends '../base.html'%}
 {% load i18n %}
+{% load static %}
 
 {% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
 
 {% block content %}
-    <h1>{% trans "Verify Your E-mail Address" %}</h1>
-
-    <p>{% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process. If you do not see the verification e-mail in your main inbox, check your spam folder. Please contact us if you do not receive the verification e-mail within a few minutes.{% endblocktrans %}</p>
-
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-lg" >
+                    <div class="card-header" style="background-color: #22668D; color:#F1F0E8;">
+                        <h1 class="text-center fw-bold">{% trans "Verify Your E-mail Address" %}</h1>
+                    </div>
+                    <div class="card-body " style="background-color: #F1F0E8;  border: 0px solid rgb(100, 97, 97);">
+                        <div class="container" >
+                        <p class="text-center" style="text-align: justify !important; line-height: 1.8;">
+                            {% blocktrans %}
+                            We have sent an <strong>e-mail</strong> to you for verification. Follow the <strong>link</strong> provided to finalize the signup process. If you do not see the verification e-mail in your main inbox, check your spam folder. Please contact us if you do not receive the verification e-mail within a few minutes.
+                            {% endblocktrans %}
+                        </p>
+                        </div>
+                    
+                
+                    <div class="mt-3 text-center mb-4 justify-content-around">
+                        <a href="{% url 'account_signup' %}" class="btn btn-light" style="background-color: #f7d597; border-color: #96B6C5;">{% trans "Sign Up" %}</a>
+                       
+                        <div class="text-center text-primary fw-bold mt-2">
+                            <small>{%trans 'Already have an account?'%} <a href="{% url 'account_login' %}"
+                                    class="text-danger">{% trans 'Login' %}</a> </small>
+                        </div>
+                    </div>
+                    </div>
+            </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
+

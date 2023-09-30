@@ -40,14 +40,14 @@ class CreateFatForm(forms.ModelForm):
     
 
 class CreateDairyForm(forms.ModelForm):
-    members = forms.ModelMultipleChoiceField(label=_("members"),required=False,queryset=User.objects.filter(is_active=True),widget=forms.SelectMultiple(attrs={"class": "form-control dairy-member-select"}))
+    members = forms.ModelMultipleChoiceField(label=_("Members"),required=False,queryset=User.objects.filter(is_active=True),widget=forms.SelectMultiple(attrs={"class": "form-control dairy-member-select"}))
     class Meta:
         model = Dairy
         fields = ["name","location","members"]
 
         widgets = {
-            'name':forms.TextInput(attrs={"class": "form-control","placeholder":"enter dairy name","maxlength":200}),
-            'location':forms.TextInput(attrs={"class": "form-control","placeholder":"enter dairy location"}),
+            'name':forms.TextInput(attrs={"class": "form-control","placeholder":"Enter dairy name","maxlength":200}),
+            'location':forms.TextInput(attrs={"class": "form-control","placeholder":"Enter dairy location"}),
             # 'members': forms.ModelMultipleChoiceField(queryset=User.objects.filter(is_active=True),widget=forms.SelectMultiple(attrs={"class": "form-control"}))
         }
 
@@ -56,10 +56,10 @@ import datetime
 class CreateMilkRecordForm(forms.ModelForm):
     shiftinfo = getShift()
     # if 
-    user = forms.ModelChoiceField(label=_("user"),queryset=None,initial=1,widget=forms.Select(attrs={"class":"form-select"}))
-    dairy = forms.ModelChoiceField(label=_("dairy"),queryset=None,initial=1,widget=forms.HiddenInput(attrs={"class":"form-select"}))
-    date = forms.DateField(label=_("date"),initial=datetime.datetime.now(),widget=DateInput(attrs={"class":"form-control date-picker","placeholder":"dd-mm-yyyy"},format="%Y-%m-%d"))
-    shift = forms.ChoiceField(label=_("shift"),widget=forms.Select(attrs={"class":"form-select"}),initial=shiftinfo,choices=MilkRecord.shift_choices)
+    user = forms.ModelChoiceField(label=_("User"),queryset=None,initial=1,widget=forms.Select(attrs={"class":"form-select"}))
+    dairy = forms.ModelChoiceField(label=_("Dairy"),queryset=None,initial=1,widget=forms.HiddenInput(attrs={"class":"form-select"}))
+    date = forms.DateField(label=_("Date"),initial=datetime.datetime.now(),widget=DateInput(attrs={"class":"form-control date-picker","placeholder":"dd-mm-yyyy"},format="%Y-%m-%d"))
+    shift = forms.ChoiceField(label=_("Shift"),widget=forms.Select(attrs={"class":"form-select"}),initial=shiftinfo,choices=MilkRecord.shift_choices)
     # input_formats=['%Y%m%d']
     class Meta:
         model = MilkRecord
