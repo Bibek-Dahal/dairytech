@@ -26,47 +26,49 @@
     <div class="row justify-content-center">
         <div class="col-md-6 col-sm-8 col-lg-5 col-12">
             <form action="" method="POST" novalidate class="p-sm-5">
-                {% csrf_token%}
-                {% if form.non_field_errors%}
-                {% for error in form.non_field_errors%}
-                <p class="alert alert-danger my-3 text-center">{{error}}</p>
-                {% endfor%}
-                {% endif%}
+                {% csrf_token %}
+                {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                <p class="alert alert-danger my-3 text-center">{{ error }}</p>
+                {% endfor %}
+                {% endif %}
                 <div class="row text-center">
-                    <div class="card-header" style="background-color: #22668D; color:#F1F0E8;">
-                        <h1 class="text-center fw-bold">{%trans 'Login' %}</h1>
+                    <div class="card-header" style="background-color: #22668D; color: #F1F0E8;">
+                        <h1 class="text-center fw-bold">{% trans 'Login' %}</h1>
                     </div>
                 </div>
-                <div class="row mt-80 p-2"  style="background-color: #F1F0E8;  border: 1px solid rgb(100, 97, 97);">
-                    {% for field in form%}
+                <div class="row mt-80 p-2" style="background-color: #F1F0E8; border: 1px solid rgb(100, 97, 97);">
+                    {% for field in form %}
                     <div class="col-12 p-1 mt-2">
-                        {{field.label_tag}}
-                    </div>
-
-                    
-                    <div class="col-12 p-1 ">
-                        {{field}}
+                        {% if field.name == 'remember_me' %}
+                        <label class="form-check-label">
+                            {{ field }} {{ field.label_tag }}
+                        </label>
+                        {% else %}
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% endif %}
                     </div>
                     <div class="col-12">
-                        <small class="text-danger">{{field.errors|striptags}}</small>
+                        <small class="text-danger">{{ field.errors|striptags }}</small>
                     </div>
-                    {%endfor%}
+                    {% endfor %}
                     <div class="row justify-content-center">
                         <div class="d-grid gap-2 my-2 col-12 col-sm-8 mx-auto">
-                            <button cclass="btn btn-light" style="background-color: #f7d597; border-color: #96B6C5;">Login</button>
+                            <button class="btn btn-light" style="background-color: #f7d597; border-color: #96B6C5;">Login</button>
                         </div>
-                        <div class=" col-12 col-sm-8 text-center my-2">
+                        <div class="col-12 col-sm-8 text-center my-2">
                             <small class="mb-5"><a href="{% url 'account_reset_password' %}">Forgot Password ?</a></small>
-                            <br/>
+                            <br />
                             <div class="text-center text-primary fw-bold mt-3">
-                                <small>{%trans 'New to our site?'%} <a href="{% url 'account_signup' %}"
-                                        class="text-danger">{% trans 'Create an Account' %}</a> </small>
+                                <small>{% trans 'New to our site?' %} <a href="{% url 'account_signup' %}" class="text-danger">{%
+                                        trans 'Create an Account' %}</a></small>
                             </div>
                         </div>
                     </div>
                 </div>
-                
             </form>
+
         </div>
     </div>
 </div>

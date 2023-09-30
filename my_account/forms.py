@@ -68,7 +68,7 @@ class MyLoginForm(LoginForm):
         
         self.fields['password'].widget.attrs.update({'class':'form-control'})
         self.fields['login'].widget.attrs.update({'autofocous':True,'class':'form-control'}) 
-        self.fields['remember'].widget.attrs.update({'class':'form-check-input'})   
+        self.fields['remember'].widget.attrs.update({'class':'d-inline'})   
 
 
 
