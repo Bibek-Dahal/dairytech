@@ -1,0 +1,52 @@
+{% extends 'base.html'%}
+{% load static%}
+{% load i18n %}
+{%block title%}{%trans 'List Dairy Members' %}{%endblock title%}
+{%block additionalcss%}
+<style>
+    a {
+        text-decoration: none;
+    }
+</style>
+{%endblock%}
+{%block content%}
+
+<div class="container mt-5">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col no-underline">{%trans 'Id'%}</th>
+                <th scope="col">{%trans 'First Name'%}</th>
+                <th scope="col">{%trans 'Middle Name'%}</th>
+                <th scope="col">{%trans 'Last Name'%}</th>
+                <th scope="col">{%trans 'Phone Number'%}</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+
+            {%for member in members%}
+
+            <tr>
+                <th scope="row"><a href="{% url 'dairyapp:member_milk_record' id=member.id dairy=dairy%}">{{member.id}}</a></th>
+                <td>{{member.first_name}}</td>
+                <td>
+                     {%if member.middle_name%}
+                      {{member.middle_name}} 
+                      {%else%}
+                        <span class="text-center">-</span>
+                      {%endif%} 
+                </td>
+                <td>{{member.last_name}}</td>
+                <td>{{member.phone_number}}</td>
+            </tr>
+            
+            {%endfor%}
+            
+        </tbody>
+    </table>
+    
+    
+</div>
+{%endblock content%}

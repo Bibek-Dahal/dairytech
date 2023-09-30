@@ -1,0 +1,47 @@
+{%extends "../base.html"%}
+{%load i18n%}
+{%block title%}{%trans 'fatrate list' %}{%endblock title%}
+{%block table_data%}
+<div class="container">
+    
+    <table class="table">
+        <div class="row">
+            <div class="col">
+                <a class="float-end nav-link " href="{%url  'dairyapp:create-fat'%}">{%trans 'Add Fat Rates'%}</a>
+            </div>
+        </div>
+        
+        <thead>
+            <tr>
+                <th scope="col">{%trans 'Id'%}</th>
+                <th scope="col">{%trans 'Fat Rate'%}</th>
+                <th scope="col">{%trans 'Dairy'%}</th>
+                <th scope="col">{%trans 'Actions'%}</th>
+    
+            </tr>
+        </thead>
+        <tbody>
+            {%for fatrate in fatrates%}
+            <tr>
+                <th scope="row">{{fatrate.id}}</th>
+                <td>{{fatrate.fat_rate}}</td>
+                <td>{{fatrate.dairy}}</td>
+                <td>
+                    <form action="{% url 'dairyapp:edit_fat' fatrate.id%}" class="d-inline">
+                        <button type="submit" class="btn btn-danger">{%trans 'edit' %}</button>
+                    </form>
+                    <form action="{% url 'dairyapp:delete_fat' fatrate.id%}" method="POST" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">{%trans 'delete' %}</button>
+                    </form>
+                </td>
+    
+            </tr>
+            {%endfor%}
+    
+    
+    
+        </tbody>
+    </table>
+</div>
+{%endblock%}

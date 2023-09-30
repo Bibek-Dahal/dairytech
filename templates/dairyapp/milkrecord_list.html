@@ -1,0 +1,63 @@
+{%extends "../base.html"%}
+{% load i18n %}
+{%block title%}{%trans 'List Milk Record' %}{%endblock title%}
+{%block table_data%}
+{%block additionalcss%}
+    <style>
+        a{
+        text-decoration: none;
+    }
+    </style>
+{%endblock%}
+<table class="table">
+
+    <a class="float-end nav-link " href="{%url  'dairyapp:create_milk_record' dairy=dairy id=user.id %}">Add Milk Record</a>
+    <thead>
+        <tr>
+            <th scope="col">{%trans 'Id' %}</th>
+            <th scope="col">{%trans 'Dairy' %}</th>
+            <th scope="col">{%trans 'User' %}</th>
+            <th scope="col">{%trans 'Shift' %}</th>
+            <th scope="col">{%trans 'Milk Weight' %}</th>
+            <th scope="col">{%trans 'Milk Fat' %}</th>
+            <th scope="col">{%trans 'Date' %}</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {%for milkrecord in milkrecords%}
+        <tr>
+            <th scope="row">{{milkrecord.id}}</th>
+            <td>{{milkrecord.dairy}}</td>
+            <td><a
+                    href="{% url 'dairyapp:member_milk_record' id=milkrecord.user.id dairy=milkrecord.dairy.name%}">{{milkrecord.user}}</a>
+            </td>
+            <td>{{milkrecord.shift}}</td>
+            <td>{{milkrecord.milk_weight}}</td>
+            <td>{{milkrecord.milk_fat}}</td>
+            <td>{{milkrecord.date}}</td>
+            <td>
+                <form action="{% url 'dairyapp:update_milk_record' id=milkrecord.id dairy=dairy%}" class="d-inline">
+                    <button type="submit" class="btn btn-danger">{% trans 'edit' %}</button>
+                </form>
+                <form action="#" method="POST" class="d-inline">
+                    {% csrf_token %}
+                    
+                    <button type="submit" class="btn btn-danger">{% trans 'delete' %}</button>
+                </form>
+            </td>
+
+        </tr>
+        {%endfor%}
+
+
+
+    </tbody>
+</table>
+
+{%for member in members%}
+{{member.first_name}}|{{member.last_name}}|{{member.phone_number}}
+{%endfor%}
+
+
+{%endblock%}
