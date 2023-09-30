@@ -5,98 +5,87 @@
 
 
 {%block content%}
-{%if fat_rate%}
-<h1>fat rate:{{fat_rate}}</h1>
-<h1>bonous:{{bonous}}</h1>
-<h1>total fat rate:{{total_fat_rate}}</h1>
-{%endif%}
-<div  onclick="handleToggle()">
-    <p class="fw-bold">{%trans 'Filter' %}:<span class="mx-2"><button id="filter_btn_value" class="btn btn-primary btn-sm"><h5>+</h5></button></span> </p>
-    <div id="filter" class="d-none">
-    
-        
-       
-        
+<div  >
+    <div class="container">
         <div class="row">
-            <div class="col-lg-4">
-                <p>{%trans 'Date' %}:<input type="date" data-single="true" class="date-picker"  id="date" {%if date %} value="{{date}}" {%endif%}></p>
-        <p>{%trans 'Start Date' %}:<input type="date" data-single="true" id="start_date" name="start-date" class="date-picker" {%if start_date %} value="{{start_date}}" {%endif%}></p>
+            
+            {%if total_price != 0%}
+            <!-- <a role="button" id="send-email-report-form" href="{%url 'dairyapp:milk_report_email'%}">
+                send milk report
+            </a> -->
+            <div class="row  fw-bold mt-1 mb-3">
+                <a role ="button" id ="send-email-report-form" class="float-end nav-link " href="{%url 'dairyapp:milk_report_email'%}">
+                    <div class="btn btn-dark" style="background-color: #22668D;">Send Milk Record</div>
+                    </a>
+            </div>
+        {%endif%}
+        </div>
+         <div id="filter" >
+        <div class="row " >
+            <div class="col-lg-4 p-2" >
+                <p class="fw-bold p-2 " data-mdb-inline="true" style="background-color: #f6f6f0" >{%trans 'Date' %}:  <input type="date" data-single="true" class="date-picker"  id="date" {%if date %} value="{{date}}" {%endif%}></p>
+                <br/>
+                <p class="fw-bold p-2" style="background-color: #FFFADD" >{%trans 'Start Date' %}:  <input type="date" data-single="true" id="start_date" name="start-date" class="date-picker" {%if start_date %} value="{{start_date}}" {%endif%}></p>
             </div>
 
-            <div class="col-lg-4">
-                <p>{%trans 'End Date' %}:<input type="date" data-single="true" id="end_date" data-single="true" name="end-date" class="date-picker" {%if end_date %} value="{{end_date}}" {%endif%}></p>
-                <p>{%trans 'Shift:select' %}</p>
+            <div class="col-lg-4 p-2">
+                <p class="fw-bold p-2" style="background-color: #FFFADD" >{%trans 'End Date' %}: <input type="date" data-single="true" id="end_date" data-single="true" name="end-date" class="date-picker" {%if end_date %} value="{{end_date}}" {%endif%}></p>
+                <br/>
+                <div style="background-color: #FFFADD;">
+                <p class="fw-bold ps-2 pt-2" style="display: inline-block;">{%trans 'Shift' %}:</p>
                 {%if shift and shift == "morning" %}
-                <div class="form-check">
+                <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="shift" id="morning" value="morning" checked>
                     <label class="form-check-label" for="flexRadioDefault1">
                         {%trans 'morning' %}
                     </label>
                 </div>
                 {%else%}
-                <div class="form-check">
+                <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="shift" id="morning" value="morning">
                     <label class="form-check-label" for="flexRadioDefault1">
                         {%trans 'morning' %}
                     </label>
                 </div>
-            
-            
                 {%endif%}
-            
                 {% if shift and shift == 'night' %}
-                <div class="form-check">
+                <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="shift" id="night" value="night" checked>
                     <label class="form-check-label" for="flexRadioDefault2">
                         {%trans 'night' %}
                     </label>
                 </div>
                 {%else%}
-                <div class="form-check">
+                <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="shift" id="night" value="night">
                     <label class="form-check-label" for="flexRadioDefault2">
                         {%trans 'night' %}
                     </label>
                 </div>
-            
                 {%endif%}
-
+                </div>
             </div>
 
+            
         </div>
+
+        <div class="row">
+            <div class="col-lg-10 col-md-12 d-flex justify-content-end my-2">
+                
+                    <a class="float-end nav-link " href="{%url  'dairyapp:create_milk_record' dairy=dairy id=id %}">
+                        <div class="btn btn-dark" style="background-color: #22668D;">Add Milk Record</div>
+                        </a>
+                
+            </div>
+        </div>
+        
+        
         <script src="{% static 'js/nepali-date-picker.min.js'%}"></script>
-        
-        
         <!-- Dateq<input type="text" data-single="true" class="date-picker" placeholder="Select Date(s)"> -->
-        
-    
-    
-       
-    
     </div>
 </div>
-<script>
-    function handleToggle(){
-        let filterdiv = document.getElementById("filter");
-        let cl = filterdiv.classList.value
-        console.log(cl)
-        if(cl === 'd-inline'){
-            filterdiv.classList.remove("d-inline");
-            filterdiv.classList.add("d-none");
-            let btn = document.getElementById('filter_btn_value')
-            btn.textContent = '+'
-            console.log("inside if")
-        }else{
-            filterdiv.classList.remove("d-none");
-            filterdiv.classList.add("d-inline");
-            let btn = document.getElementById('filter_btn_value')
-            btn.textContent = '-'
-            console.log("inside else")
-            
-        }
-    }
-</script>
-    
+</div>
+
 {%block messageinfo%}
 {% if messages %}
 <ul class="messages">
@@ -109,17 +98,14 @@
 {%endblock messageinfo%}
 {%block table_data%}
 
+<div class="container">
+
+
 <div class="col-lg-10 col-md-12 d-flex justify-content-start">
 <table class="table table-bordered table-striped">
-    {%if total_price != 0%}
-        <a role="button" id="send-email-report-form" href="{%url 'dairyapp:milk_report_email'%}">
-            send milk report
-        </a>
-    {%endif%}
 
-
-
-    <a class="float-end nav-link " href="{%url  'dairyapp:create_milk_record' dairy=dairy id=id %}">Add Milk Record</a>
+<!-- 
+    <a class="float-end nav-link " href="{%url  'dairyapp:create_milk_record' dairy=dairy id=id %}">Add Milk Record</a> -->
     <thead>
         <tr>
             <th scope="col">{% trans 'Id' %}</th>
@@ -146,7 +132,7 @@
                 <td>{{milkrecord.date}}</td>
                 <td>
                     <form action="{% url 'dairyapp:update_milk_record' id=milkrecord.id dairy=dairy%}" class="d-inline">
-                        <button type="submit" class="btn btn-danger">{%trans 'edit' %}</button>
+                        <button type="submit" class="btn btn-dark" style="background-color: #22668D;">{%trans 'edit' %}</button>
                     </form>
                     <form action="#" method="POST" class="d-inline">
                         {% csrf_token %}
@@ -154,7 +140,7 @@
                     </form>
                 </td>
         
-            </tr>
+            </tr>   
         
             {%endfor%}
             <tr>
@@ -183,7 +169,7 @@
     
 </table>
 </div>  
-
+</div>
 {%for member in members%}
 {{member.first_name}}|{{member.last_name}}|{{member.phone_number}}
 {%endfor%}

@@ -421,7 +421,7 @@ class ListMemberMilkRecord(ListView):
                     MilkRecord.objects.create(
                         dairy = dairy,
                         user = user,
-                        shift = "night",
+                        shift = "morning",
                         milk_weight = random.randint(1,20),
                         milk_fat = random.randint(1,6),
                         date = date
