@@ -1,0 +1,10 @@
+{%extends 'base.html'%}
+{%load i18n%}
+{%load static%}
+
+{%block content%}
+    <h1>Hello form user view</h1>
+    {%for dairy in dairies%}
+        <a href="{%url 'user:member_milk_record' dairy=dairy.name %}">{{dairy.name}}</a>
+    {%endfor%}
+{%endblock%}

@@ -1,0 +1,228 @@
+{%extends "../base.html"%}
+{% load i18n %}
+{%block title%}{%trans 'Milk Record' %}{%endblock title%}
+{%block messageinfo%}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %}
+
+{%endblock%}
+{%block table_data%}
+<div>
+    {{count}}
+    {%if fat_rate%}
+        <h1>fat rate:{{fat_rate}}</h1>
+        <h1>bonous:{{bonous}}</h1>
+        <h1>total fat rate:{{total_fat_rate}}</h1>
+    {%endif%}
+    <p>{%trans 'Filter' %}</p>
+    Date:{{date}}
+    <p>{%trans 'Date' %}:<input type="date" id="date" value="{{date}}"></p>
+    <p>{%trans 'Start Date' %}:<input type="date" id="start_date" name="start-date" value="{{start_date}}"></p>
+    <p>{%trans 'End Date' %}:<input type="date" id="end_date" name="end-date" value="{{end_date}}"></p>
+    <p>{%trans 'Shift:select' %}</p>
+
+
+    {%if shift and shift == "morning" %}
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="shift" id="morning" value="morning" checked>
+        <label class="form-check-label" for="flexRadioDefault1">
+            {%trans 'morning' %}
+        </label>
+    </div>
+    {%else%}
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="shift" id="morning" value="morning">
+        <label class="form-check-label" for="flexRadioDefault1">
+            {%trans 'morning' %}
+        </label>
+    </div>
+
+
+    {%endif%}
+
+    {% if shift and shift == 'night' %}
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="shift" id="night" value="night" checked>
+        <label class="form-check-label" for="flexRadioDefault2">
+            {%trans 'night' %}
+        </label>
+    </div>
+    {%else%}
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="shift" id="night" value="night">
+        <label class="form-check-label" for="flexRadioDefault2">
+            {%trans 'night' %}
+        </label>
+    </div>
+
+    {%endif%}
+
+</div>
+<table class="table">
+
+    <thead>
+        <tr>
+            <th scope="col">{% trans 'Id' %}</th>
+            <th scope="col">{% trans 'Dairy' %}</th>
+            <th scope="col">{% trans 'User' %}</th>
+            <th scope="col">{% trans 'Shift' %}</th>
+            <th scope="col">{% trans 'Milk Weight' %}</th>
+            <th scope="col">{% trans 'Milk Fat' %}</th>
+            <th scope="col">{% trans 'Date' %}</th>
+            
+
+        </tr>
+    </thead>
+    <tbody>
+        {%for milkrecord in milkrecords%}
+        <tr>
+            <th scope="row">{{milkrecord.id}}</th>
+            <td>{{milkrecord.dairy}}</td>
+            <td>{{milkrecord.user}}</td>
+            <td>{{milkrecord.shift}}</td>
+            <td>{{milkrecord.milk_weight}}</td>
+            <td>{{milkrecord.milk_fat}}</td>
+            <td>{{milkrecord.date}}</td>
+            
+
+        </tr>
+
+        {%endfor%}
+        <tr>
+            <th scope="row">{%trans 'Details'%}</th>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>
+                <h3>{{total_milk_wieght}}</h3>
+            </td>
+            <td>
+                <h3>{{avg_fat}}</h3>
+            </td>
+            <td>
+                <h3>{{milkrecord.date}}</h3>
+            </td>
+            <td>
+                <h3>total amount:{{total_price}}</h3>
+            </td>
+
+        </tr>
+
+
+
+    </tbody>
+</table>
+
+{%for member in members%}
+{{member.first_name}}|{{member.last_name}}|{{member.phone_number}}
+{%endfor%}
+
+
+<script>
+    // Function to construct the query string with the provided filter parameters
+    function constructQueryString() {
+        const shift = getSelectedShift();
+        const date = document.getElementById('date').value;
+        console.log("date", date)
+        const startDate = document.getElementById('start_date').value;
+        const endDate = document.getElementById('end_date').value;
+
+        // Construct the query string based on the provided filter parameters
+        let queryString = '';
+        if (shift) queryString += `shift=${encodeURIComponent(shift)}&`;
+        if (date) queryString += `date=${encodeURIComponent(date)}&`;
+        if (startDate) queryString += `start_date=${encodeURIComponent(startDate)}&`;
+        if (endDate) queryString += `end_date=${encodeURIComponent(endDate)}`;
+
+        return queryString;
+    }
+
+    // Function to get the selected "shift" value
+    function getSelectedShift() {
+        const shiftRadios = document.querySelectorAll('input[name="shift"]');
+        let selectedShift = null;
+
+        for (const radio of shiftRadios) {
+            if (radio.checked) {
+                selectedShift = radio.value;
+                break;
+            }
+        }
+
+        return selectedShift;
+    }
+
+    // Function to trigger the GET request with the updated filter parameters
+    function updateFiltersAndGetData(e) {
+        console.log("update filtre called", e)
+        const queryString = constructQueryString();
+        console.log(queryString)
+
+        location.href = "{% url 'user:member_milk_record' dairy=dairy%}?" + queryString
+        // Perform the GET request using JavaScript's fetch API or any other method you prefer
+        // Replace 'YOUR_API_ENDPOINT' with the actual endpoint URL
+        /*fetch(`/api/data/?${queryString}`)
+            .then((response) => response.json())
+            .then((data) => {
+                // Handle the retrieved data as needed
+                console.log(data);
+            })
+            .catch((error) => {
+                console.error('Error fetching data:', error);
+            });*/
+    }
+
+
+
+
+
+
+    // Add event listeners to each input field to trigger the GET request when the value changes
+    // Add event listener to the radio buttons to trigger the GET request when the selected "shift" changes
+    const shiftRadios = document.querySelectorAll('input[name="shift"]');
+    for (const radio of shiftRadios) {
+        radio.addEventListener('change', updateFiltersAndGetData);
+    }
+    document.getElementById('date').addEventListener('input', updateFiltersAndGetData);
+    document.getElementById('start_date').addEventListener('input', updateFiltersAndGetData);
+    document.getElementById('end_date').addEventListener('input', updateFiltersAndGetData);
+
+    function addValue() {
+
+    }
+
+
+
+    $(document).ready(function () {
+
+        const url = new URLSearchParams(location.search)
+        console.log(url)
+        let href = document.getElementById("send-email-report-form").href
+
+        const encodedDairyName = encodeURIComponent("{{dairy}}");
+        let params = `?id={{id}}&dairy=${encodedDairyName}&`
+        for (const [key, value] of url) {
+            params += `${key}=${value}&`
+            console.log(`${key}:${value}`);
+        }
+        console.log("params", params)
+        href = href + params
+        console.log("action", href)
+        let new_form = document.getElementById("send-email-report-form")
+        new_form.href = href
+        //new_form.submit()
+
+        //let new_form = document.getElementById("send-email-report-form")
+        //new_form.action = 'http://127.0.0.1:8000'
+
+    })
+
+
+
+</script>
+{%endblock%}
