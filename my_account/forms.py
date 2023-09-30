@@ -68,7 +68,7 @@ class MyLoginForm(LoginForm):
         
         self.fields['password'].widget.attrs.update({'class':'form-control'})
         self.fields['login'].widget.attrs.update({'autofocous':True,'class':'form-control'}) 
-        self.fields['remember'].widget.attrs.update({'class':'d-inline'})   
+        self.fields['remember'].widget.attrs.update({'class':'form-check-input'})   
 
 
 
@@ -87,10 +87,10 @@ class MyUserCreationForm(SignupForm):
     #     )
     # )
     first_name = CharField(label=_("First name"),max_length=20,min_length=2,widget=forms.TextInput(attrs={'class':'form-control','placeholder':_("First name")}))
-    middle_name = CharField(label=_("Middle name"),required=False,max_length=20,min_length=2,widget=forms.TextInput(attrs={'class':'form-control','placeholder':_("Middle name")}))
+    # middle_name = CharField(label=_("Middle name"),required=False,max_length=20,min_length=2,widget=forms.TextInput(attrs={'class':'form-control','placeholder':_("Middle name")}))
     last_name = CharField(label=_("Last name"),max_length=20,min_length=2,widget=forms.TextInput(attrs={'class':'form-control','placeholder':_("Last name")}))
     phone_number = CharField(label=_("Phone number"),widget=forms.NumberInput(attrs={'class':'form-control','maxlength':10,'minlength':10,'placeholder':_("Phone number")}))
-    field_order = ["email","phone_number","first_name","middle_name","last_name","password1","password2"]
+    field_order = ["first_name","phone_number","password1","last_name","email","password2"]
     
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""

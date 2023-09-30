@@ -1,0 +1,8 @@
+body {
+    background-color: rgb(245, 238, 238);
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0px;
+}

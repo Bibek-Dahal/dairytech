@@ -3,6 +3,13 @@
 {% load static%}
 {%block title%}login{%endblock title%}
 {%block navbar%}{%endblock navbar%}
+{%block additionalcss%}
+    <style>
+
+    </style>
+
+
+{%endblock%}
 {%block content%}
 
 {%block messageinfo%}
@@ -18,7 +25,7 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6 col-sm-8 col-lg-5 col-12">
-            <form action="" method="POST" novalidate class="form-control shadow-lg p-sm-5">
+            <form action="" method="POST" novalidate class="p-sm-5">
                 {% csrf_token%}
                 {% if form.non_field_errors%}
                 {% for error in form.non_field_errors%}
@@ -26,36 +33,39 @@
                 {% endfor%}
                 {% endif%}
                 <div class="row text-center">
-                    <div class="col">
-                        <h2 class="text-info">{% trans 'Login' %}</h2>
+                    <div class="card-header" style="background-color: #22668D; color:#F1F0E8;">
+                        <h1 class="text-center fw-bold">{%trans 'Login' %}</h1>
                     </div>
                 </div>
-                {% for field in form%}
-                <div class="row mt-80">
-                    <div class="col-12 p-1">
+                <div class="row mt-80 p-2"  style="background-color: #F1F0E8;  border: 1px solid rgb(100, 97, 97);">
+                    {% for field in form%}
+                    <div class="col-12 p-1 mt-2">
                         {{field.label_tag}}
                     </div>
-                    <div class="col-12 p-1">
+
+                    
+                    <div class="col-12 p-1 ">
                         {{field}}
                     </div>
                     <div class="col-12">
                         <small class="text-danger">{{field.errors|striptags}}</small>
                     </div>
-                </div>
-                {%endfor%}
-                <div class="row justify-content-center">
-                    <div class="d-grid gap-2 my-2 col-12 col-sm-8 mx-auto">
-                        <button class="btn btn-primary" type="submit">Login</button>
-                    </div>
-                    <div class=" col-12 col-sm-8 text-center my-2">
-                        <small class="mb-5"><a href="{% url 'account_reset_password' %}">Forgot Password ?</a></small>
-                        <br>
-                        <div class="text-center text-primary fw-bold">
-                            <small>{%trans 'New to our site?'%} <a href="{% url 'account_signup' %}"
-                                    class="text-danger">{% trans 'Create an Account' %}</a> </small>
+                    {%endfor%}
+                    <div class="row justify-content-center">
+                        <div class="d-grid gap-2 my-2 col-12 col-sm-8 mx-auto">
+                            <button cclass="btn btn-light" style="background-color: #f7d597; border-color: #96B6C5;">Login</button>
+                        </div>
+                        <div class=" col-12 col-sm-8 text-center my-2">
+                            <small class="mb-5"><a href="{% url 'account_reset_password' %}">Forgot Password ?</a></small>
+                            <br/>
+                            <div class="text-center text-primary fw-bold mt-3">
+                                <small>{%trans 'New to our site?'%} <a href="{% url 'account_signup' %}"
+                                        class="text-danger">{% trans 'Create an Account' %}</a> </small>
+                            </div>
                         </div>
                     </div>
                 </div>
+                
             </form>
         </div>
     </div>
