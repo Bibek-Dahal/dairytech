@@ -1,0 +1,75 @@
+{% extends 'base.html'%}
+{% load i18n %}
+{% load static%}
+{%block title%}edit milk record{%endblock title%}
+
+{%block content%}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-sm-8 col-lg-5 col-12">
+            <form action="" method="POST" novalidate class="form-control shadow-lg p-sm-5">
+                {% csrf_token%}
+                {% if form.non_field_errors%}
+                {% for error in form.non_field_errors%}
+                <p class="alert alert-danger my-3 text-center">{{error}}</p>
+                {% endfor%}
+                {% endif%}
+                <div class="row text-center">
+                    <div class="col">
+                        <h2 class="text-info">{%trans 'Update Milk Record' %}</h2>
+                    </div>
+                </div>
+                {% for field in form%}
+                <div class="row mt-80">
+                    <div class="col-12 p-1">
+                        {{field.label_tag}}
+                    </div>
+                    <div class="col-12 p-1">
+                        {{field}}
+                    </div>
+                    <div class="col-12">
+                        <small class="text-danger">{{field.errors|striptags}}</small>
+                    </div>
+                </div>
+                {%endfor%}
+                <div class="row justify-content-center">
+                    <div class="d-grid gap-2 my-2 col-12 col-sm-8 mx-auto">
+                        <button class="btn btn-primary" type="submit">{%trans 'Submit' %}</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="{% static 'js/nepali-date-picker.min.js'%}"></script>
+    <script>
+        $(document).ready(function () {
+            //$('.id_user').select2();
+            //$('.id_dairy').select2();
+
+            // Find the input element with the specified ID
+            var $oldInput = $(".date-picker");
+
+            // Create a new input element with the desired type
+            var $newInput = $("<input>").attr({
+                "type": "text",
+                "id": $oldInput.attr("id"),
+                "name": $oldInput.attr("name"),
+                "value": $oldInput.val(),
+                "class": $oldInput.attr("class"),
+                "date-singal": "true"
+                // Add any other attributes you need to copy
+            });
+
+            // Replace the old input element with the new one
+            $oldInput.replaceWith($newInput);
+            $('.date-picker').nepaliDatePicker();
+        });
+
+
+
+
+    </script>
+</div>
+{%endblock content%}

@@ -36,7 +36,9 @@ INSTALLED_APPS = [
     'my_account',
     'allauth',
     'allauth.account',
-    'user'
+    'user',
+    'dairyapp',
+    
     
 ]
 

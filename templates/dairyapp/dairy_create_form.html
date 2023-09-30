@@ -1,0 +1,106 @@
+{% extends 'base.html'%}
+{% load static%}
+{% load i18n %}
+{%block title%}{%trans 'Create Dairy' %}{%endblock title%}
+{%block additionalcss%}
+    
+{%endblock%}
+
+
+{%block content%}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-sm-8 col-lg-5 col-12">
+            {% if request.user.has_verified_dairy%}
+            <form method="POST" novalidate class="form-control shadow-lg p-sm-5">
+                {% csrf_token%}
+                {% if form.non_field_errors%}
+                {% for error in form.non_field_errors%}
+                <p class="alert alert-danger my-3 text-center">{{error}}</p>
+                {% endfor%}
+                {% endif%}
+                <div class="row text-center">
+                    <div class="col">
+                        <h2 class="text-info">{%trans 'Insert Dairy' %}</h2>
+                    </div>
+                </div>
+                {% for field in form%}
+                <div class="row mt-80">
+                    <div class="col-12 p-1">
+                        {{field.label_tag}}
+                    </div>
+                    <div class="col-12 p-1">
+                        {{field}}
+                    </div>
+                    <div class="col-12">
+                        <small class="text-danger">{{field.errors|striptags}}</small>
+                    </div>
+                </div>
+                {%endfor%}
+                <div class="row justify-content-center">
+                    <div class="d-grid gap-2 my-2 col-12 col-sm-8 mx-auto">
+                        <button class="btn btn-primary" type="submit">{%trans 'Submit' %}</button>
+
+                    </div>
+
+                </div>
+            </form>
+            {%else%}
+
+            <body>
+                <p>{% trans 'You must first pay charge to add dairy' %}</p>
+                <form action="https://uat.esewa.com.np/epay/main" method="POST">
+                    <input value="100" name="tAmt" type="hidden">
+                    <input value="90" name="amt" type="hidden">
+                    <input value="5" name="txAmt" type="hidden">
+                    <input value="2" name="psc" type="hidden">
+                    <input value="3" name="pdc" type="hidden">
+                    <input value="EPAYTEST" name="scd" type="hidden">
+                    <input value="{{uid}}" name="pid" type="hidden">
+                    <input value="http://127.0.0.1:8000/verify-esewa?q={{request.user.id}}" type="hidden" name="su">
+                    <input value="http://merchant.com.np/page/esewa_payment_failed?q=fu" type="hidden" name="fu">
+                    <input class="btn btn-primary" value="{% trans 'Pay with esewa' %}" type="submit">
+                </form>
+
+                <br/>
+                <br/>
+                <form action="{% url 'dairyapp:initiate'%}" method="POST">
+                    {%csrf_token%}
+                    <input type="hidden"  name="purchase_order_id" value="{{uid}}">
+                    <input type="hidden" name="amount" value="1000"  id="">
+                    <input type="hidden" name="return_url" value="http://127.0.0.1:8000/dashboard/verify">
+                    <input type="submit" class="btn btn-danger" value="pay with khalti">
+                </form>
+
+
+
+
+
+
+
+
+                <!-- <form action="{% url 'dairyapp:initiate' %}" method="POST">
+                    {%csrf_token%}
+                    <input type="hidden" name="purchase_order_id" value="{{uid}}" id="pid">
+                    <input type="hidden" name="amount" value="1000" id="amt">
+                    <input type="hidden" name="return_url"  value="http://127.0.0.1:8000/dashboard/verify">
+                    <input type="submit" class="btn btn-danger" id="khaltibtn" value="pay with khalti   " name="" id="">
+                </form> -->
+            </body>
+            {%endif%}
+
+
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('.dairy-member-select').select2();
+
+        });
+
+
+    </script>
+
+</div>
+{%endblock content%}
