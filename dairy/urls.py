@@ -1,4 +1,3 @@
-
 from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
@@ -15,6 +14,6 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     path('accounts/', include('allauth.urls')),
-    path('dashboard/',include("dairyapp.urls",namespace="dairyapp")),
-    path('',include('user.urls',namespace='user')),
+    # path('dashboard/',include("dairyapp.urls",namespace="dairyapp")),
+    # path('',include('user.urls',namespace='user'))
 )
