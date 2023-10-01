@@ -8,7 +8,7 @@ def sendMial(subject,to,from_email,filename,message=None,pdf=None):
     if not pdf:
         send_mail(
             subject=subject,
-            message=message,
+            message="message",
             from_email=from_email,
             recipient_list=[to],
             fail_silently=False,
