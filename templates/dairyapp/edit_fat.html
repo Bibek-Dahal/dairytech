@@ -8,7 +8,7 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6 col-sm-8 col-lg-5 col-12">
-            <form action="" method="POST" novalidate class="form-control shadow-lg p-sm-5">
+            <form action="" method="POST" novalidate class="form-control p-sm-5">
                 {% csrf_token%}
                 {% if form.non_field_errors%}
                 {% for error in form.non_field_errors%}

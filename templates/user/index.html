@@ -1,10 +1,38 @@
-{%extends 'base.html'%}
-{%load i18n%}
-{%load static%}
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
 
-{%block content%}
-    <h1>Hello form user view</h1>
-    {%for dairy in dairies%}
-        <a href="{%url 'user:member_milk_record' dairy=dairy.name %}">{{dairy.name}}</a>
-    {%endfor%}
-{%endblock%}
+{% block content %}
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <!-- Logo column -->
+        <div class="col-md-6">
+          <!-- Add your logo here with alt text -->
+          <div class="mb-4 text-center">
+            <img src="{% static 'images/logo.svg' %}" alt="Dairy Tech Logo" class="img-fluid" width="800" height="800">
+          </div>
+        </div>
+        <!-- Welcome content column with right padding -->
+        <div class="col-md-6 pr-5">
+          <h1 class="display-4">Welcome to <strong>Dairy Tech</strong> </h1>
+          <p class="lead">Revolutionizing dairy farming </p><br><br>
+          <div class="row" >
+            {{daireis}}
+            {% for dairy in dairies %}
+            <div class="col-lg-6 col-md-12 mb-4" >
+              <div class="card" style="background-color: #F1F0E8;">
+                <div class="card-body">
+                  <h5 class="card-title">{{ dairy.name }}</h5>
+                  <p class="card-text">Explore the quality and freshness of {{ dairy.name }} dairy products.</p>
+                  <a href="{% url 'user:member_milk_record' dairy=dairy.name %}" class="btn btn-dark"style="background-color: #22668D" >Discover Products</a>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

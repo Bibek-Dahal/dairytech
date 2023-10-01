@@ -132,11 +132,11 @@
                 <td>{{milkrecord.date}}</td>
                 <td>
                     <form action="{% url 'dairyapp:update_milk_record' id=milkrecord.id dairy=dairy%}" class="d-inline">
-                        <button type="submit" class="btn btn-dark" style="background-color: #22668D;">{%trans 'edit' %}</button>
+                        <button type="submit" class="btn btn-primary">{%trans 'edit' %}</button>
                     </form>
                     <form action="#" method="POST" class="d-inline">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-danger">{%trans 'delete'%}</button>
+                        <button type="submit" class="btn btn-primary">{%trans 'delete'%}</button>
                     </form>
                 </td>
         
