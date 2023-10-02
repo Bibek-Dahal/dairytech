@@ -416,9 +416,9 @@ class ListMemberMilkRecord(ListView):
                 import random
                 i = 1
                 for i in range(1,28):
-                    date = f"2023-09-{i}"
+                    date = f"2023-10-{i}"
                     if i<9:
-                        date = f"2023-09-0{i}"
+                        date = f"2023-10-0{i}"
                     MilkRecord.objects.create(
                         dairy = dairy,
                         user = user,

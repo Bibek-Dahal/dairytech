@@ -56,6 +56,7 @@ import datetime
 class CreateMilkRecordForm(forms.ModelForm):
     shiftinfo = getShift()
     # if 
+    print("shift info",shiftinfo)
     user = forms.ModelChoiceField(label=_("User"),queryset=None,initial=1,widget=forms.Select(attrs={"class":"form-select"}))
     dairy = forms.ModelChoiceField(label=_("Dairy"),queryset=None,initial=1,widget=forms.HiddenInput(attrs={"class":"form-select"}))
     date = forms.DateField(label=_("Date"),initial=datetime.datetime.now(),widget=DateInput(attrs={"class":"form-control date-picker","placeholder":"dd-mm-yyyy"},format="%Y-%m-%d"))

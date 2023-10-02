@@ -20,9 +20,9 @@ def getShift():
     # Determine whether it's AM or PM
     if current_hour < 12:
 
-        return MilkRecord.shift_choices[0][1]
+        return MilkRecord.shift_choices[0][0]
     else:
-         return MilkRecord.shift_choices[1][1]
+        return MilkRecord.shift_choices[1][0]
 
 def sendMial(subject,to,from_email,filename,message=None,pdf=None):
     if not pdf:

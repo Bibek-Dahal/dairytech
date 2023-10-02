@@ -11,7 +11,7 @@
 
     <div class="row d-flex justify-content-center">
         <div class="col-md-6 col-sm-8 col-lg-5 col-11  ">
-            <form method="POST" novalidate class="p-sm-5">
+            <form id="milkRecordForm" onsubmit="handleSubmit(event)" method="POST" novalidate class="p-sm-5">
                 {{ formset.management_form }}
                 {% csrf_token%}
                 {%for form in formset%}
@@ -55,35 +55,70 @@
             </form>
         </div>
     </div>
-    
+    <div id="id">
+        
+    </div>
+    <script src="
+    https://cdn.jsdelivr.net/npm/nepali-date-converter@3.3.1/dist/nepali-date-converter.umd.min.js
+    "></script>
 
     <script>
         $(document).ready(function () {
-            //$('.id_user').select2();
-            //$('.id_dairy').select2();
+            
+            
+            let oldInput = document.getElementById("id_form-0-date");
+            
 
-            // Find the input element with the specified ID
-            var $oldInput = $(".date-picker");
+            //get nepali date
+            let date = new NepaliDate()
+            let dateObj = date.format('YYYY-MM-DD')
+            console.log(date.getDateObject().BS)
+            let newInput = document.createElement("input")
+            newInput.setAttribute("type","text")
+            newInput.setAttribute("class","date-picker form-control")
+            newInput.setAttribute("name","form-0-date")
+            newInput.setAttribute("id","id_form-1-date")
+            newInput.setAttribute("data-single", true)
+            newInput.setAttribute("value", dateObj)
 
-            // Create a new input element with the desired type
-            var $newInput = $("<input>").attr({
-                "type": "text",
-                "id": $oldInput.attr("id"),
-                "name": $oldInput.attr("name"),
-                "value": $oldInput.val(),
-                "class": $oldInput.attr("class"),
-                "date-singal": "true"
-                // Add any other attributes you need to copy
-            });
+            console.log(newInput)
+            console.log(oldInput)
+            
+            
 
-            // Replace the old input element with the new one
-            $oldInput.replaceWith($newInput);
+            
+            
+            
+            oldInput.replaceWith(newInput)
             $('.date-picker').nepaliDatePicker();
         });
         
 
 
 
+    </script>
+
+    <script>
+
+        function handleSubmit(e){
+            event.preventDefault();
+            let dateinput = document.getElementById("id_form-1-date")
+            console.log(dateinput.value)
+            let nepadiDateObj = new NepaliDate(dateinput.value)
+            let enDate = nepadiDateObj.getAD()
+            console.log(enDate.month+1)
+            let year = enDate.year
+            let month = enDate.month+1
+            month = month<10?'0'+month:month
+            let date = enDate.date
+            date = date<10?'0'+date:date
+
+            let val =  `${month}/${date}/${year}`
+            console.log(val)
+            dateinput.value =val
+            document.getElementById('milkRecordForm').submit()
+
+        }
     </script>
 
 </div>
