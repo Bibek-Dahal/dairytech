@@ -3,6 +3,8 @@ from my_account.models import User
 from django.utils.translation import gettext_lazy as _
 from . custom_model_managers import *
 from django.urls import reverse
+from datetime import date
+from django.utils import timezone
 
 class Dairy(models.Model):
     name = models.CharField(_("name"),max_length=200,unique=True)
@@ -31,8 +33,9 @@ class FatRate(models.Model):
     fat_rate = models.FloatField(_("fat rate"),max_length=5)
     dairy = models.ForeignKey(Dairy,on_delete=models.CASCADE,verbose_name=_("dairy"))
     bonous_amount = models.PositiveSmallIntegerField("Bonous amount",default=0)
-    created_at = models.DateTimeField(_("created at"),auto_now_add=True)
+    created_at = models.DateField(_("created at"),default=timezone.now())
     updated_at = models.DateTimeField(_("updated at"),auto_now=True)
+    
 
     def __str__(self) -> str:
         return f"{self.dairy.name}-{self.fat_rate}"

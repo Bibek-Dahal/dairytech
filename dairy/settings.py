@@ -167,6 +167,7 @@ ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
 LOGIN_REDIRECT_URL = 'dairyapp:homepage'
 LOGIN_URL = 'account_login'
+
 # LOGOUT_REDIRECT_URL = 'account_login'
 
 # EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

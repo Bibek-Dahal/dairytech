@@ -52,7 +52,7 @@ def getFatBasedOnDate(start_date,end_date):
     start_date_date = datetime.strptime(start_date, '%Y-%m-%d').date() 
     
     print("inside while")
-    if start_date_date >= objs.first().created_at.date():
+    if objs and (start_date_date >= objs.first().created_at.date()):
         return objs.first()
         
         

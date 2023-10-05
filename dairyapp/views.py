@@ -5,7 +5,7 @@ from django.shortcuts import render,redirect
 from django.urls import reverse, reverse_lazy
 from django.views import View
 from django.http import Http404, HttpResponse, HttpResponseRedirect,HttpResponseForbidden,HttpResponseNotFound
-from dairyapp.mixins import PaginationMixin
+from dairyapp.mixins import PaginationMixin 
 from dairyapp.models import *
 from .forms import *
 from django.views.generic import ListView,DetailView
@@ -32,6 +32,7 @@ from django.core.exceptions import BadRequest
 import json
 import requests
 from .tasks import sendMial as sm
+from django.core.exceptions import PermissionDenied
 
 
 
@@ -46,6 +47,8 @@ class HomeView(View):
         print(user)
         dairies = Dairy.objects.filter(user = user)
         print(dairies)
+        
+
         if Dairy.objects.filter(user = user):
             fat_rates = FatRate.objects.filter(dairy__in = dairies)
             print(fat_rates)
@@ -150,7 +153,15 @@ class DeleteFatRate(DeleteView):
     print("delete view called")
     model = FatRate
     success_url = reverse_lazy("dairyapp:fat_list")
-    
+
+    def post(self, request, *args, **kwargs):
+       
+        self.object = self.get_object()
+        print(self.object.dairy)
+        if self.object.dairy.user == self.request.user:
+            return super().post(self, request, *args, **kwargs)  
+        raise PermissionDenied()
+          
 
     # def get_queryset(self):
     #     return super().get_queryset().filter(id=self.kwargs['pk'],dairy__user=self.request.user)
@@ -215,18 +226,30 @@ class ListMilkReports(PaginationMixin,ListView):
 @method_decorator(verified_dairy_user,name="dispatch")
 class CreateMilkRercord(View):
     
-    CreateMilkRecordFormSet = formset_factory(CreateMilkRecordForm,max_num=10)
     def get(self,request,*args,**kwargs):
             """
             user can add milk record if he is verified user
             """
+            num = None
+            try:
+                num = int(request.GET.get('num',1))
+                if num <=0:
+                    num = 1
+            except Exception as e:
+                print("inside except    ")
+                print(e)
+                num = 1
+            print("&&&&&&&&&&&",num)
+            
+            CreateMilkRecordFormSet = formset_factory(CreateMilkRecordForm,extra=num,max_num=10)
+            print("============",request.GET.get('num'),0)
             try:
                 print(kwargs['dairy'])
                 dairy = Dairy.objects.get(name=kwargs['dairy'],user=self.request.user)
                 user = User.objects.get(id=kwargs['id'])
                 print("dairy===============",dairy)
                 
-                formset = self.CreateMilkRecordFormSet(form_kwargs={'dairy':dairy,'user':user,})
+                formset = CreateMilkRecordFormSet(form_kwargs={'dairy':dairy,'user':user,})
 
                 # formset = self.CreateMilkRecordFormSet(initial=[
                 #     {
@@ -235,7 +258,7 @@ class CreateMilkRercord(View):
                 #     }
                 # ])
                     
-                return render(request,'dairyapp/milkrecord_create.html',{'formset':formset,'user':user})
+                return render(request,'dairyapp/milkrecord_create.html',{'formset':formset,'user':user,'num':num})
                 # else:
                 #     print('inside else')
                 #     #  raise HttpResponseForbidden("Sorry,")
