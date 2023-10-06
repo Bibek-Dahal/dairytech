@@ -5,7 +5,8 @@
 
 
 {%block content%}
-<div  >
+<div >
+    <script src="{% static 'js/nepali-date-picker.min.js'%}"></script>
     <div class="container">
         <div class="row">
             
@@ -18,58 +19,80 @@
                     <div class="btn btn-dark" style="background-color: #22668D;">Send Milk Record</div>
                     </a>
             </div>
+        
         {%endif%}
         </div>
-         <div id="filter" >
-        <div class="row " >
-            <div class="col-lg-4 p-2" >
-                <p class="fw-bold p-2 " data-mdb-inline="true" style="background-color: #f6f6f0" >{%trans 'Date' %}:  <input type="date" data-single="true" class="date-picker"  id="date" {%if date %} value="{{date}}" {%endif%}></p>
-                <br/>
-                <p class="fw-bold p-2" style="background-color: #FFFADD" >{%trans 'Start Date' %}:  <input type="date" data-single="true" id="start_date" name="start-date" class="date-picker" {%if start_date %} value="{{start_date}}" {%endif%}></p>
-            </div>
-
-            <div class="col-lg-4 p-2">
-                <p class="fw-bold p-2" style="background-color: #FFFADD" >{%trans 'End Date' %}: <input type="date" data-single="true" id="end_date" data-single="true" name="end-date" class="date-picker" {%if end_date %} value="{{end_date}}" {%endif%}></p>
-                <br/>
-                <div style="background-color: #FFFADD;">
-                <p class="fw-bold ps-2 pt-2" style="display: inline-block;">{%trans 'Shift' %}:</p>
-                {%if shift and shift == "morning" %}
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="shift" id="morning" value="morning" checked>
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        {%trans 'morning' %}
-                    </label>
+        <button id="toggleFilter" class="d-inline btn btn-danger"  onclick="toggleFilter(event)" class="btn btn-danger">Filter</button>
+        <div id="filter"  class="d-none card">
+            <form action="" >
+                <div class="row ">
+                
+                    <div class="col-lg-4 p-2">
+                        <p class="fw-bold p-2 " data-mdb-inline="true" style="background-color: #f6f6f0">{%trans 'Date' %}:
+                            <input autocomplete="off" id="date" type="text" data-single="true" name="date" class="date-picker" id="date" {%if date %}
+                                value="{{date}}" {%endif%}>
+                        </p>
+                        <br />
+                        <p class="fw-bold p-2" style="background-color: #FFFADD">{%trans 'Start Date' %}: <input autocomplete="off" name="start_date" type="text"
+                                data-single="true" id="start_date" name="start-date" class="date-picker" {%if start_date %}
+                                value="{{start_date}}" {%endif%}></p>
+                    </div>
+                
+                    <div class="col-lg-4 p-2">
+                        <p class="fw-bold p-2" style="background-color: #FFFADD">{%trans 'End Date' %}: <input autocomplete="off"
+                                onchange="triggerChange(event)" type="text" data-single="true" id="end_date" data-single="true"
+                                name="end_date" class="date-picker" {%if end_date %} value="{{end_date}}" {%endif%}></p>
+                        <br />
+                        <div style="background-color: #FFFADD;">
+                            <p class="fw-bold ps-2 pt-2" style="display: inline-block;">{%trans 'Shift' %}:</p>
+                            {%if shift and shift == "morning" %}
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="shift" id="morning" value="morning" checked>
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    {%trans 'morning' %}
+                                </label>
+                            </div>
+                            {%else%}
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="shift" id="morning" value="morning">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    {%trans 'morning' %}
+                                </label>
+                            </div>
+                            {%endif%}
+                            {% if shift and shift == 'night' %}
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="shift" id="night" value="night" checked>
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    {%trans 'night' %}
+                                </label>
+                            </div>
+                            {%else%}
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="shift" id="night" value="night">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    {%trans 'night' %}
+                                </label>
+                            </div>
+                            {%endif%}
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-danger" value="{%trans 'Apply Filter'%}">
+                
+                
+                
+                
                 </div>
-                {%else%}
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="shift" id="morning" value="morning">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        {%trans 'morning' %}
-                    </label>
-                </div>
-                {%endif%}
-                {% if shift and shift == 'night' %}
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="shift" id="night" value="night" checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        {%trans 'night' %}
-                    </label>
-                </div>
-                {%else%}
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="shift" id="night" value="night">
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        {%trans 'night' %}
-                    </label>
-                </div>
-                {%endif%}
-                </div>
-            </div>
-
+            </form>
             
-        </div>
 
-        <div class="row">
+        
+        
+        
+        </div>
+        <!-- Dateq<input type="text" data-single="true" class="date-picker" placeholder="Select Date(s)"> -->
+    </div>
+    <div class="row">
             <div class="col-lg-10 col-md-12 d-flex justify-content-end my-2">
                 
                     <a class="float-end nav-link " href="{%url  'dairyapp:create_milk_record' dairy=dairy id=id %}">
@@ -78,11 +101,6 @@
                 
             </div>
         </div>
-        
-        
-        <script src="{% static 'js/nepali-date-picker.min.js'%}"></script>
-        <!-- Dateq<input type="text" data-single="true" class="date-picker" placeholder="Select Date(s)"> -->
-    </div>
 </div>
 </div>
 
@@ -186,10 +204,8 @@
         const endDate = document.getElementById('end_date').value;
 
         // Construct the query string based on the provided filter parameters
-        let filterdiv = document.getElementById("filter");
-        let cl = filterdiv.classList.value
-        console.log("cl",cl)
-        let queryString = `display=${cl}&`;
+        
+        let queryString = '';
         if (shift) queryString += `shift=${encodeURIComponent(shift)}&`;
         if (date) queryString += `date=${encodeURIComponent(date)}&`;
         if (startDate) queryString += `start_date=${encodeURIComponent(startDate)}&`;
@@ -245,9 +261,9 @@
     for (const radio of shiftRadios) {
         radio.addEventListener('change', updateFiltersAndGetData);
     }
-    document.getElementById('date').addEventListener('input', updateFiltersAndGetData);
-    document.getElementById('start_date').addEventListener('input', updateFiltersAndGetData);
-    document.getElementById('end_date').addEventListener('input', updateFiltersAndGetData);
+    //document.getElementById('date').addEventListener('change', updateFiltersAndGetData);
+    //document.getElementById('start_date').addEventListener('input', updateFiltersAndGetData);
+    //document.getElementById('end_date').addEventListener('input', updateFiltersAndGetData);
     //document.getElementById('filter').addEventListener('click',updateFiltersAndGetData) -->
     function addValue() {
 
@@ -256,6 +272,7 @@
 
 
     $(document).ready(function () {
+        $('.date-picker').nepaliDatePicker();
 
         const url = new URLSearchParams(location.search)
         console.log(url)
@@ -272,14 +289,30 @@
         console.log("action", href)
         let new_form = document.getElementById("send-email-report-form")
         new_form.href = href
+        let elements = document.getElementsByClassName('date-picker')
+        
         //new_form.submit()
 
         //let new_form = document.getElementById("send-email-report-form")
         //new_form.action = 'http://127.0.0.1:8000'
 
+        //determine if url consists of querystring
+        // Get the current URL's query string
+        
     })
 
-    
+    let queryString = window.location.search;
+
+        // Check if a query string exists
+        if (queryString.length > 0) {
+            let filterDiv = document.getElementById('filter')
+            filterDiv.classList.remove('d-none')
+            filterDiv.classList.add('d-inline')
+            console.log('The URL has a query string:', queryString);
+
+        } else {
+            console.log('The URL does not have a query string.');
+        }
 
 
 </script>
@@ -311,6 +344,7 @@
         
     });*/
     
+
    
     
 
@@ -329,6 +363,28 @@
                     event.preventDefault()
                     console.log("hello guys")
                 });*/
+    function toggleFilter(e){
+       let filterval =  document.getElementById('filter').classList.value
+       let filterDiv = document.getElementById('filter')
+       let filterbtn = document.getElementById('toggleFilter')
+       //console.log(btn)
+       if(filterval == 'd-inline'){
+            console.log("d-inline")
+            console.log('inside if')
+            filterDiv.classList.remove('d-inline')
+            filterDiv.classList.add('d-none')
+            
+            
+       }else{
+            console.log("d-none")
+            console.log('inside else')
+            filterDiv.classList.remove('d-none')
+            filterDiv.classList.add('d-inline')
+            
+             
+       }
+    }
+    
 
     
 </script>

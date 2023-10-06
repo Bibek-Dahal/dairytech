@@ -25,7 +25,7 @@ from django.views.generic import View
 from django.utils.translation import gettext_lazy as _
 from django.template.loader import render_to_string
 from weasyprint import HTML
-from utils.dairyapp.commonutils import getFatBasedOnDate, sendMial
+from utils.dairyapp.commonutils import convert_nepali_date, getFatBasedOnDate, is_valid_date, sendMial
 from django.conf import settings
 from django.forms import formset_factory
 from django.core.exceptions import BadRequest
@@ -226,11 +226,11 @@ class ListMilkReports(PaginationMixin,ListView):
 @method_decorator(verified_dairy_user,name="dispatch")
 class CreateMilkRercord(View):
     
+    num = None
     def get(self,request,*args,**kwargs):
             """
             user can add milk record if he is verified user
             """
-            num = None
             try:
                 num = int(request.GET.get('num',1))
                 if num <=0:
@@ -271,10 +271,11 @@ class CreateMilkRercord(View):
         
         
     def post(self,request,*args,**kwargs):
+            CreateMilkRecordFormSet = formset_factory(CreateMilkRecordForm,extra=self.num,max_num=10)
             print("inside mike record post methos")
             dairy =get_object_or_404(Dairy,name=kwargs['dairy'],user=self.request.user)
             user = get_object_or_404(User,id=kwargs['id'])
-            formset = self.CreateMilkRecordFormSet(request.POST,form_kwargs={'dairy':dairy,'user':user})
+            formset = CreateMilkRecordFormSet(request.POST,form_kwargs={'dairy':dairy,'user':user})
             if formset.is_valid():
                 print(request.POST)
                 print("inside valid data")
@@ -310,7 +311,7 @@ class CreateMilkRercord(View):
                 return HttpResponseRedirect(reverse("dairyapp:member_milk_record",kwargs={'dairy':self.kwargs['dairy'],'id':self.kwargs['id']}))
             print("invalid form data++++++")
             print(formset)
-            return render(request,'dairyapp/milkrecord_create.html',{'formset':formset})
+            return render(request,'dairyapp/milkrecord_create.html',{'formset':formset,'num':self.num})
 
     
 @method_decorator(login_required(login_url='account_login'),name="dispatch")
@@ -370,10 +371,10 @@ class ListMemberMilkRecord(ListView):
         context =  super().get_context_data(**kwargs)
         context['dairy'] = self.kwargs['dairy']
         context['id'] = self.kwargs['id']
-        context['start_date'] = self.request.GET.get('start_date')
-        context['end_date'] = self.request.GET.get('end_date')
-        context['shift'] = self.request.GET.get('shift')
-        context['date'] = self.request.GET.get('date')
+        context['start_date'] = is_valid_date(self.request.GET.get('start_date',"")) 
+        context['end_date'] = is_valid_date(self.request.GET.get('end_date',""))
+        context['shift'] =  self.request.GET.get('shift')
+        context['date'] = is_valid_date( self.request.GET.get('date',""))
         context['display'] = self.request.GET.get('display','d-none')
         context['count'] = self.kwargs['count']
         context['total_milk_wieght'] = self.kwargs['total_milk_wieght']
@@ -399,10 +400,10 @@ class ListMemberMilkRecord(ListView):
             print("date",self.request.GET.get('date'))
             print("name",self.request.GET.get('name'))
             shift = request.GET.get('shift')
-            date = request.GET.get('date')
-            start_date = request.GET.get('start_date')
+            date = convert_nepali_date(request.GET.get('date',''))
+            start_date = convert_nepali_date(request.GET.get('start_date',''))
             print("start_date",start_date)
-            end_date = request.GET.get('end_date')
+            end_date = convert_nepali_date(request.GET.get('end_date',''))
             print("end_date",end_date)
             
             # return super().get_queryset() 
@@ -536,6 +537,7 @@ class ListMemberMilkRecord(ListView):
                 
             return queryset.filter(filters)
         except Exception as e:
+            print(e)
             raise BadRequest("Bad Request")
    
 

@@ -6,6 +6,8 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives,get_connection
 from django.core import mail
 from datetime import datetime,date
+
+from nepali.date_converter import converter
 def getShift():
     desired_timezone = pytz.timezone('Asia/Kathmandu')
     current_time = datetime.now(desired_timezone)
@@ -57,6 +59,36 @@ def getFatBasedOnDate(start_date,end_date):
         
         
     return None
+
+from datetime import datetime
+
+def is_valid_date(input_string):
+    date_format = "%Y-%m-%d"
+    try:
+        datetime.strptime(input_string, date_format)
+
+        
+        return input_string
+
+    except Exception as e:
+        print(e)
+        return False
+    
+def convert_nepali_date(input_string):
+    date_format = "%Y-%m-%d"
+    try:
+        datetime.strptime(input_string, date_format)
+
+        strippted_date = input_string.split('-')
+        print("----------",strippted_date)
+        print("00000000000",converter.nepali_to_english(int(strippted_date[0]), int(strippted_date[1]), int(strippted_date[2])))
+        year,month,date = converter.nepali_to_english(int(strippted_date[0]), int(strippted_date[1]), int(strippted_date[2]))
+        # return input_string
+        return f"{year}-{month}-{date}"
+    except Exception as e:
+        print(e)
+        return False
+
         
     
 
