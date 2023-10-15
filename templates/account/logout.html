@@ -3,17 +3,6 @@
 {% load i18n %}
 {% block content%}
 
-{%block messageinfo%}
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <p class="alert alert-primary">{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
-        {% endfor %}
-</ul>
-{% endif %}
-{%endblock%}
-
-
 <div class="container mt-5">
     <div class="row d-flex justify-content-center">
         <div class="col-md-6 col-sm-8 col-lg-5 col-11 p-1 card">

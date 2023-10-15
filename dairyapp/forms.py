@@ -66,7 +66,7 @@ class CreateMilkRecordForm(forms.ModelForm):
     # if 
     print("shift info",shiftinfo)
     user = forms.ModelChoiceField(label=_("User"),queryset=None,initial=1,widget=forms.Select(attrs={"class":"form-select"}))
-    dairy = forms.ModelChoiceField(label=_("Dairy"),queryset=None,initial=1,widget=forms.HiddenInput(attrs={"class":"form-select"}))
+    dairy = forms.ModelChoiceField(label=_("Dairy"),queryset=None,initial=1,widget=forms.Select(attrs={"class":"form-select"}))
     date = forms.DateField(label=_("Date"),widget=forms.DateInput(attrs={"class":"form-control date-picker","placeholder":"dd-mm-yyyy","data-single":'true'},format="%Y-%m-%d"))
     shift = forms.ChoiceField(label=_("Shift"),widget=forms.Select(attrs={"class":"form-select"}),initial=shiftinfo,choices=MilkRecord.shift_choices)
     # input_formats=['%Y%m%d']

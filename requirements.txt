@@ -18,6 +18,9 @@ defusedxml==0.7.1
 Django==4.2.3
 django-allauth==0.54.0
 django-dotenv==1.4.2
+django-google-translate==1.1
+django-nepali==0.1.0
+fontawesomefree==6.4.2
 fonttools==4.42.1
 html5lib==1.1
 idna==3.4

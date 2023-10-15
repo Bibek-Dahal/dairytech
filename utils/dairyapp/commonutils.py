@@ -54,6 +54,7 @@ def getFatBasedOnDate(start_date,end_date):
     start_date_date = datetime.strptime(start_date, '%Y-%m-%d').date() 
     
     print("inside while")
+    print(objs.first())
     if objs and (start_date_date >= objs.first().created_at.date()):
         return objs.first()
         
@@ -84,6 +85,8 @@ def convert_nepali_date(input_string):
         print("00000000000",converter.nepali_to_english(int(strippted_date[0]), int(strippted_date[1]), int(strippted_date[2])))
         year,month,date = converter.nepali_to_english(int(strippted_date[0]), int(strippted_date[1]), int(strippted_date[2]))
         # return input_string
+        if month<10:
+            return f"{year}-0{month}-{date}"
         return f"{year}-{month}-{date}"
     except Exception as e:
         print(e)

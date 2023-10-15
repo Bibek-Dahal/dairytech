@@ -33,7 +33,7 @@ class FatRate(models.Model):
     fat_rate = models.FloatField(_("fat rate"),max_length=5)
     dairy = models.ForeignKey(Dairy,on_delete=models.CASCADE,verbose_name=_("dairy"))
     bonous_amount = models.PositiveSmallIntegerField("Bonous amount",default=0)
-    created_at = models.DateField(_("created at"),default=timezone.now())
+    created_at = models.DateTimeField(_("created at"),default=timezone.now())
     updated_at = models.DateTimeField(_("updated at"),auto_now=True)
     
 

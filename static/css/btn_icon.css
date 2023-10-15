@@ -1,0 +1,13 @@
+.button-with-icon {
+    /* background-color: #007BFF; */
+    /* color: #fff; */
+    border: none;
+    padding: 1px 2px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.button-with-icon:hover {
+    /* background-color: #9ea1a4; */
+}

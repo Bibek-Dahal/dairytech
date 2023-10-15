@@ -1,11 +1,15 @@
 {%extends "../base.html"%}
 {% load i18n %}
+{%load static%}
 {%block title%}{%trans 'homepage' %}{%endblock title%}
+{%block additionalcss%}
+    <link rel="stylesheet" href="{%static 'css/btn_icon.css'%}">
+{%endblock%}
 {%block table_data%}
 
 <div class="container">
-    <table class="table">
-        <a class="float-end nav-link " href="{%url  'dairyapp:create_dairy'%}">Add Dairy</a>
+    <table class="table table-bordered table-striped">
+        <a class="float-end nav-link mt-3 mb-2" href="{%url  'dairyapp:create_dairy'%}"><button class="btn">Add Dairy </button></a>
         <thead>
             <tr>
                 <th scope="col">{%trans 'Id'%}</th>
@@ -19,7 +23,7 @@
     
             </tr>
         </thead>
-        <tbody>
+        <tbody class="table-group-divider">
             {%for dairy in dairies%}
             <tr>
                 <th scope="row">{{dairy.id}}</th>
@@ -27,11 +31,20 @@
                 <td>{{dairy.user}}</td>
                 <td>{{dairy.location}}</td>
                 <td>{{dairy.is_verified}}</td>
-                <td><a href="{% url 'dairyapp:milk_record' dairy.name%}">{%trans 'view' %}</a></td>
-                <td><a href="{% url 'dairyapp:list_dairy_members' pk=dairy.id dairy=dairy.name%}">{%trans 'view' %}</a></td>
+                <td>
+                    
+                    <a href="{% url 'dairyapp:milk_record' dairy.name%}">{%trans 'view' %}</a>
+                </td>
+                <td>
+                    <form action="{% url 'dairyapp:list_dairy_members' dairy=dairy.name%}" class="d-inline">
+                        <button type="submit" class="button-with-icon"><i style="color:var(--primary-color);" class="fa-solid fa-eye fa-xl"></i></i></button>
+                    </form>
+                   
+                
+                </td>
                 <td>
                     <form action="{% url 'dairyapp:update_dairy' dairy.id%}" class="d-inline">
-                        <button type="submit" class="btn btn-danger">{%trans 'edit'%}</button>
+                        <button type="submit" class="button-with-icon"><i class="fa-solid fa-pen-to-square fa-xl" style="color: var(--secondary-color);"></i></button>
                     </form>
     
                 </td>

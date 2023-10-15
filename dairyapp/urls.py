@@ -15,7 +15,7 @@ urlpatterns = [
 
     #dairy urls
     path("create-dairy",views.CreateDairyView.as_view(),name="create_dairy"),
-    path("list-dairy-member/<int:pk>/<str:dairy>",views.ListDairyMembers.as_view(),name="list_dairy_members"),
+    path("list-dairy-member/<str:dairy>",views.ListDairyMembers.as_view(),name="list_dairy_members"),
     path("edit-dairy/<int:pk>",views.UpadteDairyView.as_view(),name="update_dairy"),
     path("list-milk-records/<str:dairy>",views.ListMilkReports.as_view(),name="milk_record"),
     path("create-milk-records/<str:dairy>/<int:id>",views.CreateMilkRercord.as_view(),name="create_milk_record"),

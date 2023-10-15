@@ -9,12 +9,12 @@
 {% block content %}
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card" >
-                <div class="card-header" style="background-color: #22668D; color:#F1F0E8;">
+        <div class="col-md-6 shadow p-5">
+            <div>
+                <div class="card-header" >
                     <h1 class="text-center fw-bold">{% trans "Confirm your E-mail Address" %}</h1>
                 </div>
-                <div class="card-body " style="background-color: #F1F0E8;  border: 0px solid rgb(100, 97, 97);">
+                <div class="card-body " >
                     <div class="container" >
                         {% if confirmation %}
 
@@ -25,7 +25,7 @@
                         <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
                         {% csrf_token %}
                         <div class="mt-3 text-center mb-2 justify-content-around">
-                            <button class="btn btn-light" style="background-color: #f7d597; border-color: #96B6C5;" type="submit">{% trans 'Confirm' %}</button>
+                            <button class="btn btn-primary"  type="submit">{% trans 'Confirm' %}</button>
                         </div>
                         </form>
                         

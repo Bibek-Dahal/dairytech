@@ -241,7 +241,7 @@ class CreateMilkRercord(View):
                 num = 1
             print("&&&&&&&&&&&",num)
             
-            CreateMilkRecordFormSet = formset_factory(CreateMilkRecordForm,extra=num,max_num=10)
+            CreateMilkRecordFormSet = formset_factory(CreateMilkRecordForm,extra=num,max_num=30)
             print("============",request.GET.get('num'),0)
             try:
                 print(kwargs['dairy'])
@@ -362,10 +362,31 @@ class UpdateMilkRercord(View):
 @method_decorator(login_required(login_url='account_login'),name="dispatch")
 @method_decorator(verified_dairy_user,name="dispatch")
 class ListMemberMilkRecord(ListView):
-    # paginate_by = 16
+    paginate_by = 16
     model = MilkRecord
     context_object_name = "milkrecords"
     template_name = "dairyapp/member_milkrecord_list.html"
+
+    def paginate_queryset(self,queryset,page_size):
+        try:
+            return super().paginate_queryset(queryset,page_size)
+        except Http404:
+            self.kwargs['page'] = 1
+            return super().paginate_queryset(queryset,page_size)
+
+
+    # def paginate_queryset(self,queryset,page_size):
+    #     try:
+    #         return super(ListMemberMilkRecord,self).paginate_queryset(queryset,page_size)
+    #     except Http404:
+    #         self.kwargs['page'] = 1
+    #         return super(ListMemberMilkRecord,self).paginate_queryset(queryset,page_size)
+
+    
+
+    
+
+    
 
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs)
@@ -469,7 +490,7 @@ class ListMemberMilkRecord(ListView):
                 print("inside first if")
                 if qs:
                     print("inside secode if")
-                    print("+++++++++++",getFatBasedOnDate(start_date,end_date))
+                    # print("+++++++++++",getFatBasedOnDate(start_date,end_date))
                     """
                     perform qs operation if only qs is not empty
                     """
@@ -482,26 +503,29 @@ class ListMemberMilkRecord(ListView):
                     print("average_fat",avg_fat)
 
 
-
+                    #filter the fat rate within date range
                     fat_rate_obj = FatRate.objects.filter(dairy=dairy,created_at__date__lte=end_date,created_at__date__gte=start_date)
 
                     print("count obj---",fat_rate_obj.count())
 
                     if fat_rate_obj.count()>1:
+                        #raise error if multiple fat range exists within date range
                         messages.error(request, _("Cannot apply filter witin date range. Multiple fat rate exists."))
 
-                    elif getFatBasedOnDate(start_date,end_date):
-                        fat_rate_obj = getFatBasedOnDate(start_date,end_date)
-                        fat_rate = fat_rate_obj.get_fat_rate
-                        self.kwargs['fat_rate'] = fat_rate_obj.fat_rate
-                        self.kwargs['bonous'] = fat_rate_obj.bonous_amount
-                        self.kwargs['total_fat_rate'] = fat_rate
+                    # elif getFatBasedOnDate(start_date,end_date):
+                    #     print("inside first elif")
+                    #     fat_rate_obj = getFatBasedOnDate(start_date,end_date)
+                    #     fat_rate = fat_rate_obj.get_fat_rate
+                    #     self.kwargs['fat_rate'] = fat_rate_obj.fat_rate
+                    #     self.kwargs['bonous'] = fat_rate_obj.bonous_amount
+                    #     self.kwargs['total_fat_rate'] = fat_rate
                         
                         # print('fat rate obj count',fat_rate_obj.count())
                     
                         
                         # return redirect("dairyapp:member_milk_record",id=user.id,dairy=dairy.name)
                     elif fat_rate_obj.count() == 0:
+                        print('inisde second elif')
                         #calculate fat rates if provided date range is before fat rate creation date
                         
                         ft = FatRate.objects.filter(dairy=dairy).first()
@@ -530,6 +554,8 @@ class ListMemberMilkRecord(ListView):
                     except Exception as e:
                         total_price = 0
                     self.kwargs['total_price'] = total_price
+
+                    print("total price===",total_price)
                     # print("total price==",total_price)
                     pass
 
@@ -568,36 +594,59 @@ class VerifyEsewa(View):
             return HttpResponseRedirect(reverse('dairyapp:create_dairy'))
         else:
             raise Http404()
+        
+
+
+
+
 
 @method_decorator(login_required(login_url='account_login'),name="dispatch")
 @method_decorator(verified_dairy_user,name="dispatch")
 class ListDairyMembers(ListView):
-     model = Dairy
-     template_name = 'dairyapp/list_dairy_members.html'
-     context_object_name = 'members'
-     def get_queryset(self):
-          print("hello =========")
-          qs = super().get_queryset().filter(user=self.request.user)
-          print(qs[0].members.all)
-          if len(qs) >= 1:
-               return qs[0].members.all
-          return []
-     
-     def get_context_data(self, **kwargs):
-          context =  super().get_context_data(**kwargs)
-          print("context===",context)
-          
-          context['dairy'] = self.kwargs['dairy']
-          return context
+    model = Dairy
+    # paginate_by=1
+    template_name = 'dairyapp/list_dairy_members.html'
+    context_object_name = 'members'
 
+    
+    def get_queryset(self):
+        print("hello =========",super().get_queryset().filter(name=self.kwargs.get('name')))
+        qs = super().get_queryset().filter(user=self.request.user,name=self.kwargs.get('dairy'))
+        # print(qs[0].members.all)
+        print("outside if")
+        print("qs.count",qs.count())
+        
+        if qs.count() >= 1:
+            print("inside if----")
+            print(self.request)
+            search = self.request.GET.get('name')
+            print("search",search)
+            if search:
+                result = qs[0].members.all().filter(Q(first_name__icontains=search))
+                print("qs",qs[0].members.all())
+                print("result",result)
+                return result
+            else:
+
+                return qs[0].members.all
+        return []
+     
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        print("context===",context)
+        
+        context['dairy'] = get_object_or_404(Dairy,name=self.kwargs['dairy'],user=self.request.user)
+        return context
+    
+    
 
 @method_decorator(login_required(login_url='account_login'),name="dispatch")
 @method_decorator(verified_dairy_user,name="dispatch")
 class SendMilkReportEmialView(View):
     def get(self,request,*args,**kwargs):
         dairy_name = request.GET.get('dairy')
-        start_date = request.GET.get('start_date')
-        end_date = request.GET.get('end_date')
+        start_date = convert_nepali_date(request.GET.get('start_date',''))
+        end_date = convert_nepali_date(request.GET.get('end_date',''))
         shift = request.GET.get('shift')
         user_id = request.GET.get('id')
 

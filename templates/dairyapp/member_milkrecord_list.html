@@ -1,48 +1,49 @@
 {%extends "../base.html"%}
 {%load static%}
 {% load i18n %}
+{%load nepalidatetime%}
 {%block title%}{%trans 'Milk Record' %}{%endblock title%}
-
+{%load converter%}
+{%block additionalcss%}
+    <link rel="stylesheet" href="{%static 'css/btn_icon.css'%}">
+{%endblock%}
 
 {%block content%}
-<div >
+
+<div class="container-lg ">
     <script src="{% static 'js/nepali-date-picker.min.js'%}"></script>
-    <div class="container">
-        <div class="row">
-            
-            {%if total_price != 0%}
-            <!-- <a role="button" id="send-email-report-form" href="{%url 'dairyapp:milk_report_email'%}">
-                send milk report
-            </a> -->
-            <div class="row  fw-bold mt-1 mb-3">
-                <a role ="button" id ="send-email-report-form" class="float-end nav-link " href="{%url 'dairyapp:milk_report_email'%}">
-                    <div class="btn btn-dark" style="background-color: #22668D;">Send Milk Record</div>
-                    </a>
-            </div>
+    <div >
         
-        {%endif%}
-        </div>
-        <button id="toggleFilter" class="d-inline btn btn-danger"  onclick="toggleFilter(event)" class="btn btn-danger">Filter</button>
-        <div id="filter"  class="d-none card">
-            <form action="" >
+        <button style="margin-top: 10px;margin-bottom:2px;" id="toggleFilter" class="d-inline btn fw-bold text-white"  onclick="toggleFilter(event)" class="btn">Filter</button>
+        <div id="filter"  class="d-none">
+            <form id="filter-form" action="" onsubmit="applyFilter(event)">
                 <div class="row ">
                 
-                    <div class="col-lg-4 p-2">
+                    <div class="col-lg-4 col-md-4 p-2">
                         <p class="fw-bold p-2 " data-mdb-inline="true" style="background-color: #f6f6f0">{%trans 'Date' %}:
-                            <input autocomplete="off" id="date" type="text" data-single="true" name="date" class="date-picker" id="date" {%if date %}
+                            <input autocomplete="off" id="date" type="text" data-single="true" name="date" class="date-picker form-control" id="date" {%if date %}
                                 value="{{date}}" {%endif%}>
                         </p>
-                        <br />
-                        <p class="fw-bold p-2" style="background-color: #FFFADD">{%trans 'Start Date' %}: <input autocomplete="off" name="start_date" type="text"
-                                data-single="true" id="start_date" name="start-date" class="date-picker" {%if start_date %}
-                                value="{{start_date}}" {%endif%}></p>
+                        
+                        
                     </div>
-                
-                    <div class="col-lg-4 p-2">
+
+                    <div class="col-lg-4 col-md-4">
+                        <p class="fw-bold p-2" style="background-color: #FFFADD">{%trans 'Start Date' %}: <input autocomplete="off"
+                                name="start_date" type="text" data-single="true" id="start_date" name="start-date"
+                                class="form-control date-picker" {%if start_date %} value="{{start_date}}" {%endif%}></p>
+                    </div>
+                    <div class="col-lg-4 col-md-4 p-2">
                         <p class="fw-bold p-2" style="background-color: #FFFADD">{%trans 'End Date' %}: <input autocomplete="off"
-                                onchange="triggerChange(event)" type="text" data-single="true" id="end_date" data-single="true"
-                                name="end_date" class="date-picker" {%if end_date %} value="{{end_date}}" {%endif%}></p>
-                        <br />
+                                onchange="triggerChange(event)" type="text" data-single="true" id="end_date" data-single="true" name="end_date"
+                                class="date-picker form-control" {%if end_date %} value="{{end_date}}" {%endif%}></p>
+                    </div>
+
+                    
+                
+                    <div class="col-lg-6 col-md-6 p-2">
+                        
+                        
                         <div style="background-color: #FFFADD;">
                             <p class="fw-bold ps-2 pt-2" style="display: inline-block;">{%trans 'Shift' %}:</p>
                             {%if shift and shift == "morning" %}
@@ -77,7 +78,7 @@
                             {%endif%}
                         </div>
                     </div>
-                    <input type="submit" class="btn btn-danger" value="{%trans 'Apply Filter'%}">
+                    <input type="submit" class="btn fw-bold text-white mb-2 mt-2" value="{%trans 'Apply Filter'%}">
                 
                 
                 
@@ -92,105 +93,126 @@
         </div>
         <!-- Dateq<input type="text" data-single="true" class="date-picker" placeholder="Select Date(s)"> -->
     </div>
-    <div class="row">
-            <div class="col-lg-10 col-md-12 d-flex justify-content-end my-2">
-                
-                    <a class="float-end nav-link " href="{%url  'dairyapp:create_milk_record' dairy=dairy id=id %}">
-                        <div class="btn btn-dark" style="background-color: #22668D;">Add Milk Record</div>
-                        </a>
-                
-            </div>
-        </div>
-</div>
-</div>
+    
 
-{%block messageinfo%}
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-        {% endfor %}
-</ul>
-{% endif %}
 
-{%endblock messageinfo%}
+
 {%block table_data%}
 
-<div class="container">
 
-
-<div class="col-lg-10 col-md-12 d-flex justify-content-start">
-<table class="table table-bordered table-striped">
-
-<!-- 
-    <a class="float-end nav-link " href="{%url  'dairyapp:create_milk_record' dairy=dairy id=id %}">Add Milk Record</a> -->
-    <thead>
-        <tr>
-            <th scope="col">{% trans 'Id' %}</th>
-            <th scope="col">{% trans 'Dairy' %}</th>
-            <th scope="col">{% trans 'User' %}</th>
-            <th scope="col">{% trans 'Shift' %}</th>
-            <th scope="col">{% trans 'Milk Weight' %}</th>
-            <th scope="col">{% trans 'Milk Fat' %}</th>
-            <th scope="col">{% trans 'Date' %}</th>
-            <th scope="col">{% trans 'Actions' %}</th>
-
-        </tr>
-    </thead>
-    {%if milkrecords%}
-        <tbody>
-            {%for milkrecord in milkrecords%}
-            <tr>
-                <th scope="row">{{milkrecord.id}}</th>
-                <td>{{milkrecord.dairy}}</td>
-                <td>{{milkrecord.user}}</td>
-                <td>{{milkrecord.shift}}</td>
-                <td>{{milkrecord.milk_weight}}</td>
-                <td>{{milkrecord.milk_fat}}</td>
-                <td>{{milkrecord.date}}</td>
-                <td>
-                    <form action="{% url 'dairyapp:update_milk_record' id=milkrecord.id dairy=dairy%}" class="d-inline">
-                        <button type="submit" class="btn btn-primary">{%trans 'edit' %}</button>
-                    </form>
-                    <form action="#" method="POST" class="d-inline">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-primary">{%trans 'delete'%}</button>
-                    </form>
-                </td>
-        
-            </tr>   
-        
-            {%endfor%}
-            <tr>
-                <th scope="row">{%trans 'Details'%}</th>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>
-                    <h3>{{total_milk_wieght}}</h3>
-                </td>
-                <td>
-                    <h3>{{avg_fat}}</h3>
-                </td>
-                <td>
-                    <h3>{{milkrecord.date}}</h3>
-                </td>
-            </tr>
-            
-            <tr>
-                <th scope="row">{% trans 'Total Amount' %}:</th>
-                <td colspan="3">{{ total_price }}</td>
-            </tr>
-        
-        </tbody>
-    {%endif%}
+<div class="row justify-content-center overflow-x-scroll" style="min-width: 400px;">
     
-</table>
-</div>  
+    <div class="row justify-content-between">
+        {%if total_price != 0%}
+        <!-- <a role="button" id="send-email-report-form" href="{%url 'dairyapp:milk_report_email'%}">
+                                send milk report
+                            </a> -->
+        <div class="col-4 col-md-4 col-lg-2 mb-2">
+            <a id="send-email-report-form" class="" href="{%url 'dairyapp:milk_report_email'%}">
+                <div class="btn">Send Milk Record</div>
+            </a>
+        </div>
+        
+        {%endif%}
+        <div class="col-4 col-md-4 col-lg-2 mb-2">
+            <a class="nav-link " href="{%url  'dairyapp:create_milk_record' dairy=dairy id=id %}">
+                <button class="btn">Add Milk Record</button>
+            </a>
+        </div>
+    </div>
+    <div class="col">
+        <div class=" col-lg-12 col-md-12 d-flex">
+        
+            <table class="table table-bordered table-striped table-responsive">
+        
+        
+        
+        
+        
+                <!-- 
+                <a class="float-end nav-link " href="{%url  'dairyapp:create_milk_record' dairy=dairy id=id %}">Add Milk Record</a> -->
+                <thead>
+                    <tr>
+                        <th scope="col">{% trans 'Id' %}</th>
+                        <th scope="col">{% trans 'Dairy' %}</th>
+                        <th scope="col">{% trans 'User' %}</th>
+                        <th scope="col">{% trans 'Shift' %}</th>
+                        <th scope="col">{% trans 'Milk Weight' %}</th>
+                        <th scope="col">{% trans 'Milk Fat' %}</th>
+                        <th scope="col">{% trans 'Date' %}</th>
+                        <th scope="col">{% trans 'Actions' %}</th>
+        
+                    </tr>
+                </thead>
+                {%if milkrecords%}
+                <tbody class="table-group-divider ">
+                    {%for milkrecord in milkrecords%}
+                    <tr>
+                        <th scope="row">{{milkrecord.id}}</th>
+                        <td>{{milkrecord.dairy}}</td>
+                        <td>{{milkrecord.user}}</td>
+                        <td>{{milkrecord.shift}}</td>
+                        <td>{{milkrecord.milk_weight}}</td>
+                        <td>{{milkrecord.milk_fat}}</td>
+                        <td>{{milkrecord.date|convert_to_nepali}}</td>
+                        <td>
+                            <form action="{% url 'dairyapp:update_milk_record' id=milkrecord.id dairy=dairy%}" class="d-inline">
+        
+                                <!-- <button type="submit" class="btn btn-primary">{%trans 'edit' %}</button> -->
+                                <button type="submit" class="button-with-icon"><i class="fa-solid fa-pen-to-square fa-xl"
+                                        style="color: var(--primary-color);"></i> </button>
+        
+                            </form>
+                            <form action="#" method="POST" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="button-with-icon"><i class="fa-solid fa-trash fa-xl"
+                                        style="color: #e10e0e;"></i></i>
+                                </button>
+                                <!-- <button type="submit" class="btn btn-primary">{%trans 'delete'%}</button> -->
+                            </form>
+                        </td>
+        
+                    </tr>
+        
+                    {%endfor%}
+                    <tr>
+                        <th scope="row">{%trans 'Details'%}</th>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>
+                            <h3>{{total_milk_wieght}}</h3>
+                        </td>
+                        <td>
+                            <h3>{{avg_fat}}</h3>
+                        </td>
+                        <td>
+                            <h3>{{milkrecord.date}}</h3>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <th scope="row">{% trans 'Total Amount' %}:</th>
+                        <td colspan="1">{{ total_price }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{% trans 'Total Fat Rate' %}:</th>
+                        <td colspan="1">{{ total_fat_rate }}</td>
+                    </tr>
+        
+        
+        
+                </tbody>
+                {%endif%}
+        
+            </table>
+        </div>
+    </div>
 </div>
-{%for member in members%}
-{{member.first_name}}|{{member.last_name}}|{{member.phone_number}}
-{%endfor%}
+
+
+
+
 
     
 <script>
@@ -345,7 +367,19 @@
     });*/
     
 
-   
+   function applyFilter(e){
+    event.preventDefault()
+    let form = document.getElementById('filter-form')
+    let date = document.getElementById('date').value
+    let start_date = document.getElementById('start_date').value
+    let end_date = document.getElementById('end_date').value
+
+    if(start_date || end_date || date){
+        form.submit()
+    }
+    
+
+   }
     
 
 
@@ -367,7 +401,7 @@
        let filterval =  document.getElementById('filter').classList.value
        let filterDiv = document.getElementById('filter')
        let filterbtn = document.getElementById('toggleFilter')
-       //console.log(btn)
+       console.log("filterval",filterval)
        if(filterval == 'd-inline'){
             console.log("d-inline")
             console.log('inside if')

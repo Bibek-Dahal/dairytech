@@ -9,10 +9,10 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card" >
-                    <div class="card-header" style="background-color: #22668D; color:#F1F0E8;">
+                    <div class="card-header" >
                         <h1 class="text-center fw-bold">{% trans "Verify Your E-mail Address" %}</h1>
                     </div>
-                    <div class="card-body " style="background-color: #F1F0E8;  border: 0px solid rgb(100, 97, 97);">
+                    <div class="card-body " >
                         <div class="container" >
                         <p class="text-center" style="text-align: justify !important; line-height: 1.8;">
                             {% blocktrans %}
@@ -23,7 +23,7 @@
                     
                 
                     <div class="mt-3 text-center mb-4 justify-content-around">
-                        <a href="{% url 'account_signup' %}" class="btn btn-light" style="background-color: #f7d597; border-color: #96B6C5;">{% trans "Sign Up" %}</a>
+                        <a href="{% url 'account_signup' %}" class="btn btn-primary" >{% trans "Sign Up" %}</a>
                        
                         <div class="text-center text-primary fw-bold mt-2">
                             <small>{%trans 'Already have an account?'%} <a href="{% url 'account_login' %}"

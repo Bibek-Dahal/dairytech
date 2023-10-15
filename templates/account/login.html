@@ -12,20 +12,10 @@
 {%endblock%}
 {%block content%}
 
-{%block messageinfo%}
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-        {% endfor %}
-</ul>
-{% endif %}
-{%endblock%}
-
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6 col-sm-8 col-lg-5 col-12">
-            <form action="" method="POST" novalidate class="p-sm-5">
+            <form action="" method="POST" novalidate class="shadow p-sm-4">
                 {% csrf_token %}
                 {% if form.non_field_errors %}
                 {% for error in form.non_field_errors %}
@@ -33,11 +23,11 @@
                 {% endfor %}
                 {% endif %}
                 <div class="row text-center">
-                    <div class="card-header" style="background-color: #22668D; color: #F1F0E8;">
-                        <h1 class="text-center fw-bold">{% trans 'Login' %}</h1>
+                    <div class="card-header">
+                        <h1 class="text-center">{% trans 'Login' %}</h1>
                     </div>
                 </div>
-                <div class="row mt-80 p-2" style="background-color: #F1F0E8; border: 0px solid rgb(100, 97, 97);">
+                <div class="row mt-80 p-2">
                     {% for field in form %}
                     <div class="col-12 p-1 mt-2">
                         {% if field.name == 'remember_me' %}
@@ -55,7 +45,7 @@
                     {% endfor %}
                     <div class="row justify-content-center">
                         <div class="d-grid gap-2 my-2 col-12 col-sm-8 mx-auto">
-                            <button class="btn btn-light" style="background-color: #f7d597; border-color: #96B6C5;">Login</button>
+                            <button class="btn" >Login</button>
                         </div>
                         <div class=" col-12 col-sm-8 text-center text-primary fw-bold my-2">
                             <small class="mb-5"><a href="{% url 'account_reset_password' %}">Forgot Password ?</a></small>

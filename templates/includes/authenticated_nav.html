@@ -1,7 +1,7 @@
 {% load i18n %}
 {%load static%}
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="sticky-top navbar navbar-expand-lg navbar-expand-md navbar-expand-sm bg-body-tertiary" style="background-color: var(--primary-color) !important">
     <div class="container-fluid">
         <a class="navbar-brand" href="{%url 'user:homepage'%}"><img src="{%static 'images/logo.svg'%}" alt="logo" width="40" height="40"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link {%if name == 'Dashboard'%} active {%endif%}"
+                    <a class="nav-link fw-bold{%if name == 'Dashboard'%} active {%else%} text-white {%endif%}"
                         href="{%url 'dairyapp:homepage'%}">{%trans 'Dashboard'%}</a>
                 </li>
 
@@ -19,7 +19,7 @@
                         <a class="nav-link {%if name == 'Dairies'%} active {%endif%}" aria-current="page" href="{% url 'dairyapp:homepage' %}" >{%trans 'Dairies'%}</a>
                     </li> -->
                 <li class="nav-item">
-                    <a class="nav-link {%if name == 'Fat Rates'%} active {%endif%}"
+                    <a class="nav-link fw-bold {%if name == 'Fat Rates'%} active {%else%} text-white {%endif%}"
                         href="{% url 'dairyapp:fat_list' %}">{%trans 'Fat Rates'%}</a>
                 </li>
 
@@ -27,13 +27,13 @@
 
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle fw-bold {%if name == 'Account'%} active {%else%} text-white {%endif%}" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         {%trans 'Account'%}
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{% url 'account_logout'%}">{%trans 'Log Out'%}</a></li>
-                        <li><a class="dropdown-item" href="{%url 'account_change_password'%}">{%trans 'Passowrd Change'%}</a></li>
+                    <ul class="dropdown-menu" style="background-color: var(--primary-color);">
+                        <li class="dropdown-li"><a class="dropdown-item text-white fw-bold" href="{% url 'account_logout'%}">{%trans 'Log Out'%}</a></li>
+                        <li class="dropdwon-li"><a class="dropdown-item text-white fw-bold" href="{%url 'account_change_password'%}">{%trans 'Passowrd Change'%}</a></li>
                         
 
 
@@ -49,7 +49,34 @@
             <div class="d-flex justify-content-end">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a href="#" class="nav-link mx-12">{%trans 'Welcome'%},{{request.user.first_name|title}}</a>
+                        <a href="#" class="nav-link mx-12 text-white fw-bold">{%trans 'Welcome'%},{{request.user.first_name|title}}</a>
+                        <!-- <div class="avatar-wrapper">
+                            <img class="rounded-circle" src="{{request.user.profile.profile_pic.url}}"  alt="No img">
+
+                        </div> -->
+                    </li>
+                </ul>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="">
+                        <!-- <a href="#" class="nav-link mx-12 text-white fw-bold">{%trans
+                            'Welcome'%},{{request.user.first_name|title}}</a> -->
+                        <div class="avatar-wrapper">
+                            <!-- <a href="{%url 'user:profile'%}"><img class="rounded-circle" src="{{request.user.profile.profile_pic.url}}" alt="No img"></a> -->
+                            {%with pic=request.user.profile.profile_pic.url %}
+                            {%if pic%}
+                                <a href="{%url 'user:profile'%}"><img class="rounded-circle" src="{{pic}}" alt="No img"></a>
+                            {%else%}
+                                <div class="custom-circular-image">
+                                    <a style="text-decoration: none;" href="{%url 'user:profile'%}"><span class="initial-letter fw-bold" style="color:#ffffff;">{{request.user.first_name|slice:":1"}}{{request.user.last_name|slice:":1"}}</span></a>
+                                </div>
+                            
+                            {%endif%}
+                            {%endwith%}
+            
+                        </div>
                     </li>
                 </ul>
             </div>

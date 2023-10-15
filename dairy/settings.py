@@ -38,6 +38,12 @@ INSTALLED_APPS = [
     'allauth.account',
     'user',
     'dairyapp',
+    'django_nepali',
+    'fontawesomefree',
+    
+
+    
+    
     
     
 ]
@@ -154,6 +160,9 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR/'media'
+
 
 #allauth
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
@@ -205,5 +214,5 @@ EMAIL_PORT = os.environ.get('EMAIL_PORT')
 CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
 CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND')
 
-
+DATE_FORMAT = 'Y-m-d'
 

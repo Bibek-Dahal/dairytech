@@ -1,10 +1,15 @@
 {%extends "../base.html"%}
 {%load i18n%}
 {%block title%}{%trans 'fatrate list' %}{%endblock title%}
+{%load static%}
+{%load converter%}
+{%block additionalcss%}
+    <link rel="stylesheet" href="{%static 'css/btn_icon.css'%}">
+{%endblock%}
 {%block table_data%}
 <div class="container">
     
-    <table class="table">
+    <table class="table table table-bordered table-striped">
         <div class="row">
             <div class="col">
                 <a class="float-end nav-link " href="{%url  'dairyapp:create-fat'%}">{%trans 'Add Fat Rates'%}</a>
@@ -15,24 +20,32 @@
             <tr>
                 <th scope="col">{%trans 'Id'%}</th>
                 <th scope="col">{%trans 'Fat Rate'%}</th>
+                <th scope="col">{%trans 'Bonus'%}</th>
+                <th scope="col">{%trans 'Total Fat Rate'%}</th>
                 <th scope="col">{%trans 'Dairy'%}</th>
+                <th scope="col">{%trans 'Valid From'%}</th>
+                <th scope="col">{%trans 'Updated At'%}</th>
                 <th scope="col">{%trans 'Actions'%}</th>
     
             </tr>
         </thead>
-        <tbody>
+        <tbody class="table-group-divider">
             {%for fatrate in fatrates%}
             <tr>
                 <th scope="row">{{fatrate.id}}</th>
                 <td>{{fatrate.fat_rate}}</td>
+                <td>{{fatrate.bonous_amount}}</td>
+                <td>{{fatrate.get_fat_rate}}</td>
                 <td>{{fatrate.dairy}}</td>
+                <td>{{fatrate.created_at|convert_to_nepali}}</td>
+                <td>{{fatrate.updated_at|convert_to_nepali}}</td>
                 <td>
                     <form action="{% url 'dairyapp:edit_fat' fatrate.id%}" class="d-inline">
-                        <button type="submit" class="btn btn-danger">{%trans 'edit' %}</button>
+                        <button type="submit" class="button-with-icon"><i class="fa-solid fa-pen-to-square fa-xl" style="color: var(--primary-color);"></i></button>
                     </form>
                     <form action="{% url 'dairyapp:delete_fat' fatrate.id%}" id="del-form" method="POST" class="d-inline">
                         {% csrf_token %}
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">{%trans 'delete' %}</button>
+                        <button type="button" class="button-with-icon" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash fa-xl" style="color: #e10e0e;"></i></i></button>
                     </form>
                 </td>
     
@@ -57,8 +70,8 @@
                     <p>Are you sure you want to delete fat rate?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{%trans 'No'%}</button>
-                    <button type="button" class="btn btn-primary" id="yes-button">{%trans 'Yes'%}</button>
+                    <button type="button" class="btn" data-bs-dismiss="modal">{%trans 'No'%}</button>
+                    <button type="button" class="btn" id="yes-button">{%trans 'Yes'%}</button>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 {% load i18n %}
 {%load static%}
 
-<button class="btn btn-danger btn-sm d-inline" id="myButton" onclick="submitform()">
+<button class="btn lang-btn btn-sm d-inline fw-bold text-white" style="background-color: var(--secondary-color);" id="myButton" onclick="submitform()">
     {% get_current_language as LANGUAGE_CODE %}
     {%if LANGUAGE_CODE == 'ne' %}
         EN

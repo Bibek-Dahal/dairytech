@@ -20,12 +20,12 @@
           <div class="row" >
             {{daireis}}
             {% for dairy in dairies %}
-            <div class="col-lg-6 col-md-12 mb-4" >
-              <div class="card" style="background-color: #F1F0E8;">
+            <div class="col-lg-6 col-md-6 col-12 col-sm-6 mb-4" >
+              <div class="card shadow">
                 <div class="card-body">
                   <h5 class="card-title">{{ dairy.name }}</h5>
                   
-                  <a href="{% url 'user:member_milk_record' dairy=dairy.name %}" class="btn btn-dark"style="background-color: #22668D" >{%trans 'List Records'%}</a>
+                  <a href="{% url 'user:member_milk_record' dairy=dairy.name %}" class="btn"style="background-color: #22668D" >{%trans 'List Records'%}</a>
                 </div>
               </div>
             </div>
