@@ -129,6 +129,7 @@ ENV/
 env.bak/
 venv.bak/
 db_config.env
+.doc.env.dev
 
 # Spyder project settings
 .spyderproject

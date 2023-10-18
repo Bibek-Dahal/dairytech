@@ -49,8 +49,9 @@ def sendMial(subject,to,from_email,filename,message=None,pdf=None):
        
         msg.send(fail_silently=False)
 
-def getFatBasedOnDate(start_date,end_date):
-    objs = FatRate.objects.all().order_by('-created_at')
+def getFatBasedOnDate(start_date,end_date,dairy,req):
+    print("dairy%%%%%%%%%%%%",dairy)
+    objs = FatRate.objects.filter(dairy__user=req.user,dairy=dairy).order_by('-created_at')
     start_date_date = datetime.strptime(start_date, '%Y-%m-%d').date() 
     
     print("inside while")
@@ -81,13 +82,16 @@ def convert_nepali_date(input_string):
         datetime.strptime(input_string, date_format)
 
         strippted_date = input_string.split('-')
-        print("----------",strippted_date)
-        print("00000000000",converter.nepali_to_english(int(strippted_date[0]), int(strippted_date[1]), int(strippted_date[2])))
+        # print("----------",strippted_date)
+        # print("00000000000",converter.nepali_to_english(int(strippted_date[0]), int(strippted_date[1]), int(strippted_date[2])))
         year,month,date = converter.nepali_to_english(int(strippted_date[0]), int(strippted_date[1]), int(strippted_date[2]))
         # return input_string
+        # print(f"year {year} month {month} date {date}")
         if month<10:
             return f"{year}-0{month}-{date}"
         return f"{year}-{month}-{date}"
+    
+
     except Exception as e:
         print(e)
         return False

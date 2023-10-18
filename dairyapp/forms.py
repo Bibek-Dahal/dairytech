@@ -107,6 +107,7 @@ class UpdateMilkRecord(forms.ModelForm):
     # date = forms.DateField(initial=datetime.datetime.now(),widget=DateInput(attrs={"class":"form-control date-picker","placeholder":"dd-mm-yyyy"},format="%Y-%m-%d"))
     # shift = forms.ChoiceField(widget=forms.Select(attrs={"class":"form-select"}),choices=MilkRecord.shift_choices)
     # input_formats=['%Y%m%d']
+    date = forms.DateField(label=_("Date"),widget=forms.DateInput(attrs={"class":"form-control date-picker","placeholder":"dd-mm-yyyy","data-single":'true'},format="%Y-%m-%d"))
     class Meta:
         model = MilkRecord
         fields = ["shift","dairy","user","milk_weight","milk_fat","date"]

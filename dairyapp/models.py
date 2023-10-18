@@ -5,9 +5,12 @@ from . custom_model_managers import *
 from django.urls import reverse
 from datetime import date
 from django.utils import timezone
+from autoslug import AutoSlugField
+from basemodels.models import BaseModel
 
-class Dairy(models.Model):
+class Dairy(BaseModel):
     name = models.CharField(_("name"),max_length=200,unique=True)
+    slug = AutoSlugField("Slug",populate_from='name',unique=True)
     user = models.ForeignKey(User,on_delete=models.PROTECT,related_name="dairies",verbose_name=_("user"))
     location = models.CharField(_("location"),max_length=200)
     is_verified = models.BooleanField(_("verified"),default=False)
@@ -29,7 +32,7 @@ class Dairy(models.Model):
         return reverse('dairyapp:homepage')
     
 
-class FatRate(models.Model):
+class FatRate(BaseModel):
     fat_rate = models.FloatField(_("fat rate"),max_length=5)
     dairy = models.ForeignKey(Dairy,on_delete=models.CASCADE,verbose_name=_("dairy"))
     bonous_amount = models.PositiveSmallIntegerField("Bonous amount",default=0)
@@ -44,7 +47,7 @@ class FatRate(models.Model):
     def get_fat_rate(self):
         return self.fat_rate + self.bonous_amount
     
-class MilkRecord(models.Model):
+class MilkRecord(BaseModel):
     shift_choices = (
         ("morning","Morning"),
         ("night","Night")
@@ -62,7 +65,7 @@ class MilkRecord(models.Model):
         unique_together = ["dairy", "user","shift","date"]
 
 
-class MilkReportEmailHistory(models.Model):
+class MilkReportEmailHistory(BaseModel):
     shift_choices = (
         ("morning","morning"),
         ("night","night")

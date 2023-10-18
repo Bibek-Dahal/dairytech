@@ -167,6 +167,12 @@ class MyUserCreationForm(SignupForm):
         if User.objects.filter(phone_number=phone_number).exists():
             raise ValidationError(_("User with phone numbre already exists"))
         return phone_number
+    
+    def clean_email(self):
+        email =  super().clean_email()
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError(_('User with email address already exists.'))
+        return email
         
 
 

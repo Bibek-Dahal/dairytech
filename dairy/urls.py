@@ -19,3 +19,8 @@ urlpatterns += i18n_patterns(
     path('dashboard/',include("dairyapp.urls",namespace="dairyapp")),
     path('',include('user.urls',namespace='user')),
 )
+
+from django.conf.urls import handler404
+
+handler404 = 'user.views.custom_404'
+

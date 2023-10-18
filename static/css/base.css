@@ -14,12 +14,21 @@ body {
     background-color: var(--primary-color) !important;
     font-weight: bold !important;
     color: white !important;
-
-
 }
+
+.second-btn{
+    background-color: var(--third-color) !important;
+    font-weight: bold !important;
+    color: white !important;
+}
+
 
 .btn:hover{
     background-color: var(--secondary-color) !important;
+}
+
+.second-btn:hover {
+    background-color: var(--hover-third-color) !important;
 }
 
 .lang-btn{
@@ -35,10 +44,18 @@ input{
 }
 
 input:focus {
-    border: 2px solid #221a1a !important;
+    border: 1px solid var(--primary-color) !important;
     box-shadow: none !important;
     /* Add any other custom styles you want */
 }
+
+/* nav ul li a.active {
+    background-color: var(--secondary-color) !important;
+    
+    color: #fff;
+    border-radius: 10%;
+    
+} */
 
 .avatar-wrapper img{
     width: 100% !important;

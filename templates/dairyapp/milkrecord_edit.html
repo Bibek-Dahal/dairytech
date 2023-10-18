@@ -8,7 +8,7 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8 col-sm-8 col-lg-5 col-12">
-            <form action="" method="POST" novalidate class="form-control p-sm-3 p-lg-5 p-md-4 p-4 shadow">
+            <form id="update-fat-form" action="" onsubmit="handleSubmit()" method="POST" novalidate class="form-control p-sm-3 p-lg-5 p-md-4 p-4 shadow">
                 {% csrf_token%}
                 {% if form.non_field_errors%}
                 {% for error in form.non_field_errors%}
@@ -43,33 +43,63 @@
         </div>
     </div>
     <script src="{% static 'js/nepali-date-picker.min.js'%}"></script>
-    <script>
-        $(document).ready(function () {
-            //$('.id_user').select2();
-            //$('.id_dairy').select2();
+<script src="https://cdn.jsdelivr.net/npm/nepali-date-converter@3.3.1/dist/nepali-date-converter.umd.min.js"></script>
 
-            // Find the input element with the specified ID
-            var $oldInput = $(".date-picker");
+<script>
+    $(document).ready(function () {
+        
+        //event.preventDefault();
+        let dateinput = document.getElementById("id_date")
+        console.log("loaded")
+        console.log("hello")
+        if (dateinput) {
+            console.log("inside if")
+            //dateinput.setAttribute("data-single",true);
+            console.log(dateinput.value)
+            console.log(dateinput)
+            
+            let nepaliDateObj = new NepaliDate(new Date(dateinput.value))
+            //enDate = nepaliDateObj.getBS()
+            //enDate.setMonth(enDate.month + 1)
+            console.log(nepaliDateObj)
+            //console.log(enDate)
+            console.log(nepaliDateObj.format('YYYY-MM-DD'))
+            dateinput.value = nepaliDateObj.format('YYYY-MM-DD')
 
-            // Create a new input element with the desired type
-            var $newInput = $("<input>").attr({
-                "type": "text",
-                "id": $oldInput.attr("id"),
-                "name": $oldInput.attr("name"),
-                "value": $oldInput.val(),
-                "class": $oldInput.attr("class"),
-                "date-singal": "true"
-                // Add any other attributes you need to copy
-            });
-
-            // Replace the old input element with the new one
-            $oldInput.replaceWith($newInput);
             $('.date-picker').nepaliDatePicker();
-        });
+            console.log(dateinput)
 
 
+            
+            }
 
 
+        
+    });
+</script>
+
+<script>
+
+        function handleSubmit(e){
+            event.preventDefault();
+            let dateinput = document.getElementById("id_date")
+            console.log(dateinput.value)
+            let nepadiDateObj = new NepaliDate(dateinput.value)
+            let enDate = nepadiDateObj.getAD()
+            console.log(enDate.month+1)
+            let year = enDate.year
+            let month = enDate.month+1
+            month = month<10?'0'+month:month
+            let date = enDate.date
+            date = date<10?'0'+date:date
+
+            let val =  `${month}/${date}/${year}`
+            console.log(val)
+            dateinput.value =val
+            document.getElementById('update-fat-form').submit()
+
+        }
     </script>
+
 </div>
 {%endblock content%}

@@ -1,0 +1,29 @@
+{%load static%}
+{%load i18n%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Conformation</title>
+</head>
+
+<body>
+    <h1>Hello how are you guys.</h1>
+    {% autoescape off %}
+    {% blocktrans with site_name=current_site.name %}
+    <p>Hello from {{ site_name }}!</p>
+    {% endblocktrans %}
+
+    {% block content %}
+
+    {% endblock %}
+
+    {% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Thank you for using {{ site_name
+    }}!
+    {{ site_domain }}{% endblocktrans %}
+    {% endautoescape %}
+</body>
+
+</html>

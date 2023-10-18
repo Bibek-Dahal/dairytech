@@ -10,119 +10,43 @@
 
 {%block content%}
 
-<div class="container-lg ">
+<div class="container-fluid ">
     <script src="{% static 'js/nepali-date-picker.min.js'%}"></script>
-    <div >
-        
-        <button style="margin-top: 10px;margin-bottom:2px;" id="toggleFilter" class="d-inline btn fw-bold text-white"  onclick="toggleFilter(event)" class="btn">Filter</button>
-        <div id="filter"  class="d-none">
-            <form id="filter-form" action="" onsubmit="applyFilter(event)">
-                <div class="row ">
-                
-                    <div class="col-lg-4 col-md-4 p-2">
-                        <p class="fw-bold p-2 " data-mdb-inline="true" style="background-color: #f6f6f0">{%trans 'Date' %}:
-                            <input autocomplete="off" id="date" type="text" data-single="true" name="date" class="date-picker form-control" id="date" {%if date %}
-                                value="{{date}}" {%endif%}>
-                        </p>
-                        
-                        
-                    </div>
-
-                    <div class="col-lg-4 col-md-4">
-                        <p class="fw-bold p-2" style="background-color: #FFFADD">{%trans 'Start Date' %}: <input autocomplete="off"
-                                name="start_date" type="text" data-single="true" id="start_date" name="start-date"
-                                class="form-control date-picker" {%if start_date %} value="{{start_date}}" {%endif%}></p>
-                    </div>
-                    <div class="col-lg-4 col-md-4 p-2">
-                        <p class="fw-bold p-2" style="background-color: #FFFADD">{%trans 'End Date' %}: <input autocomplete="off"
-                                onchange="triggerChange(event)" type="text" data-single="true" id="end_date" data-single="true" name="end_date"
-                                class="date-picker form-control" {%if end_date %} value="{{end_date}}" {%endif%}></p>
-                    </div>
-
-                    
-                
-                    <div class="col-lg-6 col-md-6 p-2">
-                        
-                        
-                        <div style="background-color: #FFFADD;">
-                            <p class="fw-bold ps-2 pt-2" style="display: inline-block;">{%trans 'Shift' %}:</p>
-                            {%if shift and shift == "morning" %}
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="shift" id="morning" value="morning" checked>
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                    {%trans 'morning' %}
-                                </label>
-                            </div>
-                            {%else%}
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="shift" id="morning" value="morning">
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                    {%trans 'morning' %}
-                                </label>
-                            </div>
-                            {%endif%}
-                            {% if shift and shift == 'night' %}
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="shift" id="night" value="night" checked>
-                                <label class="form-check-label" for="flexRadioDefault2">
-                                    {%trans 'night' %}
-                                </label>
-                            </div>
-                            {%else%}
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="shift" id="night" value="night">
-                                <label class="form-check-label" for="flexRadioDefault2">
-                                    {%trans 'night' %}
-                                </label>
-                            </div>
-                            {%endif%}
-                        </div>
-                    </div>
-                    <input type="submit" class="btn fw-bold text-white mb-2 mt-2" value="{%trans 'Apply Filter'%}">
-                
-                
-                
-                
-                </div>
-            </form>
-            
-
-        
-        
-        
-        </div>
-        <!-- Dateq<input type="text" data-single="true" class="date-picker" placeholder="Select Date(s)"> -->
+<div class="row justify-content-end">
+    <div class="col-2 mt-4 col-md-3 text-center col-12 mb-2">
+        <!-- <div class="col-4 col-md-4 col-lg-2 mb-2"> -->
+            <a class="nav-link " href="{%url  'dairyapp:create_milk_record' dairy=dairy id=id %}">
+                <button class="btn">Add Milk Record</button>
+            </a>
+        <!-- </div> -->
     </div>
-    
-
-
+</div>
 
 {%block table_data%}
 
 
-<div class="row justify-content-center overflow-x-scroll" style="min-width: 400px;">
+<div class="row justify-content-center">
     
-    <div class="row justify-content-between">
+    <div class="row">
         {%if total_price != 0%}
         <!-- <a role="button" id="send-email-report-form" href="{%url 'dairyapp:milk_report_email'%}">
                                 send milk report
                             </a> -->
-        <div class="col-4 col-md-4 col-lg-2 mb-2">
+        <div class="col-12 col-md-4 col-lg-2 mb-2">
             <a id="send-email-report-form" class="" href="{%url 'dairyapp:milk_report_email'%}">
-                <div class="btn">Send Milk Record</div>
+                <div class="btn second-btn">Send Milk Record</div>
             </a>
         </div>
         
         {%endif%}
-        <div class="col-4 col-md-4 col-lg-2 mb-2">
-            <a class="nav-link " href="{%url  'dairyapp:create_milk_record' dairy=dairy id=id %}">
-                <button class="btn">Add Milk Record</button>
-            </a>
-        </div>
-    </div>
-    <div class="col">
-        <div class=" col-lg-12 col-md-12 d-flex">
         
+    </div>
+    <div class="row">
+        
+        <div class="overflow-x-auto col-lg-9 col-md-12 d-flex">
+            {%if milkrecords%}
+
+            
             <table class="table table-bordered table-striped table-responsive">
         
         
@@ -130,7 +54,7 @@
         
         
                 <!-- 
-                <a class="float-end nav-link " href="{%url  'dairyapp:create_milk_record' dairy=dairy id=id %}">Add Milk Record</a> -->
+                        <a class="float-end nav-link " href="{%url  'dairyapp:create_milk_record' dairy=dairy id=id %}">Add Milk Record</a> -->
                 <thead>
                     <tr>
                         <th scope="col">{% trans 'Id' %}</th>
@@ -148,7 +72,7 @@
                 <tbody class="table-group-divider ">
                     {%for milkrecord in milkrecords%}
                     <tr>
-                        <th scope="row">{{milkrecord.id}}</th>
+                        <th scope="row">{{forloop.counter}}</th>
                         <td>{{milkrecord.dairy}}</td>
                         <td>{{milkrecord.user}}</td>
                         <td>{{milkrecord.shift}}</td>
@@ -203,18 +127,39 @@
         
         
                 </tbody>
+                
+
+                    
                 {%endif%}
         
             </table>
+            {%else%}
+                <div>
+                        
+                        <img style="height:400px" src="{%static 'images/no_data.svg'%}" alt="">
+
+                   
+                </div>
+            {%endif%}
         </div>
+        <div class="col-lg-3">
+            <div class="row justify-content-between" style="background-color:var(--primary-color)">
+                <div class="col">
+                    <div class="text-white p-1 sm-mt-2 md-mt-2" ><button style="" id="toggleFilter" class="d-inline btn fw-bold text-white"  onclick="toggleFilter(event)" class="btn">Filter</button></div>
+                </div>
+                <div class="col-2 col-sm-3">
+                        <div class=" text-white p-1 sm-mt-2 md-mt-2"><button class="btn"><a class="text-white" href="{% url 'dairyapp:member_milk_record' id=id dairy=dairy%}" style="text-decoration:none;"><i style="display:inline-block;" class="fa-solid fa-xmark fa-xl"></i> </a> </button></div>
+                </div>
+            </div>
+            
+            <div >
+               {%include '../partials/filter_div.html'%}
+            </div>
+        <!-- Dateq<input type="text" data-single="true" class="date-picker" placeholder="Select Date(s)"> -->
     </div>
 </div>
+        
 
-
-
-
-
-    
 <script>
     // Function to construct the query string with the provided filter parameters
     function constructQueryString() {

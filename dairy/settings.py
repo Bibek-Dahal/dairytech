@@ -96,7 +96,7 @@ DATABASES = {
         "NAME": os.environ.get("DB_NAME"),
         "USER": os.environ.get("DB_ROOT_USER"),
         "PASSWORD": os.environ.get("DB_ROOT_PASSWORD"),
-        "HOST": "db",
+        "HOST": os.environ.get("DB_HOST"),
         "PORT": os.environ.get("DB_PORT")
     }
 }
@@ -210,9 +210,9 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = os.environ.get('EMAIL_PORT')
 
 
-#Celery 
-CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
-CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND')
+# #Celery 
+# CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
+# CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND')
 
 DATE_FORMAT = 'Y-m-d'
 

@@ -8,7 +8,7 @@ from nepali.date_converter import converter
 
 @register.filter
 def convert_to_nepali(input_string):
-    print("input string",input_string)
+    # print("input string",input_string)
     input_string=input_string.strftime('%Y-%m-%d')
     date_format = "%Y-%m-%d"
     try:

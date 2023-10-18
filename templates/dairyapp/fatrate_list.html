@@ -8,54 +8,59 @@
 {%endblock%}
 {%block table_data%}
 <div class="container">
-    
-    <table class="table table table-bordered table-striped">
-        <div class="row">
-            <div class="col">
-                <a class="float-end nav-link " href="{%url  'dairyapp:create-fat'%}">{%trans 'Add Fat Rates'%}</a>
+    <div class="table-con overflow-x-auto">
+        <table class="table table-bordered table-striped">
+            <div class="row">
+                <div class="col mt-2 mb-2">
+                    <a class="float-end nav-link  " href="{%url  'dairyapp:create-fat'%}"><button class="btn">{%trans 'Add Fat Rates'%}</button> </a>
+                </div>
             </div>
-        </div>
         
-        <thead>
-            <tr>
-                <th scope="col">{%trans 'Id'%}</th>
-                <th scope="col">{%trans 'Fat Rate'%}</th>
-                <th scope="col">{%trans 'Bonus'%}</th>
-                <th scope="col">{%trans 'Total Fat Rate'%}</th>
-                <th scope="col">{%trans 'Dairy'%}</th>
-                <th scope="col">{%trans 'Valid From'%}</th>
-                <th scope="col">{%trans 'Updated At'%}</th>
-                <th scope="col">{%trans 'Actions'%}</th>
+            <thead>
+                <tr>
+                    <th scope="col">{%trans 'Id'%}</th>
+                    <th scope="col">{%trans 'Fat Rate'%}</th>
+                    <th scope="col">{%trans 'Bonus'%}</th>
+                    <th scope="col">{%trans 'Total Fat Rate'%}</th>
+                    <th scope="col">{%trans 'Dairy'%}</th>
+                    <th scope="col">{%trans 'Valid From'%}</th>
+                    <th scope="col">{%trans 'Updated At'%}</th>
+                    <th scope="col">{%trans 'Actions'%}</th>
+        
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                {%for fatrate in fatrates%}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{fatrate.fat_rate}}</td>
+                    <td>{{fatrate.bonous_amount}}</td>
+                    <td>{{fatrate.get_fat_rate}}</td>
+                    <td>{{fatrate.dairy}}</td>
+                    <td>{{fatrate.created_at|convert_to_nepali}}</td>
+                    <td>{{fatrate.updated_at|convert_to_nepali}}</td>
+                    <td>
+                        <form action="{% url 'dairyapp:edit_fat' fatrate.id%}" class="d-inline">
+                            <button type="submit" class="button-with-icon"><i class="fa-solid fa-pen-to-square fa-xl"
+                                    style="color: var(--primary-color);"></i></button>
+                        </form>
+                        <form action="{% url 'dairyapp:delete_fat' fatrate.id%}" id="del-form" method="POST" class="d-inline">
+                            {% csrf_token %}
+                            <button type="button" class="button-with-icon" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal"><i class="fa-solid fa-trash fa-xl"
+                                    style="color: #e10e0e;"></i></i></button>
+                        </form>
+                    </td>
+        
+                </tr>
+                {%endfor%}
+        
+        
+        
+            </tbody>
+        </table>
+    </div>
     
-            </tr>
-        </thead>
-        <tbody class="table-group-divider">
-            {%for fatrate in fatrates%}
-            <tr>
-                <th scope="row">{{fatrate.id}}</th>
-                <td>{{fatrate.fat_rate}}</td>
-                <td>{{fatrate.bonous_amount}}</td>
-                <td>{{fatrate.get_fat_rate}}</td>
-                <td>{{fatrate.dairy}}</td>
-                <td>{{fatrate.created_at|convert_to_nepali}}</td>
-                <td>{{fatrate.updated_at|convert_to_nepali}}</td>
-                <td>
-                    <form action="{% url 'dairyapp:edit_fat' fatrate.id%}" class="d-inline">
-                        <button type="submit" class="button-with-icon"><i class="fa-solid fa-pen-to-square fa-xl" style="color: var(--primary-color);"></i></button>
-                    </form>
-                    <form action="{% url 'dairyapp:delete_fat' fatrate.id%}" id="del-form" method="POST" class="d-inline">
-                        {% csrf_token %}
-                        <button type="button" class="button-with-icon" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash fa-xl" style="color: #e10e0e;"></i></i></button>
-                    </form>
-                </td>
-    
-            </tr>
-            {%endfor%}
-    
-    
-    
-        </tbody>
-    </table>
     
     
     <!-- Modal -->

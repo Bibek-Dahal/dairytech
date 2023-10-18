@@ -17,6 +17,7 @@ cssselect2==0.7.0
 defusedxml==0.7.1
 Django==4.2.3
 django-allauth==0.54.0
+django-autoslug==1.9.9
 django-dotenv==1.4.2
 django-google-translate==1.1
 django-nepali==0.1.0
