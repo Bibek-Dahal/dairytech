@@ -46,6 +46,13 @@
 
                     </ul>
                 </li>
+                {% if request.user.is_superuser%}
+                <li class="nav-item">
+                    <a class="nav-link fw-bold {%if name == 'Admin'%} active {%else%} text-white {%endif%}"
+                        href="{% url 'admin:index' %}">{%trans 'Admin'%}</a>
+                </li>
+                {%endif%}
+
                 <li class="nav-item">
                     <a class="nav-link">{%include './lang_select.html'%}</a>
 
