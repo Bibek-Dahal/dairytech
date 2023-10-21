@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('mero-dairy-admin-9846/', admin.site.urls),
     path("i18n/", include("django.conf.urls.i18n")),
     # path('account/',include('my_account.urls',namespace='account')),
     

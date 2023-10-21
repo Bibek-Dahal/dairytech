@@ -185,7 +185,7 @@ ACCOUNT_ADAPTER = 'my_account.adapters.MyAccountAdapter'
 ACCOUNT_PASSWORD_MIN_LENGTH = 8
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
-LOGIN_REDIRECT_URL = 'dairyapp:homepage'
+LOGIN_REDIRECT_URL = 'user:homepage'
 LOGIN_URL = 'account_login'
 
 # LOGOUT_REDIRECT_URL = 'account_login'
