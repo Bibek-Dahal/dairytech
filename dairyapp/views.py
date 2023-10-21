@@ -829,11 +829,19 @@ class SendMilkReportEmialView(View):
                 
                 rendered_mail_template = render_to_string("dairyapp/email/report.html",context)
 
+<<<<<<< HEAD
                 print("rendered_mail_tem===========",rendered_mail_template)
                 html = HTML(string=rendered_mail_template)
                 buffer = io.BytesIO()
                 html.write_pdf(target=buffer)
                 pdf = buffer.getvalue()
+=======
+                # print("rendered_mail_tem===========",rendered_mail_template)
+                pdf = HTML(string=rendered_mail_template).write_pdf()
+                # buffer = io.BytesIO()
+                # html.write_pdf(target=buffer)
+                # pdf = buffer.getvalue()
+>>>>>>> bibek
 
                 filename = 'test.pdf'
                 mimetype_pdf = 'application/pdf'
