@@ -11,15 +11,6 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <style>
-        @font-face {
-            font-family: 'KantipurRegular' !important;
-            src: url('{% static "fonts/Kantipur Regular.otf" %}') format('opentype') !important;
-        }
-
-        .nepali-text {
-            font-family: 'KantipurRegular', sans-serif !important;
-        }
-
         table {
             border-collapse: collapse;
             width: 100%;
@@ -80,7 +71,7 @@
                         <td>{{ milkrecord.milk_weight }}</td>
                         <td>{{ milkrecord.milk_fat }}</td>
                         <td>
-                            <p class="nepali-text">{{ milkrecord.date|convert_to_nepali }}</p>
+                            <p class="nepali-text">{{ milkrecord.date}}</p>
                         </td>
                     </tr>
                     {% endfor %}
@@ -122,7 +113,7 @@
                         <th scope="row">{{ forloop.counter}}</th>
                         <td>{{ milkrecord.milk_weight }}</td>
                         <td>{{ milkrecord.milk_fat }}</td>
-                        <td class="nepali-text">{{ milkrecord.date|convert_to_nepali }}</td>
+                        <td class="nepali-text">{{ milkrecord.date}}</td>
                     </tr>
                     {% endfor %}
                     <tr>
