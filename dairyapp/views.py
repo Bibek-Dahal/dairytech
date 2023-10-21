@@ -25,7 +25,7 @@ from django.views.generic import View
 from django.utils.translation import gettext_lazy as _
 from django.template.loader import render_to_string
 from weasyprint import HTML
-from utils.dairyapp.commonutils import convert_nepali_date, getFatBasedOnDate, is_valid_date, sendMial
+from utils.dairyapp.commonutils import convert_nepali_date, get_fat_rate_fun, getFatBasedOnDate, is_valid_date, sendMial
 from django.conf import settings
 from django.forms import formset_factory,modelformset_factory
 from django.core.exceptions import BadRequest
@@ -446,54 +446,54 @@ class ListMemberMilkRecord(ListView):
     
         
     
-    def get_fat_rate_fun(self,request,start_date,end_date,dairy,fat_rate_obj):
-            print("inside get fat rate========")
+    # def get_fat_rate_fun(self,request,start_date,end_date,dairy,fat_rate_obj):
+    #         print("inside get fat rate========")
                 
-            try:
+    #         try:
 
 
-                """
-                    New Logic
-                """
-                if fat_rate_obj.count()>1:
-                    #raise error if multiple fat range exists within date range
-                    messages.error(request, _("Cannot apply filter witin date range. Multiple fat rate exists."))
+    #             """
+    #                 New Logic
+    #             """
+    #             if fat_rate_obj.count()>1:
+    #                 #raise error if multiple fat range exists within date range
+    #                 messages.error(request, _("Cannot apply filter witin date range. Multiple fat rate exists."))
 
-                elif fat_rate_obj.count() == 1:
-                    fat_rate = fat_rate_obj.first().get_fat_rate
-                    self.kwargs['fat_rate'] = fat_rate_obj.first().fat_rate
-                    self.kwargs['bonous'] = fat_rate_obj.first().bonous_amount
-                    self.kwargs['total_fat_rate'] = fat_rate
-                    print("fat rate===",fat_rate)
-                    return fat_rate
+    #             elif fat_rate_obj.count() == 1:
+    #                 fat_rate = fat_rate_obj.first().get_fat_rate
+    #                 self.kwargs['fat_rate'] = fat_rate_obj.first().fat_rate
+    #                 self.kwargs['bonous'] = fat_rate_obj.first().bonous_amount
+    #                 self.kwargs['total_fat_rate'] = fat_rate
+    #                 print("fat rate===",fat_rate)
+    #                 return fat_rate
 
-                elif getFatBasedOnDate(start_date,end_date,dairy,self.request) is not None:
+    #             elif getFatBasedOnDate(start_date,end_date,dairy,self.request) is not None:
                     
-                    print("inside first elif")
-                    fat_rate_obj = getFatBasedOnDate(start_date,end_date,dairy,self.request)
-                    fat_rate = fat_rate_obj.get_fat_rate
-                    self.kwargs['fat_rate'] = fat_rate_obj.fat_rate
-                    self.kwargs['bonous'] = fat_rate_obj.bonous_amount
-                    self.kwargs['total_fat_rate'] = fat_rate
-                    return fat_rate
+    #                 print("inside first elif")
+    #                 fat_rate_obj = getFatBasedOnDate(start_date,end_date,dairy,self.request)
+    #                 fat_rate = fat_rate_obj.get_fat_rate
+    #                 self.kwargs['fat_rate'] = fat_rate_obj.fat_rate
+    #                 self.kwargs['bonous'] = fat_rate_obj.bonous_amount
+    #                 self.kwargs['total_fat_rate'] = fat_rate
+    #                 return fat_rate
 
-                elif FatRate.objects.filter(dairy=dairy,dairy__user=self.request.user).order_by("created_at").exists():
-                    fat_rate_obj = FatRate.objects.filter(dairy=dairy,dairy__user=self.request.user).order_by("created_at").first()
-                    fat_rate = fat_rate_obj.get_fat_rate
-                    self.kwargs['fat_rate'] = fat_rate_obj.fat_rate
-                    self.kwargs['bonous'] = fat_rate_obj.bonous_amount
-                    self.kwargs['total_fat_rate'] = fat_rate
-                    return fat_rate
-                else:
-                    print("inside last else")
-                    messages.error(request, _("Cannot fint fat rate witin date range.Fat rate doesnot exists."))
-                    self.kwargs['fat_rate'] = 0
-                    self.kwargs['bonous'] = 0
-                    self.kwargs['total_fat_rate'] = 0
-                    return 0
-            except Exception as e:
-                print("exception occour")
-                return 0
+    #             elif FatRate.objects.filter(dairy=dairy,dairy__user=self.request.user).order_by("created_at").exists():
+    #                 fat_rate_obj = FatRate.objects.filter(dairy=dairy,dairy__user=self.request.user).order_by("created_at").first()
+    #                 fat_rate = fat_rate_obj.get_fat_rate
+    #                 self.kwargs['fat_rate'] = fat_rate_obj.fat_rate
+    #                 self.kwargs['bonous'] = fat_rate_obj.bonous_amount
+    #                 self.kwargs['total_fat_rate'] = fat_rate
+    #                 return fat_rate
+    #             else:
+    #                 print("inside last else")
+    #                 messages.error(request, _("Cannot fint fat rate witin date range.Fat rate doesnot exists."))
+    #                 self.kwargs['fat_rate'] = 0
+    #                 self.kwargs['bonous'] = 0
+    #                 self.kwargs['total_fat_rate'] = 0
+    #                 return 0
+    #         except Exception as e:
+    #             print("exception occour")
+    #             return 0
     
     def get_queryset(self):
         try:
@@ -591,7 +591,7 @@ class ListMemberMilkRecord(ListView):
                     
                     try:
                         print("inside try") 
-                        total_price = self.get_fat_rate_fun(self.request,start_date=start_date,end_date=end_date,dairy=dairy,fat_rate_obj=fat_rate_obj)*milk_wg*avg_fat
+                        total_price = get_fat_rate_fun(self,start_date=start_date,end_date=end_date,dairy=dairy,fat_rate_obj=fat_rate_obj)['fat_rate']*milk_wg*avg_fat
                     except Exception as e:
                         print("e==",e)
                         total_price = 0
@@ -729,32 +729,32 @@ class SendMilkReportEmialView(View):
             """
                 New Logic
             """
-            if fat_rate_obj.count()>1:
-                #raise error if multiple fat range exists within date range
-                messages.error(request, _("Cannot apply filter witin date range. Multiple fat rate exists."))
+            # if fat_rate_obj.count()>1:
+            #     #raise error if multiple fat range exists within date range
+            #     messages.error(request, _("Cannot apply filter witin date range. Multiple fat rate exists."))
 
-            elif fat_rate_obj.count() == 1:
-                fat_rate = fat_rate_obj.first().get_fat_rate
-                self.kwargs['fat_rate'] = fat_rate_obj.first().fat_rate
-                self.kwargs['bonous'] = fat_rate_obj.first().bonous_amount
-                self.kwargs['total_fat_rate'] = fat_rate
-                print("fat rate===",fat_rate)
+            # elif fat_rate_obj.count() == 1:
+            #     fat_rate = fat_rate_obj.first().get_fat_rate
+            #     self.kwargs['fat_rate'] = fat_rate_obj.first().fat_rate
+            #     self.kwargs['bonous'] = fat_rate_obj.first().bonous_amount
+            #     self.kwargs['total_fat_rate'] = fat_rate
+            #     print("fat rate===",fat_rate)
 
-            elif getFatBasedOnDate(start_date,end_date,dairy,self.request) != None:
+            # elif getFatBasedOnDate(start_date,end_date,dairy,self.request) != None:
                 
-                print("inside first elif")
-                fat_rate_obj = getFatBasedOnDate(start_date,end_date,dairy,self.request)
-                fat_rate = fat_rate_obj.get_fat_rate
-                self.kwargs['fat_rate'] = fat_rate_obj.fat_rate
-                self.kwargs['bonous'] = fat_rate_obj.bonous_amount
-                self.kwargs['total_fat_rate'] = fat_rate
+            #     print("inside first elif")
+            #     fat_rate_obj = getFatBasedOnDate(start_date,end_date,dairy,self.request)
+            #     fat_rate = fat_rate_obj.get_fat_rate
+            #     self.kwargs['fat_rate'] = fat_rate_obj.fat_rate
+            #     self.kwargs['bonous'] = fat_rate_obj.bonous_amount
+            #     self.kwargs['total_fat_rate'] = fat_rate
 
-            else:
-                fat_rate_obj = FatRate.objects.filter(dairy=dairy,dairy__user=self.request.user).order_by("created_at").first()
-                fat_rate = fat_rate_obj.get_fat_rate
-                self.kwargs['fat_rate'] = fat_rate_obj.fat_rate
-                self.kwargs['bonous'] = fat_rate_obj.bonous_amount
-                self.kwargs['total_fat_rate'] = fat_rate
+            # else:
+            #     fat_rate_obj = FatRate.objects.filter(dairy=dairy,dairy__user=self.request.user).order_by("created_at").first()
+            #     fat_rate = fat_rate_obj.get_fat_rate
+            #     self.kwargs['fat_rate'] = fat_rate_obj.fat_rate
+            #     self.kwargs['bonous'] = fat_rate_obj.bonous_amount
+            #     self.kwargs['total_fat_rate'] = fat_rate
 
                 
             try:
@@ -783,116 +783,90 @@ class SendMilkReportEmialView(View):
             if avg_fat is None:
                 avg_fat = 0
                 
-            fat_rate = fat_rate
-            total_price = fat_rate*milk_wg*avg_fat
+            fat_rate = get_fat_rate_fun(self,start_date=start_date,end_date=end_date,dairy=dairy,fat_rate_obj=fat_rate_obj)
 
-            print("before nmilk_wg")
-            nmilk_wg = night_milk_records.aggregate(Sum("milk_weight")).get('milk_weight__sum')
-            navg_fat = night_milk_records.aggregate(Avg("milk_fat")).get('milk_fat__avg')
-            nfat_rate = fat_rate
+            if fat_rate != 0:
+                total_price = fat_rate['fat_rate']*milk_wg*avg_fat
 
-            # print(f"nmilk_wg:{nmilk_wg} navg_fat:{navg_fat} nfat_rate:{nfat_rate}")
+                print("before nmilk_wg")
+                nmilk_wg = night_milk_records.aggregate(Sum("milk_weight")).get('milk_weight__sum')
+                navg_fat = night_milk_records.aggregate(Avg("milk_fat")).get('milk_fat__avg')
+                nfat_rate = fat_rate['fat_rate']
 
-            if nmilk_wg is None:
-                nmilk_wg = 0
+                # print(f"nmilk_wg:{nmilk_wg} navg_fat:{navg_fat} nfat_rate:{nfat_rate}")
 
-            if navg_fat is None:
-                navg_fat = 0
-            
+                if nmilk_wg is None:
+                    nmilk_wg = 0
 
-            ntotal_price = fat_rate*nmilk_wg*navg_fat
-
-
-            context = {
-                'total_milk_wieght':milk_wg,
-                'avg_fat': round(avg_fat,3),
-                'fat_rate':round(fat_rate,3),
-                'total_price':round(total_price,3),
-                'bonus':fat_rate_obj.bonous_amount,
-
-
-                'ntotal_milk_wieght':nmilk_wg,
-                'navg_fat': round(navg_fat,3),
-                'nfat_rate':round(nfat_rate,3),
-                'ntotal_price':round(ntotal_price,3),
-                'dairy':dairy,
-
-
-                'user':user,
-                'shift':'morning',
-                'morning_milk_records':morning_milk_records,
-                'night_milk_records': night_milk_records
-            }
-            print("context===========",context)
-
-
-            """
-                here i have created milkrepoemail history so that i can track fat rate on selected date
-            """
-            print(fat_rate_obj)
-            # morningobj = MilkReportEmailHistory.objects.get_or_create(
-            #     user=user,
-            #     shift='morning',
-            #     fat_rate=fat_rate_obj.fat_rate,
-            #     bonous_amount=fat_rate_obj.bonous_amount,
-            #     dairy=dairy,
-            #     start_date=morning_milk_records.order_by('date').first().date,
-            #     end_date=morning_milk_records.order_by('-date').first().date,
-            #     milk_weight = milk_wg,
-            #     avg_fat = avg_fat,
-            #     total_amount = total_price
-
-            # )
-
-            # nightobj = MilkReportEmailHistory.objects.get_or_create(
-            #     user=user,
-            #     shift='night',
-            #     fat_rate=fat_rate_obj.fat_rate,
-            #     bonous_amount=fat_rate_obj.bonous_amount,
-            #     dairy=dairy,
-            #     start_date=night_milk_records.order_by('date').first().date,
-            #     end_date=night_milk_records.order_by('-date').first().date,
-            #     milk_weight = nmilk_wg,
-            #     avg_fat = navg_fat,
-            #     total_amount = ntotal_price
-
-            # )
-            
-            rendered_mail_template = render_to_string("dairyapp/email/report.html",context)
-            html = HTML(string=rendered_mail_template)
-            buffer = io.BytesIO()
-            html.write_pdf(target=buffer)
-            pdf = buffer.getvalue()
-
-            filename = 'test.pdf'
-            mimetype_pdf = 'application/pdf'
-            # print(rendered_mail_template)
-
-            try:
-
-                # sm.delay(
-                #     subject="Milk Report",
-                #     from_email=settings.EMAIL_HOST_USER,
-                #     to=user.email,
-                #     message="hello",
-                #     filename=filename,
-                #     pdf=pdf
-                # )
-                 
-                sendMial(
-                    subject="Milk Report",
-                    from_email=settings.EMAIL_HOST_USER,
-                    to=user.email,
-                    message="hello",
-                    filename=filename,
-                    pdf=pdf)
-            except Exception as e:
-                 print(e)
-
-            return HttpResponse(rendered_mail_template)
-            messages.success(request,_("milk report email sent"))
-            return redirect("dairyapp:member_milk_record",id=user_id,dairy=dairy_name)
+                if navg_fat is None:
+                    navg_fat = 0
                 
+                print("fat_rate_=======",fat_rate)
+                ntotal_price = fat_rate['fat_rate']*nmilk_wg*navg_fat
+
+
+                context = {
+                    'total_milk_wieght':milk_wg,
+                    'avg_fat': round(avg_fat,3),
+                    'fat_rate':round(fat_rate['fat_rate'],3),
+                    'total_price':round(total_price,3),
+                    'bonus':fat_rate['fat_rate_obj'].bonous_amount,
+
+
+                    'ntotal_milk_wieght':nmilk_wg,
+                    'navg_fat': round(navg_fat,3),
+                    'nfat_rate':round(nfat_rate,3),
+                    'ntotal_price':round(ntotal_price,3),
+                    'dairy':dairy,
+
+
+                    'user':user,
+                    'shift':'morning',
+                    'morning_milk_records':morning_milk_records,
+                    'night_milk_records': night_milk_records
+                }
+                print("context===========",context)
+
+            
+                
+                rendered_mail_template = render_to_string("dairyapp/email/report.html",context)
+                html = HTML(string=rendered_mail_template)
+                buffer = io.BytesIO()
+                html.write_pdf(target=buffer)
+                pdf = buffer.getvalue()
+
+                filename = 'test.pdf'
+                mimetype_pdf = 'application/pdf'
+                # print(rendered_mail_template)
+
+                try:
+
+                    # sm.delay(
+                    #     subject="Milk Report",
+                    #     from_email=settings.EMAIL_HOST_USER,
+                    #     to=user.email,
+                    #     message="hello",
+                    #     filename=filename,
+                    #     pdf=pdf
+                    # )
+                    
+                    sendMial(
+                        subject="Milk Report",
+                        from_email=settings.EMAIL_HOST_USER,
+                        to=user.email,
+                        message="hello",
+                        filename=filename,
+                        pdf=pdf)
+                except Exception as e:
+                    print(e)
+
+                return HttpResponse(rendered_mail_template)
+                messages.success(request,_("milk report email sent"))
+                return redirect("dairyapp:member_milk_record",id=user_id,dairy=dairy_name)
+            else:
+                return redirect("dairyapp:member_milk_record",id=user_id,dairy=dairy_name)
+                
+
         except Exception as e:
             print("e----------",e)
             raise BadRequest("Bad Request")
