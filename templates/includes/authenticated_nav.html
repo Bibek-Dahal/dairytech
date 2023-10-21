@@ -82,11 +82,11 @@
                             <a href="{%url 'user:profile'%}"><img class="rounded-circle" src="{{pic.url}}"
                                     alt="No img"></a>
                             {%else%}
-                            <div class="custom-circular-image">
-                                <a style="text-decoration: none;" href="{%url 'user:profile'%}"><span
-                                        class="initial-letter fw-bold"
-                                        style="color:#ffffff;">{{request.user.first_name|slice:":1"}}{{request.user.last_name|slice:":1"}}</span></a>
-                            </div>
+                                <div class="custom-circular-image">
+                                    <a style="text-decoration: none;" href="{%url 'user:profile'%}"><span
+                                            class="initial-letter fw-bold"
+                                            style="color:#ffffff;">{{request.user.first_name|slice:":1"}}{{request.user.last_name|slice:":1"}}</span></a>
+                                </div>
 
                             {%endif%}
                             {%endwith%}
