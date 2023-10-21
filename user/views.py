@@ -19,7 +19,7 @@ from user.forms import UserProfileForm, UserUpdateForm
 from user.models import Profile
 from django.contrib import messages
 
-from utils.dairyapp.commonutils import convert_nepali_date, getFatBasedOnDate, is_valid_date
+from utils.dairyapp.commonutils import convert_nepali_date, get_fat_rate_fun, getFatBasedOnDate, is_valid_date
 
 
 
@@ -171,39 +171,41 @@ class MemberMilkRecord(ListView):
                     print("average_fat",avg_fat)
 
 
-                    fat_rate_obj = FatRate.objects.filter(dairy=dairy,dairy__user=self.request.user,created_at__range=(start_date,end_date))
+                    fat_rate_obj = FatRate.objects.filter(dairy=dairy,created_at__range=(start_date,end_date))
                     print("count obj---",fat_rate_obj.count())
 
-
+                    ft = get_fat_rate_fun(self,start_date=start_date,end_date=end_date,dairy=dairy,fat_rate_obj=fat_rate_obj)
+                    if ft != 0:
+                        self.kwargs['total_price'] = round(ft['fat_rate']*avg_fat*milk_wg,3)
                     """
                         New Logic
                     """
-                    if fat_rate_obj.count()>1:
-                        #raise error if multiple fat range exists within date range
-                        messages.error(request, _("Cannot apply filter witin date range. Multiple fat rate exists."))
+                    # if fat_rate_obj.count()>1:
+                    #     #raise error if multiple fat range exists within date range
+                    #     messages.error(request, _("Cannot apply filter witin date range. Multiple fat rate exists."))
 
-                    elif fat_rate_obj.count() == 1:
-                        fat_rate = fat_rate_obj.first().get_fat_rate
-                        self.kwargs['fat_rate'] = fat_rate_obj.first().fat_rate
-                        self.kwargs['bonous'] = fat_rate_obj.first().bonous_amount
-                        self.kwargs['total_fat_rate'] = fat_rate
-                        print("fat rate===",fat_rate)
+                    # elif fat_rate_obj.count() == 1:
+                    #     fat_rate = fat_rate_obj.first().get_fat_rate
+                    #     self.kwargs['fat_rate'] = fat_rate_obj.first().fat_rate
+                    #     self.kwargs['bonous'] = fat_rate_obj.first().bonous_amount
+                    #     self.kwargs['total_fat_rate'] = fat_rate
+                    #     print("fat rate===",fat_rate)
 
-                    elif getFatBasedOnDate(start_date,end_date,dairy,self.request) != None:
+                    # elif getFatBasedOnDate(start_date,end_date,dairy,self.request) != None:
                         
-                        print("inside first elif")
-                        fat_rate_obj = getFatBasedOnDate(start_date,end_date,dairy,self.request)
-                        fat_rate = fat_rate_obj.get_fat_rate
-                        self.kwargs['fat_rate'] = fat_rate_obj.fat_rate
-                        self.kwargs['bonous'] = fat_rate_obj.bonous_amount
-                        self.kwargs['total_fat_rate'] = fat_rate
+                    #     print("inside first elif")
+                    #     fat_rate_obj = getFatBasedOnDate(start_date,end_date,dairy,self.request)
+                    #     fat_rate = fat_rate_obj.get_fat_rate
+                    #     self.kwargs['fat_rate'] = fat_rate_obj.fat_rate
+                    #     self.kwargs['bonous'] = fat_rate_obj.bonous_amount
+                    #     self.kwargs['total_fat_rate'] = fat_rate
 
-                    else:
-                        fat_rate_obj = FatRate.objects.filter(dairy=dairy,dairy__user=self.request.user).order_by("created_at").first()
-                        fat_rate = fat_rate_obj.get_fat_rate
-                        self.kwargs['fat_rate'] = fat_rate_obj.fat_rate
-                        self.kwargs['bonous'] = fat_rate_obj.bonous_amount
-                        self.kwargs['total_fat_rate'] = fat_rate
+                    # else:
+                    #     fat_rate_obj = FatRate.objects.filter(dairy=dairy,dairy__user=self.request.user).order_by("created_at").first()
+                    #     fat_rate = fat_rate_obj.get_fat_rate
+                    #     self.kwargs['fat_rate'] = fat_rate_obj.fat_rate
+                    #     self.kwargs['bonous'] = fat_rate_obj.bonous_amount
+                    #     self.kwargs['total_fat_rate'] = fat_rate
 
                 
             return queryset.filter(filters).order_by('created_at')
