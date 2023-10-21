@@ -831,10 +831,10 @@ class SendMilkReportEmialView(View):
 
 
                 print("rendered_mail_tem===========",rendered_mail_template)
-                html = HTML(string=rendered_mail_template).write_pdf()
+                pdf = HTML(string=rendered_mail_template).write_pdf()
                 # buffer = io.BytesIO()
                 # html.write_pdf(target=buffer)
-                pdf = buffer.getvalue()
+                # pdf = buffer.getvalue()
 
 
                 filename = 'test.pdf'
