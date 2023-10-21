@@ -155,7 +155,6 @@ AUTHENTICATION_BACKENDS = [
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
 
 
 # Default primary key field type
@@ -165,21 +164,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "my_account.User"
 
-STATIC_URL = '/static/'
-STATIC_ROOT = '/home/merodairy/public_html/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+
+STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR/'static'
+
 
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR/'media'
-# STORAGES = {
-#     # ...
-#     "staticfiles": {
-#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-#     },
-# }
+
 
 
 #allauth
