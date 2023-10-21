@@ -5,9 +5,27 @@ from user.models import Profile
 
 @receiver(post_save,sender=User)
 def create_user_profile(sender,instance,created,**kwargs):
+    print("create user profile running")
     if created:
+        print("inside if")
         Profile.objects.create(user=instance)
     
+    
+@receiver(pre_save, sender=Profile)
+def delete_old_profile_image(sender, instance, **kwargs):
+    # Initialize old_profile as None
+    old_profile = None
+
+    try:
+        # Get the current user's profile
+        old_profile = Profile.objects.get(pk=instance.pk)
+    except Profile.DoesNotExist:
+        return
+
+    if old_profile.profile_pic != instance.profile_pic:
+        # The profile image has changed; delete the old image
+        old_profile.profile_pic.delete(save=False)
+
 
 @receiver(pre_save, sender=User)
 def user_verification_handler(sender,instance,**kwargs):

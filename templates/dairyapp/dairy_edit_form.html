@@ -8,7 +8,7 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6 col-sm-8 col-lg-5 col-11">
-            <form action="" method="POST" novalidate class="shadow-sm p-sm-5">
+            <form action="" method="POST" novalidate class="shadow p-sm-4 p-4 p-lg-5">
                 {% csrf_token%}
                 {% if form.non_field_errors%}
                 {% for error in form.non_field_errors%}
@@ -35,20 +35,20 @@
                 {%endfor%}
                 <div class="row justify-content-center">
                     <div class="d-grid gap-2 my-2 col-12 col-sm-8 mx-auto">
-                        <button class="btn"  type="submit">{%trans 'Submit' %}</button>
+                        <button class="btn" type="submit">{%trans 'Submit' %}</button>
                     </div>
-                
+
                 </div>
 
-                </form>
-            </div>
-            </div>
+            </form>
         </div>
-    <script>
-        $(document).ready(function () {
-            $('.dairy-member-select').select2();
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.dairy-member-select').select2();
 
-        });
-    </script>
+    });
+</script>
 </div>
 {%endblock content%}

@@ -1,21 +1,20 @@
 {%extends "../base.html"%}
 {%load i18n%}
-{%block title%}{%trans 'fatrate list' %}{%endblock title%}
+{%block title%}{%trans 'Fatrate List' %}{%endblock title%}
 {%load static%}
 {%load converter%}
-{%block additionalcss%}
-    <link rel="stylesheet" href="{%static 'css/btn_icon.css'%}">
-{%endblock%}
+
 {%block table_data%}
 <div class="container">
     <div class="table-con overflow-x-auto">
         <table class="table table-bordered table-striped">
             <div class="row">
                 <div class="col mt-2 mb-2">
-                    <a class="float-end nav-link  " href="{%url  'dairyapp:create-fat'%}"><button class="btn">{%trans 'Add Fat Rates'%}</button> </a>
+                    <a class="float-end nav-link  " href="{%url  'dairyapp:create-fat'%}">
+                        <button class="btn">{%trans 'Add Fat Rates'%}</button> </a>
                 </div>
             </div>
-        
+
             <thead>
                 <tr>
                     <th scope="col">{%trans 'Id'%}</th>
@@ -26,7 +25,7 @@
                     <th scope="col">{%trans 'Valid From'%}</th>
                     <th scope="col">{%trans 'Updated At'%}</th>
                     <th scope="col">{%trans 'Actions'%}</th>
-        
+
                 </tr>
             </thead>
             <tbody class="table-group-divider">
@@ -44,25 +43,26 @@
                             <button type="submit" class="button-with-icon"><i class="fa-solid fa-pen-to-square fa-xl"
                                     style="color: var(--primary-color);"></i></button>
                         </form>
-                        <form action="{% url 'dairyapp:delete_fat' fatrate.id%}" id="del-form" method="POST" class="d-inline">
+                        <form action="{% url 'dairyapp:delete_fat' fatrate.id%}" id="del-form" method="POST"
+                            class="d-inline">
                             {% csrf_token %}
                             <button type="button" class="button-with-icon" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal"><i class="fa-solid fa-trash fa-xl"
                                     style="color: #e10e0e;"></i></i></button>
                         </form>
                     </td>
-        
+
                 </tr>
                 {%endfor%}
-        
-        
-        
+
+
+
             </tbody>
         </table>
     </div>
-    
-    
-    
+
+
+
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -81,10 +81,10 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 <script>
-    document.getElementById('yes-button').addEventListener("click",()=>{
+    document.getElementById('yes-button').addEventListener("click", () => {
         console.log("hello")
         document.getElementById("del-form").submit()
     })

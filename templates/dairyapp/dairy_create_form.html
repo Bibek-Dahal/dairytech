@@ -3,7 +3,7 @@
 {% load i18n %}
 {%block title%}{%trans 'Create Dairy' %}{%endblock title%}
 {%block additionalcss%}
-    
+
 {%endblock%}
 
 
@@ -13,7 +13,7 @@
     <div class="row d-flex justify-content-center">
         <div class="col-md-6 col-sm-8 col-lg-5 col-11">
             {% if request.user.has_verified_dairy%}
-            <form method="POST" novalidate class="shadow p-sm-5">
+            <form method="POST" novalidate class="shadow p-sm-4 p-4 p-lg-5">
                 {% csrf_token%}
                 {% if form.non_field_errors%}
                 {% for error in form.non_field_errors%}
@@ -42,7 +42,7 @@
                     <div class="d-grid gap-2 my-2 col-12 col-sm-8 mx-auto">
                         <button class="btn fw-bold text-white" type="submit">{%trans 'Submit' %}</button>
                     </div>
-                
+
                 </div>
             </form>
             {%else%}
@@ -62,12 +62,12 @@
                     <input class="btn" value="{% trans 'Pay with esewa' %}" type="submit">
                 </form>
 
-                <br/>
-                <br/>
+                <br />
+                <br />
                 <form action="{% url 'dairyapp:initiate'%}" method="POST">
                     {%csrf_token%}
-                    <input type="hidden"  name="purchase_order_id" value="{{uid}}">
-                    <input type="hidden" name="amount" value="1000"  id="">
+                    <input type="hidden" name="purchase_order_id" value="{{uid}}">
+                    <input type="hidden" name="amount" value="1000" id="">
                     <input type="hidden" name="return_url" value="http://127.0.0.1:8000/dashboard/verify">
                     <input type="submit" class="btn btn-danger" value="pay with khalti">
                 </form>

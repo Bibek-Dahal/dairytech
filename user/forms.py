@@ -11,7 +11,7 @@ class UserProfileForm(forms.ModelForm):
         def clean_image(self):
             image = self.cleaned_data.get('profile_pic')
             if image:
-                if image.size > 1024 * 1024:  # 1 MB as an example size limit
+                if image.size > 5*1024 * 1024:  # 1 MB as an example size limit
                     raise forms.ValidationError("Image size must be less than 1 MB.")
             return image
 

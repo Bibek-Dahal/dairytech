@@ -1,7 +1,7 @@
 from typing import Any
 from django.db import models
 from django.forms.models import BaseModelForm
-from django.http import HttpResponse
+from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import ListView,TemplateView
 from django.utils.decorators import method_decorator
@@ -48,6 +48,13 @@ class MemberMilkRecord(ListView):
     context_object_name = "milkrecords"
     template_name = "user/member_milkrecord_list_copy.html"
     paginate_by = 16
+
+    def paginate_queryset(self,queryset,page_size):
+        try:
+            return super().paginate_queryset(queryset,page_size)
+        except Http404:
+            self.kwargs['page'] = 1
+            return super().paginate_queryset(queryset,page_size)
 
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs)
@@ -206,8 +213,8 @@ class MemberMilkRecord(ListView):
 
 
              
-       
-
+   
+@method_decorator(login_required(login_url='account_login'),name="dispatch")
 class UpdateProfileView(View):
     template_name = 'user/profile/profile.html'
 
@@ -228,6 +235,7 @@ class UpdateProfileView(View):
             return redirect("user:profile")
         return render(request,self.template_name,{'form':form})
     
+@method_decorator(login_required(login_url='account_login'),name="dispatch")
 class UpdateUserView(View):
     template_name = 'user/update_user.html'
     form_class = UserUpdateForm

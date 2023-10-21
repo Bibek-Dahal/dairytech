@@ -11,5 +11,8 @@ class Profile(BaseModel):
 
     
     def image(self): #new
-        return mark_safe(f'<img src = "{self.profile_pic.url}" width="50" border-radius = "50%"/>')
+        if self.profile_pic:
+            return mark_safe(f'<img src = "{self.profile_pic.url}" width="50" border-radius = "50%"/>')
+        return mark_safe(f'<img src = "" alt="no img" width="50" border-radius = "50%"/>')
+    
     

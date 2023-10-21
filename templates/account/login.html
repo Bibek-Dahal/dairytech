@@ -1,12 +1,12 @@
 {% extends 'base.html'%}
 {% load i18n %}
 {% load static%}
-{%block title%}login{%endblock title%}
+{%block title%}{% trans 'Login' %}{%endblock title%}
 
 {%block additionalcss%}
-    <style>
+<style>
 
-    </style>
+</style>
 
 
 {%endblock%}
@@ -15,7 +15,7 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6 col-sm-8 col-lg-5 col-12">
-            <form action="" method="POST" novalidate class="shadow p-sm-4">
+            <form action="" method="POST" novalidate class="shadow p-sm-4 p-4 p-lg-5">
                 {% csrf_token %}
                 {% if form.non_field_errors %}
                 {% for error in form.non_field_errors %}
@@ -45,15 +45,17 @@
                     {% endfor %}
                     <div class="row justify-content-center">
                         <div class="d-grid gap-2 my-2 col-12 col-sm-8 mx-auto">
-                            <button class="btn" >Login</button>
+                            <button class="btn">Login</button>
                         </div>
                         <div class=" col-12 col-sm-8 text-center text-primary fw-bold my-2">
-                            <small class="mb-5"><a href="{% url 'account_reset_password' %}">Forgot Password ?</a></small>
+                            <small class="mb-5"><a href="{% url 'account_reset_password' %}">Forgot Password
+                                    ?</a></small>
                             <br />
                             <div class="text-center text-primary fw-bold mt-3">
-                                <small>{% trans 'New to our site?' %} <a href="{% url 'account_signup' %}" class="text-danger">
-                                    {% trans 'Create an Account' %}</a>
-                                    </small>
+                                <small>{% trans 'New to our site?' %} <a href="{% url 'account_signup' %}"
+                                        class="text-danger">
+                                        {% trans 'Create an Account' %}</a>
+                                </small>
                             </div>
                         </div>
                     </div>

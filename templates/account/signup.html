@@ -1,7 +1,7 @@
 {%extends 'base.html'%}
 {%load static%}
 {% load i18n %}
-{%block title%}signup{%endblock%}
+{%block title%}{% trans 'Signup' %}{%endblock%}
 
 {% block content%}
 
@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="row mt-50">
-                    <div class="col-lg-6 col-md-6" >
+                    <div class="col-lg-6 col-md-6">
                         {% for field in form.visible_fields|slice:":3" %}
                         <div class="p-1 mt-2">
                             {{ field.label_tag }}
@@ -44,16 +44,16 @@
                     </div>
                     <div class="mt-3 text-center mb-4 justify-content-around">
                         <!-- <a href="{% url 'account_login' %}" class="btn btn-primary">{% trans "Sign In" %}</a> -->
-                        <button class="btn btn-primary" >{%trans 'SignUp' %}</button>
+                        <button class="btn">{%trans 'SignUp' %}</button>
                         <div class="text-center text-primary fw-bold mt-4">
                             <small>{%trans 'Already Have an account?'%} <a href="{% url 'account_login' %}"
                                     class="text-danger">{% trans 'Login' %}</a> </small>
                         </div>
-                        
+
                     </div>
                 </div>
-           
-                
+
+
 
 
             </form>

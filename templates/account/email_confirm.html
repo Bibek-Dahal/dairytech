@@ -11,37 +11,48 @@
     <div class="row justify-content-center">
         <div class="col-md-6 shadow p-5">
             <div>
-                <div class="card-header" >
+                <div>
                     <h1 class="text-center fw-bold">{% trans "Confirm your E-mail Address" %}</h1>
                 </div>
-                <div class="card-body " >
-                    <div class="container" >
+                <div class="card-body ">
+                    <div class="container">
                         {% if confirmation %}
 
                         {% user_display confirmation.email_address.user as user_display %}
-                        
-                        <p class="text-center" style="text-align: justify !important; line-height: 1.8;">{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</p>
-                        
+
+                        <p class="text-center" style="text-align: justify !important; line-height: 1.8;">
+
+                            {% blocktrans with confirmation.email_address.email as email %}
+                            Please confirm that <a href="mailto:{{ email }}">{{ email }}</a>
+                            is an e-mail address for
+                            user {{ user_display}}.
+                            {% endblocktrans %}
+                        </p>
+
                         <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
-                        {% csrf_token %}
-                        <div class="mt-3 text-center mb-2 justify-content-around">
-                            <button class="btn btn-primary"  type="submit">{% trans 'Confirm' %}</button>
-                        </div>
+                            {% csrf_token %}
+                            <div class="mt-3 text-center mb-2 justify-content-around">
+                                <button class="btn" type="submit">{% trans 'Confirm' %}</button>
+                            </div>
                         </form>
-                        
+
                         {% else %}
-                        
+
                         {% url 'account_email' as email_url %}
-                        
-                        <p class="text-center" style="text-align: justify !important; line-height: 1.8;">{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktrans %}</p>
-                        
+
+                        <p class="text-center" style="text-align: justify !important; line-height: 1.8;">
+                            {% blocktrans%}
+                            This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue
+                                a new e-mail confirmation request</a>.{% endblocktrans %}
+                        </p>
+
                         {% endif %}
 
-                  
+
                     </div>
-                
+
                 </div>
-        </div>
+            </div>
         </div>
     </div>
 </div>

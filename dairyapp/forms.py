@@ -65,6 +65,7 @@ class CreateMilkRecordForm(forms.ModelForm):
     shiftinfo = getShift()
     # if 
     print("shift info",shiftinfo)
+    milk_fat = forms.FloatField(label="Milk Fat",initial=0,widget=forms.NumberInput(attrs={"class":"form-control"}))
     user = forms.ModelChoiceField(label=_("User"),queryset=None,initial=1,widget=forms.Select(attrs={"class":"form-select"}))
     dairy = forms.ModelChoiceField(label=_("Dairy"),queryset=None,initial=1,widget=forms.Select(attrs={"class":"form-select"}))
     date = forms.DateField(label=_("Date"),widget=forms.DateInput(attrs={"class":"form-control date-picker","placeholder":"dd-mm-yyyy","data-single":'true'},format="%Y-%m-%d"))

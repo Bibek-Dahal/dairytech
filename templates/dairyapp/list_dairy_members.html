@@ -3,22 +3,20 @@
 {% load i18n %}
 {%block title%}{%trans 'List Dairy Members' %}{%endblock title%}
 
-{%block additionalcss%}
-    <link rel="stylesheet" href="{%static 'css/btn_icon.css'%}">
-{%endblock%}
 {%block content%}
 
 <div class="mt-5 container-lg container-fluid" style="min-width: 200px; max-width:900px;">
     <div class="row justify-content-end">
         <div class="col-lg-4 col-md-4 col-sm-4 col-12 mb-2">
             <form action="" class="d-flex">
-                
+
                 <input required placeholder="search" class="form-control me-2" type="text" name="name" id="baf">
-                <button class="button-with-icon"><i style="color: var(--primary-color);" class="fa-solid fa-magnifying-glass fa-xl"></i></button>
+                <button class="button-with-icon"><i style="color: var(--primary-color);"
+                        class="fa-solid fa-magnifying-glass fa-xl"></i></button>
             </form>
-            
+
         </div>
-        
+
     </div>
     <div class="table-con overflow-x-auto">
         <table class="table table-bordered table-striped">
@@ -36,7 +34,7 @@
             <tbody class="table-group-divider">
                 <div class="tbody">
                     {%for member in members%}
-        
+
                     <tr>
                         <th scope="row"><a
                                 href="{% url 'dairyapp:member_milk_record' id=member.id dairy=dairy.slug%}">{{forloop.counter}}</a>
@@ -53,19 +51,19 @@
                         <td>{{member.phone_number}}</td>
                         <td>
                             <div class="avatar-wrapper">
-                                {%with pic=member.profile.profile_pic.url %}
+                                {%with pic=member.profile.profile_pic %}
                                 {%if pic%}
-                                <img class="rounded-circle" src="{{member.profile.profile_pic.url}}" alt="No img">
+                                <img class="rounded-circle" src="{{pic.url}}" alt="No img">
                                 {%else%}
                                 <div class="custom-circular-image">
                                     <span
                                         class="initial-letter">{{member.first_name|slice:":1"}}{{member.last_name|slice:":1"}}</span>
                                 </div>
-        
+
                                 {%endif%}
                                 {%endwith%}
-        
-        
+
+
                             </div>
                         </td>
                         <td>
@@ -74,21 +72,21 @@
                                 <button type="submit" class="button-with-icon"><i style="color:var(--primary-color)"
                                         class="fa-solid fa-plus fa-xl"></i></button>
                             </form>
-        
+
                         </td>
                     </tr>
-        
+
                     {%endfor%}
-        
+
                 </div>
-        
-        
-        
+
+
+
             </tbody>
         </table>
     </div>
-    
-    
-    
+
+
+
 </div>
 {%endblock content%}

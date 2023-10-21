@@ -1,13 +1,34 @@
 {% load i18n %}
 {%load static%}
 
-<button class="btn lang-btn btn-sm d-inline fw-bold text-white" style="background-color: var(--secondary-color);" id="myButton" onclick="submitform()">
+{%comment%}
+<button class="btn lang-btn btn-sm d-inline fw-bold text-white" style="background-color: var(--secondary-color);"
+    id="myButton" onclick="submitform()">
     {% get_current_language as LANGUAGE_CODE %}
     {%if LANGUAGE_CODE == 'ne' %}
-        EN
+    EN
     {% else %}
-        NE
+    NE
     {%endif%}
-    
+
 </button>
 
+{%endcomment%}
+
+{% load i18n %}
+
+<form id="lang-form" action="{% url 'set_language' %}" method="post">{% csrf_token %}
+    <input name="next" type="hidden" value="{{ redirect_to }}">
+    <select id="lang-select" style="border:none;background-color:var(--primary-color)!important;" name="language"
+        class="fw-bold text-white">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+        <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+            {{ language.code|title }}
+        </option>
+        {% endfor %}
+    </select>
+
+</form>

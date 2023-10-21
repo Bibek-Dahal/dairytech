@@ -1,5 +1,5 @@
 {%extends 'base.html'%}
-{%block title%}Sign Out{%endblock%}
+{%block title%}{% trans 'Sign Out' %}{%endblock%}
 {% load i18n %}
 {% block content%}
 
@@ -7,7 +7,7 @@
     <div class="row d-flex justify-content-center">
         <div class="col-md-6 col-sm-8 col-lg-5 col-11 p-1 card">
             <p>{% trans 'Are you sure you want to sign out?' %}</p>
-            
+
             <form method="post" class="form-control" action="{% url 'account_logout' %}">
                 {% csrf_token %}
                 {% if redirect_field_value %}

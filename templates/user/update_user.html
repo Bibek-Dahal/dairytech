@@ -2,23 +2,23 @@
 
 {%load static%}
 {%load i18n%}
-{%block title%}{%trans 'user' %}{%endblock title%}
+{%block title%}{%trans 'Update User' %}{%endblock title%}
 {%block additionalcss%}
-    <style>
-        .avatar-wrapper{
-            border-radius: 50%;
-            object-fit: cover;
-            width: 30px;
-            height: 30px;
-            display: inline-block;
-        }
+<style>
+    .avatar-wrapper {
+        border-radius: 50%;
+        object-fit: cover;
+        width: 30px;
+        height: 30px;
+        display: inline-block;
+    }
 
-        img{
-            width: 100%;
-            
-            
-        }
-    </style>
+    img {
+        width: 100%;
+
+
+    }
+</style>
 {%endblock%}
 
 
@@ -27,7 +27,7 @@
     <div class="row d-flex justify-content-center">
         <div class="col-md-6 col-sm-8 col-lg-5 col-12">
             <form accept="{%url 'user:profile'%}" method="POST" enctype="multipart/form-data" novalidate
-                class="     p-sm-5">
+                class="form-control shadow p-sm-4 p-4 p-lg-5">
                 {% csrf_token%}
                 {% if form.non_field_errors%}
                 {% for error in form.non_field_errors%}
@@ -35,12 +35,12 @@
                 {% endfor%}
                 {% endif%}
                 <div class="row text-center">
-                    <div class="card-header" style="background-color: #22668D; color:#F1F0E8;">
+                    <div class="card-header">
                         <h1 class="text-center fw-bold">{%trans 'Update User' %}</h1>
                     </div>
                 </div>
 
-                <div class="row mt-50 p-2" style="background-color: #F1F0E8;  border: 0px solid rgb(100, 97, 97);">
+                <div class="row mt-50 p-2">
                     {% for field in form%}
                     <div class="col-12 p-1">
                         {{field.label_tag}}

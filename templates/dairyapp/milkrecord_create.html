@@ -1,15 +1,11 @@
 {% extends 'base.html'%}
 {% load i18n %}
 {% load static%}
-{%block title%}create milk record{%endblock title%}
-{%block additionalcss%}
-    <style>
-        
-    </style>
-{%endblock%}
+{%block title%}{% trans 'Create Milk Record' %}{%endblock title%}
+
 
 {%block content%}
-<script src="{% static 'js/nepali-date-picker.min.js'%}"></script>
+<script type="text/javascript" src="{% static 'js/nepali-date-picker.min.js'%}"></script>
 
 <div class="container mt-5 ">
 
@@ -18,7 +14,8 @@
             <div><button id="form-gen-btn" class="btn">Generate Froms</button></div>
             <div id="form-div d-row ">
                 <div>
-                    <form id="milkRecordForm" onsubmit="handleSubmit(event)" method="POST" novalidate class="p-sm-5 ">
+                    <form id="milkRecordForm" onsubmit="handleSubmit(event)" method="POST" novalidate
+                        class="shadow p-sm-4 p-4 p-lg-5">
                         {{ formset.management_form }}
                         {% csrf_token%}
                         <div class="row justify-content-center">
@@ -28,171 +25,186 @@
                                 </div>
                             </div>
                             {%for form in formset%}
-                                <div class="col-lg-4 col-md-6 shadow ">
-                                    <p class="fw-bold justify-content-end">{{forloop.counter}}</p>
-                                    {% if form.non_field_errors%}
-                                        {% for error in form.non_field_errors%}
-                                            <p class="alert alert-danger my-3 text-center">{{error}}</p>
-                                        {% endfor%}
-                                    {% endif%}
-                                    
-                                    <div class=" mt-50 p-2">
-                                        {% for field in form%}
-                                        <div class=" mt-80">
-                                            <div class="col-12 p-1">
-                                                {{field.label_tag}}
-                                            </div>
-                                            <div class="col-12 p-1">
-                                                {{field}}
-                                            </div>
+                            <div class="col-lg-4 col-md-6 shadow ">
+                                <p class="fw-bold justify-content-end">{{forloop.counter}}</p>
+                                {% if form.non_field_errors%}
+                                {% for error in form.non_field_errors%}
+                                <p class="alert alert-danger my-3 text-center">{{error}}</p>
+                                {% endfor%}
+                                {% endif%}
+
+                                <div class=" mt-50 p-2">
+                                    {% for field in form%}
+                                    {%if not field.is_hidden%}
+                                    <div class=" mt-80">
+                                        {%if field.name|slice:"-6:" == 'DELETE'%}
+
+                                        <div class="col-12 p-1">
+                                            {{field.label_tag}} {{field}}
+                                        </div>
+                                        {%else%}
+                                        <div class="col-12 p-1">
+                                            {{field.label_tag}}
                                             <div class="col-12">
                                                 <small class="text-danger">{{field.errors|striptags}}</small>
                                             </div>
                                         </div>
-                                        {%endfor%}
-                                    </div>
-                                </div>
-                                
-                                {%endfor%}
-                        
-                                    <div class="row justify-content-center">
-                                        <div class="d-grid gap-2 my-2 col-12 col-md-4 col-sm-8 mx-auto">
-                                            <button class="btn text-white fw-bold" type="submit">{%trans 'Submit' %}</button>
+                                        <div class="col-12 p-1">
+                                            {{field}}
                                         </div>
-                                    
+                                        <div class="col-12">
+                                            <small class="text-danger">{{field.errors|striptags}}</small>
+                                        </div>
+
+                                        {%endif%}
+
                                     </div>
-                            
+                                    {%endif%}
+
+                                    {%endfor%}
+                                </div>
                             </div>
+
+                            {%endfor%}
+                            <input type="hidden" name="num" value="{{num}}">
+                            <div class="row justify-content-center">
+                                <div class="d-grid gap-2 my-2 col-12 col-md-4 col-sm-8 mx-auto">
+                                    <button class="btn text-white fw-bold" type="submit">{%trans 'Submit' %}</button>
+                                </div>
+
+                            </div>
+
                         </div>
-                    
-                    </form>
                 </div>
+
+                </form>
             </div>
         </div>
     </div>
-    <!-- Modal -->
-    <div class="modal fade" id="numberOfFormsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">{%trans 'Delete Fat Rate'%}</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>How many milk records would you like to insert?</p>
-                    <input id="num-of-forms" type="number" class="form-control" value="{{num}}">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn" data-bs-dismiss="modal">{%trans 'Cancel'%}</button>
-                    <button type="button" class="btn" id="yes-button">{%trans 'Submit'%}</button>
-                </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="numberOfFormsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">{%trans 'Delete Fat Rate'%}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>How many milk records would you like to insert?</p>
+                <input id="num-of-forms" type="number" class="form-control" value="{{num}}">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" data-bs-dismiss="modal">{%trans 'Cancel'%}</button>
+                <button type="button" class="btn" id="yes-button">{%trans 'Submit'%}</button>
             </div>
         </div>
     </div>
-    
-    </div>
-    
-    <div id="id">
-        
-    </div>
-    <script src="
+</div>
+
+</div>
+
+<div id="id">
+
+</div>
+<script src="
     https://cdn.jsdelivr.net/npm/nepali-date-converter@3.3.1/dist/nepali-date-converter.umd.min.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            
-            
-           /* let oldInput = document.getElementById("id_form-0-date");
-            
-            
-            //get nepali date
-            let date = new NepaliDate()
-            let dateObj = date.format('YYYY-MM-DD')
-            console.log(date.getDateObject().BS)
-            let newInput = document.createElement("input")
-            newInput.setAttribute("type","text")
-            newInput.setAttribute("class","date-picker form-control")
-            newInput.setAttribute("name","form-0-date")
-            newInput.setAttribute("id","id_form-1-date")
-            newInput.setAttribute("data-single", true)
-            newInput.setAttribute("value", dateObj)
+<script>
+    $(document).ready(function () {
 
-            console.log(newInput)
-            console.log(oldInput)
-            
-            
 
-            
-            
-            
-            oldInput.replaceWith(newInput)*/
-            $('.date-picker').nepaliDatePicker();
-            let dateinput = $('.date-picker')
-            let dateval = new NepaliDate()
-            let formatteddate = dateval.format('YYYY-MM-DD')
-            console.log(formatteddate)
-            dateinput.val(formatteddate)
+        /* let oldInput = document.getElementById("id_form-0-date");
+         
+         
+         //get nepali date
+         let date = new NepaliDate()
+         let dateObj = date.format('YYYY-MM-DD')
+         console.log(date.getDateObject().BS)
+         let newInput = document.createElement("input")
+         newInput.setAttribute("type","text")
+         newInput.setAttribute("class","date-picker form-control")
+         newInput.setAttribute("name","form-0-date")
+         newInput.setAttribute("id","id_form-1-date")
+         newInput.setAttribute("data-single", true)
+         newInput.setAttribute("value", dateObj)
 
-            
-            document.getElementById('form-gen-btn').addEventListener("click",()=>{
-                // Show the dialog when the page loads
-                $('#numberOfFormsModal').modal('show');
-            })
+         console.log(newInput)
+         console.log(oldInput)
+         
+         
 
-            document.getElementById('yes-button').addEventListener("click",()=>{
-                console.log("yes btn clicked")
-                console.log(location.href)
-                let numOfforms = document.getElementById('num-of-forms').value
-                location.href = window.location.origin + window.location.pathname +`?num=${numOfforms}`
-            })
+         
+         
+         
+         oldInput.replaceWith(newInput)*/
+        $('.date-picker').nepaliDatePicker();
+        let dateinput = $('.date-picker')
+        let dateval = new NepaliDate()
+        let formatteddate = dateval.format('YYYY-MM-DD')
+        console.log(formatteddate)
+        dateinput.val(formatteddate)
 
-            // Handle the "Confirm" button click
-            $('#confirmNumForms').click(function () {
-                // Get the number of forms from the input
-                var numForms = parseInt($('#numForms').val());
 
-                // Generate the forms based on the user's input
-                generateForms(numForms);
+        document.getElementById('form-gen-btn').addEventListener("click", () => {
+            // Show the dialog when the page loads
+            $('#numberOfFormsModal').modal('show');
+        })
 
-                // Close the dialog
-                $('#numberOfFormsModal').modal('hide');
-            });
+        document.getElementById('yes-button').addEventListener("click", () => {
+            console.log("yes btn clicked")
+            console.log(location.href)
+            let numOfforms = document.getElementById('num-of-forms').value
+            location.href = window.location.origin + window.location.pathname + `?num=${numOfforms}`
+        })
 
-             
+        // Handle the "Confirm" button click
+        $('#confirmNumForms').click(function () {
+            // Get the number of forms from the input
+            var numForms = parseInt($('#numForms').val());
+
+            // Generate the forms based on the user's input
+            generateForms(numForms);
+
+            // Close the dialog
+            $('#numberOfFormsModal').modal('hide');
         });
-        
+
+
+    });
 
 
 
-    </script>
-    
 
-    <script>
+</script>
 
-        function handleSubmit(e){
-            event.preventDefault();
-            var dateInputs = document.querySelectorAll('input[id^="id_form-"][class*="date-picker"]');
-            dateInputs.forEach((dateinput) => {
-                console.log(dateinput.value)
-                let nepadiDateObj = new NepaliDate(dateinput.value)
-                let enDate = nepadiDateObj.getAD()
-                console.log(enDate.month + 1)
-                let year = enDate.year
-                let month = enDate.month + 1
-                month = month < 10 ? '0' + month : month
-                let date = enDate.date
-                date = date < 10 ? '0' + date : date
 
-                let val = `${month}/${date}/${year}`
-                console.log(val)
-                dateinput.value = val
-            })
-            //let dateinput = document.getElementById("id_form-1-date")
-            document.getElementById('milkRecordForm').submit()
-            
+<script>
 
-        }
-    </script>
+    function handleSubmit(e) {
+        event.preventDefault();
+        var dateInputs = document.querySelectorAll('input[id^="id_form-"][class*="date-picker"]');
+        dateInputs.forEach((dateinput) => {
+            console.log(dateinput.value)
+            let nepadiDateObj = new NepaliDate(dateinput.value)
+            let enDate = nepadiDateObj.getAD()
+            console.log(enDate.month + 1)
+            let year = enDate.year
+            let month = enDate.month + 1
+            month = month < 10 ? '0' + month : month
+            let date = enDate.date
+            date = date < 10 ? '0' + date : date
+
+            let val = `${month}/${date}/${year}`
+            console.log(val)
+            dateinput.value = val
+        })
+        //let dateinput = document.getElementById("id_form-1-date")
+        document.getElementById('milkRecordForm').submit()
+
+
+    }
+</script>
 
 </div>
 

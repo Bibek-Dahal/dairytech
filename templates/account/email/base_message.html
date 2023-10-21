@@ -10,7 +10,6 @@
 </head>
 
 <body>
-    <h1>Hello how are you guys.</h1>
     {% autoescape off %}
     {% blocktrans with site_name=current_site.name %}
     <p>Hello from {{ site_name }}!</p>
@@ -20,8 +19,8 @@
 
     {% endblock %}
 
-    {% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Thank you for using {{ site_name
-    }}!
+    {% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Thank you for using
+    {{ site_name}}!
     {{ site_domain }}{% endblocktrans %}
     {% endautoescape %}
 </body>
