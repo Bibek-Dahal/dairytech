@@ -9,7 +9,10 @@ urlpatterns = [
     path("i18n/", include("django.conf.urls.i18n")),
     # path('account/',include('my_account.urls',namespace='account')),
     
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 urlpatterns += i18n_patterns(
@@ -17,3 +20,8 @@ urlpatterns += i18n_patterns(
     path('dashboard/',include("dairyapp.urls",namespace="dairyapp")),
     path('',include('user.urls',namespace='user')),
 )
+
+from django.conf.urls import handler404
+
+handler404 = 'user.views.custom_404'
+

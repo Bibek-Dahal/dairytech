@@ -1,0 +1,72 @@
+{%load i18n%}
+
+<div id="filter"  class="d-inline" style="background-color:blue !important;">
+    <form id="filter-form" action="" onsubmit="applyFilter(event)">
+        <div class="row ">
+        
+            <div class="col-lg-12 col-md-4 p-2">
+                <p class="fw-bold p-1    " data-mdb-inline="true" style="background-color: #FFFADD">{%trans 'Date' %}:
+                    <input autocomplete="off" id="date" type="text" data-single="true" name="date" class="date-picker form-control" id="date" {%if date %}
+                        value="{{date}}" {%endif%}>
+                </p>
+                
+                
+            </div>
+
+            <div class="col-lg-12 col-md-4">
+                <p class="fw-bold p-2" style="background-color: #FFFADD">{%trans 'Start Date' %}: <input autocomplete="off"
+                        name="start_date" type="text" data-single="true" id="start_date" name="start-date"
+                        class="form-control date-picker" {%if start_date %} value="{{start_date}}" {%endif%}></p>
+            </div>
+            <div class="col-lg-12 col-md-4 p-1">
+                <p class="fw-bold p-2" style="background-color: #FFFADD">{%trans 'End Date' %}: <input autocomplete="off"
+                        onchange="triggerChange(event)" type="text" data-single="true" id="end_date" data-single="true" name="end_date"
+                        class="date-picker form-control" {%if end_date %} value="{{end_date}}" {%endif%}></p>
+            </div>
+
+            
+        
+            <div class="col-lg-12 col-md-6 p-1">
+                
+                
+                <div style="background-color: #FFFADD;">
+                    <p class="fw-bold ps-2 pt-2" style="display: inline-block;">{%trans 'Shift' %}:</p>
+                    {%if shift and shift == "morning" %}
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="shift" id="morning" value="morning" checked>
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            {%trans 'morning' %}
+                        </label>
+                    </div>
+                    {%else%}
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="shift" id="morning" value="morning">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            {%trans 'morning' %}
+                        </label>
+                    </div>
+                    {%endif%}
+                    {% if shift and shift == 'night' %}
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="shift" id="night" value="night" checked>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            {%trans 'night' %}
+                        </label>
+                    </div>
+                    {%else%}
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="shift" id="night" value="night">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            {%trans 'night' %}
+                        </label>
+                    </div>
+                    {%endif%}
+                </div>
+            </div>
+            <input type="submit" class="btn fw-bold text-white mb-2 mt-2" value="{%trans 'Apply Filter'%}">
+        
+        </div>
+    </form>
+                
+                
+</div>

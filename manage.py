@@ -3,11 +3,14 @@
 import os
 import sys
 import dotenv
+import pymysql
 
 
 def main():
     """Run administrative tasks."""
-    # dotenv.read_dotenv()
+    dotenv.read_dotenv()
+    pymysql.install_as_MySQLdb()
+
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'dairy.settings')
     try:
         from django.core.management import execute_from_command_line

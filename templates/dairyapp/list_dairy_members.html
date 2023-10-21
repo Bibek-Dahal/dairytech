@@ -2,51 +2,91 @@
 {% load static%}
 {% load i18n %}
 {%block title%}{%trans 'List Dairy Members' %}{%endblock title%}
-{%block additionalcss%}
-<style>
-    a {
-        text-decoration: none;
-    }
-</style>
-{%endblock%}
+
 {%block content%}
 
-<div class="container mt-5">
+<div class="mt-5 container-lg container-fluid" style="min-width: 200px; max-width:900px;">
+    <div class="row justify-content-end">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-12 mb-2">
+            <form action="" class="d-flex">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col no-underline">{%trans 'Id'%}</th>
-                <th scope="col">{%trans 'First Name'%}</th>
-                <th scope="col">{%trans 'Middle Name'%}</th>
-                <th scope="col">{%trans 'Last Name'%}</th>
-                <th scope="col">{%trans 'Phone Number'%}</th>
-            </tr>
-        </thead>
-        <tbody>
-            
+                <input required placeholder="search" class="form-control me-2" type="text" name="name" id="baf">
+                <button class="button-with-icon"><i style="color: var(--primary-color);"
+                        class="fa-solid fa-magnifying-glass fa-xl"></i></button>
+            </form>
 
-            {%for member in members%}
+        </div>
 
-            <tr>
-                <th scope="row"><a href="{% url 'dairyapp:member_milk_record' id=member.id dairy=dairy%}">{{member.id}}</a></th>
-                <td>{{member.first_name}}</td>
-                <td>
-                     {%if member.middle_name%}
-                      {{member.middle_name}} 
-                      {%else%}
-                        <span class="text-center">-</span>
-                      {%endif%} 
-                </td>
-                <td>{{member.last_name}}</td>
-                <td>{{member.phone_number}}</td>
-            </tr>
-            
-            {%endfor%}
-            
-        </tbody>
-    </table>
-    
-    
+    </div>
+    <div class="table-con overflow-x-auto">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th scope="col no-underline">{%trans 'Id'%}</th>
+                    <th scope="col">{%trans 'First Name'%}</th>
+                    <th scope="col">{%trans 'Middle Name'%}</th>
+                    <th scope="col">{%trans 'Last Name'%}</th>
+                    <th scope="col">{%trans 'Phone Number'%}</th>
+                    <th scope="col">{%trans 'Profile'%}</th>
+                    <th scope="col">{%trans 'Actions'%}</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <div class="tbody">
+                    {%for member in members%}
+
+                    <tr>
+                        <th scope="row"><a
+                                href="{% url 'dairyapp:member_milk_record' id=member.id dairy=dairy.slug%}">{{forloop.counter}}</a>
+                        </th>
+                        <td>{{member.first_name}}</td>
+                        <td>
+                            {%if member.middle_name%}
+                            {{member.middle_name}}
+                            {%else%}
+                            <span class="text-center">-</span>
+                            {%endif%}
+                        </td>
+                        <td>{{member.last_name}}</td>
+                        <td>{{member.phone_number}}</td>
+                        <td>
+                            <div class="avatar-wrapper">
+                                {%with pic=member.profile.profile_pic %}
+                                {%if pic%}
+                                <img class="rounded-circle" src="{{pic.url}}" alt="No img">
+                                {%else%}
+                                <div class="custom-circular-image">
+                                    <span
+                                        class="initial-letter">{{member.first_name|slice:":1"}}{{member.last_name|slice:":1"}}</span>
+                                </div>
+
+                                {%endif%}
+                                {%endwith%}
+
+
+                            </div>
+                        </td>
+                        <td>
+                            <form action="{%url  'dairyapp:create_milk_record' dairy=dairy.slug id=member.id %}"
+                                class="d-inline">
+                                <button type="submit" class="button-with-icon"><i style="color:var(--primary-color)"
+                                        class="fa-solid fa-plus fa-xl"></i></button>
+                            </form>
+
+                        </td>
+                    </tr>
+
+                    {%endfor%}
+
+                </div>
+
+
+
+            </tbody>
+        </table>
+    </div>
+
+
+
 </div>
 {%endblock content%}

@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .forms import MyUserCreationForm,MyUserChangeForm
 from my_account.models import User
 from django.utils.translation import gettext_lazy as _
+from django.conf import settings
 
 class UserAdmin(BaseUserAdmin): 
     # The forms to add and change user instances
@@ -48,3 +49,9 @@ class UserAdmin(BaseUserAdmin):
 
 
 admin.site.register(User, UserAdmin)
+
+from django.contrib.admin.views.decorators import staff_member_required
+
+admin.site.login = staff_member_required(
+    admin.site.login, login_url=settings.LOGIN_URL
+)

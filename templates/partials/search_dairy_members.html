@@ -1,0 +1,40 @@
+{%for member in members%}
+    
+<tr>
+    <th scope="row"><a href="{% url 'dairyapp:member_milk_record' id=member.id dairy=dairy%}">{{member.id}}</a></th>
+    <td>{{member.first_name}}</td>
+    <td>
+        {%if member.middle_name%}
+        {{member.middle_name}}
+        {%else%}
+        <span class="text-center">-</span>
+        {%endif%}
+    </td>
+    <td>{{member.last_name}}</td>
+    <td>{{member.phone_number}}</td>
+    <td>
+        <div class="avatar-wrapper">
+            {%with pic=member.profile.profile_pic.url %}
+            {%if pic%}
+            <img class="rounded-circle" src="{{member.profile.profile_pic.url}}" alt="No img">
+            {%else%}
+            <div class="custom-circular-image">
+                <span class="initial-letter">{{member.first_name|slice:":1"}}{{member.last_name|slice:":1"}}</span>
+            </div>
+
+            {%endif%}
+            {%endwith%}
+
+
+        </div>
+    </td>
+    <td>
+        <form action="{%url  'dairyapp:create_milk_record' dairy=dairy id=member.id %}" class="d-inline">
+            <button type="submit" class="button-with-icon"><i style="color:var(--primary-color)"
+                    class="fa-solid fa-plus fa-xl"></i></button>
+        </form>
+
+    </td>
+</tr>
+
+{%endfor%}

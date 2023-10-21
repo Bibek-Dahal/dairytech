@@ -1,126 +1,9 @@
-<!-- {%load static%}
-{%load i18n%}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Milk Report</title>
-    <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}" />
-    <script src="{%static 'js/bootstrap.min.js'%}"></script>
-  </head>
-  <body>
-    <div class="container">
-      <p>User:{{user.first_name}} {%if user.middle_name %} {{user.middle_name}} {%endif%} {{user.last_name}}</p>
-      <p>Phone Number: {{user.phone_number}}</p>
-      <p>Fat Rate: {{fat_rate}}</p>
-      <p>Dairy: {{dairy.name}}</p>
-        <p>Shift: Morning</p>
-    <div class=" col-lg-6 d-flex justify-content-start">
-        <table class="table table-bordered table-striped">
-        
-    
-            <thead>
-                <tr>
-                    <th scope="col">{% trans 'Id' %}</th>
-                    <th scope="col">{% trans 'Milk Weight' %}</th>
-                    <th scope="col">{% trans 'Milk Fat' %}</th>
-                    <th scope="col">{% trans 'Date' %}</th>
-        
-                </tr>
-            </thead>
-            <tbody>
-                {%for milkrecord in morning_milk_records%}
-                <tr>
-                    <th scope="row">{{milkrecord.id}}</th>
-                    <td>{{milkrecord.milk_weight}}</td>
-                    <td>{{milkrecord.milk_fat}}</td>
-                    <td>{{milkrecord.date}}</td>
-                    
-        
-                </tr>
-        
-                {%endfor%}
-                <tr>
-                    <th scope="row">{%trans 'Details'%}</th>
-                    <td>
-                        <h5>{{total_milk_wieght}}</h5>
-                    </td>
-                    <td>
-                        <h5>{{avg_fat}}</h5>
-                    </td>
-                    <td>
-                        <h3>{{milkrecord.date}}</h3>
-                    </td>
-                </tr>
-                <th scope="row">{%trans 'Total Amount : '%}{{total_price}}</th>
-         
-        
-        
-            </tbody>
-        </table>
-    </div>
-  
-
-    </div>
-    </div>
-
-
-    <div class="container">
-        <p>Shift: Night</p>
-        <table class="table">
-    
-    
-            <thead>
-                <tr>
-                    <th scope="col">{% trans 'Id' %}</th>
-                    <th scope="col">{% trans 'Milk Weight' %}</th>
-                    <th scope="col">{% trans 'Milk Fat' %}</th>
-                    <th scope="col">{% trans 'Date' %}</th>
-    
-                </tr>
-            </thead>
-            <tbody>
-                {%for milkrecord in night_milk_records%}
-                <tr>
-                    <th scope="row">{{milkrecord.id}}</th>
-                    <td>{{milkrecord.milk_weight}}</td>
-                    <td>{{milkrecord.milk_fat}}</td>
-                    <td>{{milkrecord.date}}</td>
-    
-    
-                </tr>
-    
-                {%endfor%}
-                <tr>
-                    <th scope="row">{%trans 'Details'%}</th>
-                    <td>
-                        <h3>{{ntotal_milk_wieght}}</h3>
-                    </td>
-                    <td>
-                        <h3>{{navg_fat}}</h3>
-                    </td>
-                    <td>
-                        <h3>{{milkrecord.date}}</h3>
-                    </td>
-                    <th scope="row">{%trans 'Total Amount : '%}{{total_price}}</th>
-     
-    
-                </tr>
-    
-    
-    
-            </tbody>
-        </table>
-    
-    </div>
-  </body>
-</html> -->
-
 {% load static %}
+{%load converter%}
 {% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -128,113 +11,138 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <style>
+        @font-face {
+            font-family: 'KantipurRegular' !important;
+            src: url('{% static "fonts/Kantipur Regular.otf" %}') format('opentype') !important;
+        }
+
+        .nepali-text {
+            font-family: 'KantipurRegular', sans-serif !important;
+        }
+
         table {
             border-collapse: collapse;
             width: 100%;
-            border: 5px solid #000; /* Add a 1px solid black border around the table */
-    }
+            border: 5px solid #000;
+            /* Add a 1px solid black border around the table */
+        }
 
-    th, td , tr{
-        border: 1px solid #000; /* Add a 1px solid black border to table cells */
-        padding: 8px; /* Add padding to cells for better spacing */
-    }
-   
+        th,
+        td,
+        tr {
+            border: 1px solid #000;
+            /* Add a 1px solid black border to table cells */
+            padding: 8px;
+            /* Add padding to cells for better spacing */
+        }
     </style>
 </head>
-<body>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-md-12 d-flex justify-content-center">
-            <h2  class="mt-5">Milk Report</h2>
-        </div>
-    </div>
-    
-    <div class="row">
-        <div class="col">
-            <p><span class="fw-bold">User:  </span>{{ user.first_name }} {% if user.middle_name %}{{ user.middle_name }}{% endif %} {{ user.last_name }}</p>
-            <p><span class="fw-bold">Phone Number:  </span> {{ user.phone_number }}</p>
-            <p><span class="fw-bold">Shift:  </span>Morning</p>
-            
-        </div>
-        <div class="col">
-            <p><span class="fw-bold">Fat Rate: </span> {{ fat_rate }}</p>
-            <p><span class="fw-bold">Dairy:  </span>{{ dairy.name }}</p>
-          
-        </div>
-    </div>
-   
-    <div class="col-lg-8 col-md-12 d-flex justify-content-start">
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">{% trans 'Id' %}</th>
-                    <th scope="col">{% trans 'Milk Weight' %}</th>
-                    <th scope="col">{% trans 'Milk Fat' %}</th>
-                    <th scope="col">{% trans 'Date' %}</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for milkrecord in morning_milk_records %}
-                <tr>
-                    <th scope="row">{{ milkrecord.id }}</th>
-                    <td>{{ milkrecord.milk_weight }}</td>
-                    <td>{{ milkrecord.milk_fat }}</td>
-                    <td>{{ milkrecord.date }}</td>
-                </tr>
-                {% endfor %}
-                <tr>
-                    <th scope="row">{% trans 'Details' %}</th>
-                    <td>
-                        <p class = "fw-bold">{{ total_milk_wieght }}</p>
-                    </td>
-                    <td>
-                        <p class = "fw-bold">{{ avg_fat}}</p>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">{% trans 'Total Amount' %}:</th>
-                    <td colspan="3">{{ total_price }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 
-    <p><span class="fw-bold">Shift:  </span> Night</p>
-    <div class="col-lg-8 col-md-12 d-flex justify-content-start">
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">{% trans 'Id' %}</th>
-                    <th scope="col">{% trans 'Milk Weight' %}</th>
-                    <th scope="col">{% trans 'Milk Fat' %}</th>
-                    <th scope="col">{% trans 'Date' %}</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for milkrecord in night_milk_records %}
-                <tr>
-                    <th scope="row">{{ milkrecord.id }}</th>
-                    <td>{{ milkrecord.milk_weight }}</td>
-                    <td>{{ milkrecord.milk_fat }}</td>
-                    <td>{{ milkrecord.date }}</td>
-                </tr>
-                {% endfor %}
-                <tr>
-                    <th scope="row">{% trans 'Details' %}</th>
-                    <td>
-                        <p class = "fw-bold">{{ ntotal_milk_wieght }}</p>
-                    </td>
-                    <td>
-                        <p class = "fw-bold">{{navg_fat}}</P>  
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">{% trans 'Total Amount' %}:</th>
-                    <td colspan="3">{{ ntotal_price }}</td>
-                </tr>
-            </tbody>
-        </table>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12 d-flex justify-content-center">
+                <h2 class="mt-5">Milk Report</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <p><span class="fw-bold">User: </span>{{ user.first_name }} {% if user.middle_name %}{{ user.middle_name
+                    }}{% endif %} {{ user.last_name }}</p>
+                <p><span class="fw-bold">Phone Number: </span> {{ user.phone_number }}</p>
+                <p><span class="fw-bold">Shift: </span>Morning</p>
+
+            </div>
+            <div class="col">
+                <p><span class="fw-bold">Fat Rate: </span> {{ fat_rate }}</p>
+                <p><span class="fw-bold">Dairy: </span>{{ dairy.name }}</p>
+
+            </div>
+        </div>
+
+
+        {%if morning_milk_records%}
+        <div class="col-lg-8 col-md-12 d-flex justify-content-start">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">{% trans 'Id' %}</th>
+                        <th scope="col">{% trans 'Milk Weight' %}</th>
+                        <th scope="col">{% trans 'Milk Fat' %}</th>
+                        <th scope="col">{% trans 'Date' %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for milkrecord in morning_milk_records %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ milkrecord.milk_weight }}</td>
+                        <td>{{ milkrecord.milk_fat }}</td>
+                        <td>
+                            <p class="nepali-text">{{ milkrecord.date|convert_to_nepali }}</p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th scope="row">{% trans 'Details' %}</th>
+                        <td>
+                            <p class="fw-bold">{{ total_milk_wieght }}</p>
+                        </td>
+                        <td>
+                            <p class="fw-bold">{{ avg_fat}}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{% trans 'Total Amount' %}:</th>
+                        <td colspan="3">{{ total_price }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        {%endif%}
+
+        {%if night_milk_records%}
+
+
+        <p><span class="fw-bold">Shift: </span> Night</p>
+        <div class="col-lg-8 col-md-12 d-flex justify-content-start">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">{% trans 'Id' %}</th>
+                        <th scope="col">{% trans 'Milk Weight' %}</th>
+                        <th scope="col">{% trans 'Milk Fat' %}</th>
+                        <th scope="col">{% trans 'Date' %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for milkrecord in night_milk_records %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter}}</th>
+                        <td>{{ milkrecord.milk_weight }}</td>
+                        <td>{{ milkrecord.milk_fat }}</td>
+                        <td class="nepali-text">{{ milkrecord.date|convert_to_nepali }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th scope="row">{% trans 'Details' %}</th>
+                        <td>
+                            <p class="fw-bold">{{ ntotal_milk_wieght }}</p>
+                        </td>
+                        <td>
+                            <p class="fw-bold">{{navg_fat}}</P>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{% trans 'Total Amount' %}:</th>
+                        <td colspan="3">{{ ntotal_price }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        {%endif%}
     </div>
-</div>
 </body>
+
 </html>

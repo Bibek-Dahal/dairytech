@@ -6,11 +6,16 @@ from django.utils.translation import gettext_lazy as _
 from my_account.models import User
 
 class MyAccountAdapter(DefaultAccountAdapter):
-    def clean_email(self, email):
-        email =  super().clean_email(email)
-        if User.objects.filter(email=email).exists():
-            raise ValidationError(_('User with email address already exists.'))
-        return email
+    # def clean_email(self, email):
+    #     email =  super().clean_email(email)
+    #     print("self",self)
+    #     if User.objects.filter(email=email).exists():
+    #         raise ValidationError(_('User with email address already exists.'))
+    #     return email
+
+    def reset_password(self, request, user):
+        # Override the reset_password method to skip the email check
+        return super().reset_password(request, user)
 
     def clean_password(self, password, user=None):
         password =  super().clean_password(password, user)

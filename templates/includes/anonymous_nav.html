@@ -1,17 +1,19 @@
 {%load i18n%}
 {%load static%}
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg navbar-expand-md navbar-expand-sm bg-body-tertiary"
+    style="background-color: var(--primary-color) !important">
     <div class="container-fluid">
-        <img src="{%static 'images/logo.svg'%}" alt="Bootstrap" width="40" height="40">
-        <h4 class="ms-3">Dairy Tech</h4>
+        <a class="navbar-brand" href="{%url 'account_login'%}"> <img src="{%static 'images/logo.svg'%}" alt="Bootstrap"
+                width="40" height="40"></a>
+        <h4 class="ms-3 text-white">Dairy Tech</h4>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-    
+
             </ul>
             <div class="d-flex justify-content-end">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">

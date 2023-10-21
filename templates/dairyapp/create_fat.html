@@ -6,9 +6,9 @@
 {%block content%}
 
 <div class="container mt-5">
-    <div class="row d-flex justify-content-center">
+    <div class="row justify-content-center">
         <div class="col-md-6 col-sm-8 col-lg-5 col-12">
-            <form action="" method="POST" novalidate class="     p-sm-5">
+            <form action="" method="POST" novalidate class="form-control shadow p-sm-4 p-4 p-lg-5">
                 {% csrf_token%}
                 {% if form.non_field_errors%}
                 {% for error in form.non_field_errors%}
@@ -16,13 +16,12 @@
                 {% endfor%}
                 {% endif%}
                 <div class="row text-center">
-                    <div class="card-header" style="background-color: #22668D; color:#F1F0E8;">
-                        <h1 class="text-center fw-bold">{%trans 'Create Fat' %}</h1>
+                    <div class="col">
+                        <h2 class="">{%trans 'Create Fat Rate' %}</h2>
                     </div>
                 </div>
-                
-                <div class="row mt-50 p-2" style="background-color: #F1F0E8;  border: 0px solid rgb(100, 97, 97);">
-                    {% for field in form%}
+                {% for field in form%}
+                <div class="row mt-80">
                     <div class="col-12 p-1">
                         {{field.label_tag}}
                     </div>
@@ -32,20 +31,20 @@
                     <div class="col-12">
                         <small class="text-danger">{{field.errors|striptags}}</small>
                     </div>
-                
+                </div>
                 {%endfor%}
                 <div class="row justify-content-center">
-                    <div class="mt-3 text-center mb-4 justify-content-around">
-    
-                        <button class="btn btn-light" style="background-color: #f7d597; border-color: #96B6C5;" type="submit">{%trans 'Submit' %}</button>
-
+                    <div class="d-grid gap-2 my-2 col-12 col-sm-8 mx-auto">
+                        <button class="btn fw-bold text-white" type="submit">{%trans 'Submit' %}</button>
                     </div>
 
-
-                </div>
                 </div>
             </form>
         </div>
     </div>
+
 </div>
+
+
+
 {%endblock content%}

@@ -1,0 +1,71 @@
+{%extends '../base.html'%}
+
+{%load static%}
+{%load i18n%}
+{%block title%}{%trans 'Update User' %}{%endblock title%}
+{%block additionalcss%}
+<style>
+    .avatar-wrapper {
+        border-radius: 50%;
+        object-fit: cover;
+        width: 30px;
+        height: 30px;
+        display: inline-block;
+    }
+
+    img {
+        width: 100%;
+
+
+    }
+</style>
+{%endblock%}
+
+
+{%block content%}
+<div class="container mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6 col-sm-8 col-lg-5 col-12">
+            <form accept="{%url 'user:profile'%}" method="POST" enctype="multipart/form-data" novalidate
+                class="form-control shadow p-sm-4 p-4 p-lg-5">
+                {% csrf_token%}
+                {% if form.non_field_errors%}
+                {% for error in form.non_field_errors%}
+                <p class="alert alert-danger my-3 text-center">{{error}}</p>
+                {% endfor%}
+                {% endif%}
+                <div class="row text-center">
+                    <div class="card-header">
+                        <h1 class="text-center fw-bold">{%trans 'Update User' %}</h1>
+                    </div>
+                </div>
+
+                <div class="row mt-50 p-2">
+                    {% for field in form%}
+                    <div class="col-12 p-1">
+                        {{field.label_tag}}
+                    </div>
+                    <div class="col-12 p-1">
+                        {{field}}
+                    </div>
+                    <div class="col-12">
+                        <small class="text-danger">{{field.errors|striptags}}</small>
+                    </div>
+
+                    {%endfor%}
+                    <div class="row justify-content-center">
+                        <div class="mt-3 text-center mb-4 justify-content-around">
+
+                            <button class="btn btn-light" style="background-color: #f7d597; border-color: #96B6C5;"
+                                type="submit">{%trans 'Submit' %}</button>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{%endblock content%}

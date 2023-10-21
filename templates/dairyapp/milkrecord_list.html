@@ -1,63 +1,367 @@
 {%extends "../base.html"%}
+{%load static%}
 {% load i18n %}
+{%load nepalidatetime%}
 {%block title%}{%trans 'List Milk Record' %}{%endblock title%}
-{%block table_data%}
-{%block additionalcss%}
-    <style>
-        a{
-        text-decoration: none;
-    }
-    </style>
-{%endblock%}
-<table class="table">
-
-    <a class="float-end nav-link " href="{%url  'dairyapp:create_milk_record' dairy=dairy id=user.id %}">Add Milk Record</a>
-    <thead>
-        <tr>
-            <th scope="col">{%trans 'Id' %}</th>
-            <th scope="col">{%trans 'Dairy' %}</th>
-            <th scope="col">{%trans 'User' %}</th>
-            <th scope="col">{%trans 'Shift' %}</th>
-            <th scope="col">{%trans 'Milk Weight' %}</th>
-            <th scope="col">{%trans 'Milk Fat' %}</th>
-            <th scope="col">{%trans 'Date' %}</th>
-
-        </tr>
-    </thead>
-    <tbody>
-        {%for milkrecord in milkrecords%}
-        <tr>
-            <th scope="row">{{milkrecord.id}}</th>
-            <td>{{milkrecord.dairy}}</td>
-            <td><a
-                    href="{% url 'dairyapp:member_milk_record' id=milkrecord.user.id dairy=milkrecord.dairy.name%}">{{milkrecord.user}}</a>
-            </td>
-            <td>{{milkrecord.shift}}</td>
-            <td>{{milkrecord.milk_weight}}</td>
-            <td>{{milkrecord.milk_fat}}</td>
-            <td>{{milkrecord.date}}</td>
-            <td>
-                <form action="{% url 'dairyapp:update_milk_record' id=milkrecord.id dairy=dairy%}" class="d-inline">
-                    <button type="submit" class="btn btn-primary">{% trans 'edit' %}</button>
-                </form>
-                <form action="#" method="POST" class="d-inline">
-                    {% csrf_token %}
-                    
-                    <button type="submit" class="btn btn-primary">{% trans 'delete' %}</button>
-                </form>
-            </td>
-
-        </tr>
-        {%endfor%}
+{%load converter%}
 
 
+{%block content%}
 
-    </tbody>
-</table>
+<div class="container-fluid mt-4">
+    <div class="row justify-content-end">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-12 mb-2">
+            <form action="" class="d-flex">
 
-{%for member in members%}
-{{member.first_name}}|{{member.last_name}}|{{member.phone_number}}
-{%endfor%}
+                <input required placeholder="search" class="form-control me-2" type="text" name="name" id="baf">
+                <button class="button-with-icon"><i style="color: var(--primary-color);"
+                        class="fa-solid fa-magnifying-glass fa-xl"></i></button>
+            </form>
+
+        </div>
+
+    </div>
+    <script src="{% static 'js/nepali-date-picker.min.js'%}"></script>
 
 
-{%endblock%}
+    {%block table_data%}
+
+
+    <div class="row justify-content-center">
+
+
+        <div class="row">
+
+            <div class="overflow-x-auto col-lg-9 col-md-12 d-flex">
+                {%if milkrecords%}
+
+
+                <table class="table table-bordered table-striped table-responsive">
+
+                    <thead>
+                        <tr>
+                            <th scope="col">{% trans 'Id' %}</th>
+                            <th scope="col">{% trans 'Dairy' %}</th>
+                            <th scope="col">{% trans 'User' %}</th>
+                            <th scope="col">{% trans 'Shift' %}</th>
+                            <th scope="col">{% trans 'Milk Weight' %}</th>
+                            <th scope="col">{% trans 'Milk Fat' %}</th>
+                            <th scope="col">{% trans 'Date' %}</th>
+                            <th scope="col">{% trans 'Actions' %}</th>
+
+                        </tr>
+                    </thead>
+                    {%if milkrecords%}
+                    <tbody class="table-group-divider ">
+                        {%for milkrecord in milkrecords%}
+                        <tr>
+                            <th scope="row">{{forloop.counter}}</th>
+                            <td>{{milkrecord.dairy}}</td>
+                            <td>{{milkrecord.user}}</td>
+                            <td>{{milkrecord.shift}}</td>
+                            <td>{{milkrecord.milk_weight}}</td>
+                            <td>{{milkrecord.milk_fat}}</td>
+                            <td>{{milkrecord.date|convert_to_nepali}}</td>
+                            <td>
+                                <form action="{% url 'dairyapp:update_milk_record' id=milkrecord.id dairy=dairy%}"
+                                    class="d-inline">
+
+                                    <!-- <button type="submit" class="btn btn-primary">{%trans 'edit' %}</button> -->
+                                    <button type="submit" class="button-with-icon"><i
+                                            class="fa-solid fa-pen-to-square fa-xl"
+                                            style="color: var(--primary-color);"></i> </button>
+
+                                </form>
+                                <form action="#" method="POST" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="button-with-icon"><i class="fa-solid fa-trash fa-xl"
+                                            style="color: #e10e0e;"></i></i>
+                                    </button>
+                                    <!-- <button type="submit" class="btn btn-primary">{%trans 'delete'%}</button> -->
+                                </form>
+                            </td>
+
+                        </tr>
+
+                        {%endfor%}
+                        <tr>
+                            <th scope="row">{%trans 'Details'%}</th>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>
+                                <h3>{{total_milk_wieght}}</h3>
+                            </td>
+                            <td>
+                                <h3>{{avg_fat}}</h3>
+                            </td>
+                            <td>
+                                <h3>{{milkrecord.date}}</h3>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">{% trans 'Total Amount' %}:</th>
+                            <td colspan="1">{{ total_price }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">{% trans 'Total Fat Rate' %}:</th>
+                            <td colspan="1">{{ total_fat_rate }}</td>
+                        </tr>
+
+
+
+                    </tbody>
+
+
+
+                    {%endif%}
+
+                </table>
+                {%else%}
+                <div>
+
+                    <img style="height:400px" src="{%static 'images/no_data.svg'%}" alt="">
+
+
+                </div>
+                {%endif%}
+            </div>
+            <div class="col-lg-3">
+
+                <div class="row justify-content-between" style="background-color:var(--primary-color)">
+                    <div class="col">
+                        <div class="text-white p-1 sm-mt-2 md-mt-2"><button style="" id="toggleFilter"
+                                class="d-inline btn fw-bold text-white" onclick="toggleFilter(event)"
+                                class="btn">Filter</button></div>
+                    </div>
+                    <div class="col-2 col-sm-3">
+                        <div class=" text-white p-1 sm-mt-2 md-mt-2"><button class="btn"><a class="text-white"
+                                    href="{% url 'dairyapp:milk_record' dairy=dairy%}" style="text-decoration:none;"><i
+                                        style="display:inline-block;" class="fa-solid fa-xmark fa-xl"></i> </a>
+                            </button></div>
+                    </div>
+                </div>
+
+
+                <div>
+                    {%include '../partials/filter_div.html'%}
+                </div>
+                <!-- Dateq<input type="text" data-single="true" class="date-picker" placeholder="Select Date(s)"> -->
+            </div>
+        </div>
+
+
+        <script>
+            // Function to construct the query string with the provided filter parameters
+            function constructQueryString() {
+                console.log("construct called")
+                const shift = getSelectedShift();
+                const date = document.getElementById('date').value;
+                console.log("date", date)
+                const startDate = document.getElementById('start_date').value;
+                const endDate = document.getElementById('end_date').value;
+
+                // Construct the query string based on the provided filter parameters
+
+                let queryString = '';
+                if (shift) queryString += `shift=${encodeURIComponent(shift)}&`;
+                if (date) queryString += `date=${encodeURIComponent(date)}&`;
+                if (startDate) queryString += `start_date=${encodeURIComponent(startDate)}&`;
+                if (endDate) queryString += `end_date=${encodeURIComponent(endDate)}`;
+
+                return queryString;
+            }
+
+            // Function to get the selected "shift" value
+            function getSelectedShift() {
+                const shiftRadios = document.querySelectorAll('input[name="shift"]');
+                let selectedShift = null;
+
+                for (const radio of shiftRadios) {
+                    if (radio.checked) {
+                        selectedShift = radio.value;
+                        break;
+                    }
+                }
+
+                return selectedShift;
+            }
+
+            // Function to trigger the GET request with the updated filter parameters
+            function updateFiltersAndGetData(e) {
+                event.preventDefault()
+                console.log("update filtre called", e)
+                const queryString = constructQueryString();
+                console.log(queryString)
+
+
+                location.href = "{% url 'dairyapp:milk_record' dairy=dairy%}?" + queryString
+
+
+                // Perform the GET request using JavaScript's fetch API or any other method you prefer
+                // Replace 'YOUR_API_ENDPOINT' with the actual endpoint URL
+                /*fetch(`/api/data/?${queryString}`)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        // Handle the retrieved data as needed
+                        console.log(data);
+                    })
+                    .catch((error) => {
+                        console.error('Error fetching data:', error);
+                    });*/
+            }
+
+
+
+
+
+
+            // Add event listeners to each input field to trigger the GET request when the value changes
+            // Add event listener to the radio buttons to trigger the GET request when the selected "shift" changes
+            const shiftRadios = document.querySelectorAll('input[name="shift"]');
+            for (const radio of shiftRadios) {
+                radio.addEventListener('change', updateFiltersAndGetData);
+            }
+            //document.getElementById('date').addEventListener('change', updateFiltersAndGetData);
+            //document.getElementById('start_date').addEventListener('input', updateFiltersAndGetData);
+            //document.getElementById('end_date').addEventListener('input', updateFiltersAndGetData);
+            //document.getElementById('filter').addEventListener('click',updateFiltersAndGetData) -->
+            function addValue() {
+
+            }
+
+
+
+            $(document).ready(function () {
+                $('.date-picker').nepaliDatePicker();
+
+                const url = new URLSearchParams(location.search)
+                console.log(url)
+                let href = document.getElementById("send-email-report-form").href
+
+                const encodedDairyName = encodeURIComponent("{{dairy}}");
+                let params = `?id={{id}}&dairy=${encodedDairyName}&`
+                for (const [key, value] of url) {
+                    params += `${key}=${value}&`
+                    console.log(`${key}:${value}`);
+                }
+                console.log("params", params)
+                href = href + params
+                console.log("action", href)
+                let new_form = document.getElementById("send-email-report-form")
+                new_form.href = href
+                let elements = document.getElementsByClassName('date-picker')
+
+                //new_form.submit()
+
+                //let new_form = document.getElementById("send-email-report-form")
+                //new_form.action = 'http://127.0.0.1:8000'
+
+                //determine if url consists of querystring
+                // Get the current URL's query string
+
+            })
+
+            let queryString = window.location.search;
+
+            // Check if a query string exists
+            if (queryString.length > 0) {
+                let filterDiv = document.getElementById('filter')
+                filterDiv.classList.remove('d-none')
+                filterDiv.classList.add('d-inline')
+                console.log('The URL has a query string:', queryString);
+
+            } else {
+                console.log('The URL does not have a query string.');
+            }
+
+
+        </script>
+
+
+
+        <script>
+            /*$(document).ready(function () {
+                //$('.id_user').select2();
+                //$('.id_dairy').select2();
+        
+                // Find the input element with the specified ID
+                var $oldInput = $(".date-picker");
+        
+                // Create a new input element with the desired type
+                var $newInput = $("<input>").attr({
+                    "type": "text",
+                    "id": $oldInput.attr("id"),
+                    "name": $oldInput.attr("name"),
+                    "value": $oldInput.val(),
+                    "class": $oldInput.attr("class"),
+                    "data-singal": "true"
+                    // Add any other attributes you need to copy
+                });
+                
+        
+                // Replace the old input element with the new one
+                $oldInput.replaceWith($newInput);
+                
+            });*/
+
+
+            function applyFilter(e) {
+                event.preventDefault()
+                let form = document.getElementById('filter-form')
+                let date = document.getElementById('date').value
+                let start_date = document.getElementById('start_date').value
+                let end_date = document.getElementById('end_date').value
+
+                if (start_date || end_date || date) {
+                    form.submit()
+                }
+
+
+            }
+
+
+
+
+
+
+        </script>
+        <script>
+
+
+            /* $(function () {
+                 $('.date-picker').nepaliDatePicker();
+             });
+             $("#date").on("dateSelect", function (event) {
+                     event.preventDefault()
+                     console.log("hello guys")
+                 });*/
+            function toggleFilter(e) {
+                let filterval = document.getElementById('filter').classList.value
+                let filterDiv = document.getElementById('filter')
+                let filterbtn = document.getElementById('toggleFilter')
+                console.log("filterval", filterval)
+                if (filterval == 'd-inline') {
+                    console.log("d-inline")
+                    console.log('inside if')
+                    filterDiv.classList.remove('d-inline')
+                    filterDiv.classList.add('d-none')
+
+
+                } else {
+                    console.log("d-none")
+                    console.log('inside else')
+                    filterDiv.classList.remove('d-none')
+                    filterDiv.classList.add('d-inline')
+
+
+                }
+            }
+
+
+
+        </script>
+        {%endblock%}
+
+        {%endblock content%}

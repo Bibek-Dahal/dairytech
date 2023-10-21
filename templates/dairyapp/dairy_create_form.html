@@ -3,7 +3,7 @@
 {% load i18n %}
 {%block title%}{%trans 'Create Dairy' %}{%endblock title%}
 {%block additionalcss%}
-    
+
 {%endblock%}
 
 
@@ -13,7 +13,7 @@
     <div class="row d-flex justify-content-center">
         <div class="col-md-6 col-sm-8 col-lg-5 col-11">
             {% if request.user.has_verified_dairy%}
-            <form method="POST" novalidate class="p-sm-5">
+            <form method="POST" novalidate class="shadow p-sm-4 p-4 p-lg-5">
                 {% csrf_token%}
                 {% if form.non_field_errors%}
                 {% for error in form.non_field_errors%}
@@ -21,13 +21,12 @@
                 {% endfor%}
                 {% endif%}
                 <div class="row text-center">
-                    <div class="card-header" style="background-color: #22668D; color:#F1F0E8;">
-                        <h1 class="text-center fw-bold">{%trans 'Insert Dairy' %}</h1>
+                    <div class="col">
+                        <h2 class="">{%trans 'Create Dairy' %}</h2>
                     </div>
                 </div>
-                
-                <div class="row mt-50 p-2" style="background-color: #F1F0E8;  border: 0px solid rgb(100, 97, 97);">
-                    {% for field in form%}
+                {% for field in form%}
+                <div class="row mt-80">
                     <div class="col-12 p-1">
                         {{field.label_tag}}
                     </div>
@@ -37,17 +36,12 @@
                     <div class="col-12">
                         <small class="text-danger">{{field.errors|striptags}}</small>
                     </div>
-            
+                </div>
                 {%endfor%}
                 <div class="row justify-content-center">
-
-                    <div class="mt-3 text-center mb-4 justify-content-around">
-    
-                            <button class="btn btn-light" style="background-color: #f7d597; border-color: #96B6C5;" type="submit">{%trans 'Submit' %}</button>
-    
-                        </div>
-                </div>
-                </div>
+                    <div class="d-grid gap-2 my-2 col-12 col-sm-8 mx-auto">
+                        <button class="btn fw-bold text-white" type="submit">{%trans 'Submit' %}</button>
+                    </div>
 
                 </div>
             </form>
@@ -65,15 +59,15 @@
                     <input value="{{uid}}" name="pid" type="hidden">
                     <input value="http://127.0.0.1:8000/verify-esewa?q={{request.user.id}}" type="hidden" name="su">
                     <input value="http://merchant.com.np/page/esewa_payment_failed?q=fu" type="hidden" name="fu">
-                    <input class="btn btn-primary" value="{% trans 'Pay with esewa' %}" type="submit">
+                    <input class="btn" value="{% trans 'Pay with esewa' %}" type="submit">
                 </form>
 
-                <br/>
-                <br/>
+                <br />
+                <br />
                 <form action="{% url 'dairyapp:initiate'%}" method="POST">
                     {%csrf_token%}
-                    <input type="hidden"  name="purchase_order_id" value="{{uid}}">
-                    <input type="hidden" name="amount" value="1000"  id="">
+                    <input type="hidden" name="purchase_order_id" value="{{uid}}">
+                    <input type="hidden" name="amount" value="1000" id="">
                     <input type="hidden" name="return_url" value="http://127.0.0.1:8000/dashboard/verify">
                     <input type="submit" class="btn btn-danger" value="pay with khalti">
                 </form>

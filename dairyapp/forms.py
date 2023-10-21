@@ -13,17 +13,25 @@ class CreateFatForm(forms.ModelForm):
     # fat_rate = forms.FloatField(widget=forms.NumberInput(attrs={"class": "form-control","placeholder":"enter your email"}))
     dairy = forms.ModelChoiceField(queryset=None,widget=forms.Select(attrs={"class":"form-control","maxlength":6}))
     # foo_select = forms.ModelMultipleChoiceField(queryset=None)
-    bonous_amount = forms.CharField(label=_("Bonus amount"),widget=forms.NumberInput(attrs={'class':'form-control'}))
+    bonous_amount = forms.CharField(initial=0,label=_("Bonus amount"),widget=forms.NumberInput(attrs={'class':'form-control'}))
+    # created_at = forms.DateField(label=_("Created At"),widget=DateInput(attrs={"class":"form-control date-picker","placeholder":"dd-mm-yyyy"},format="%Y-%m-%d"))
     def __init__(self,request,*args, **kwargs):
         super().__init__(*args, **kwargs)
         print("------------")
         self.fields["dairy"].queryset = Dairy.objects.filter(user=request.user)
+        instance = kwargs.get('instance')
+        
+        # Exclude 'created_at' field when creating a new instance
+        if instance is None:
+            self.fields.pop('created_at')
+        
     class Meta:
         model = FatRate
-        fields = ["fat_rate","dairy","bonous_amount"]
+        fields = ["fat_rate","dairy","bonous_amount","created_at"]
 
         widgets ={
             # 'country':CountrySelectWidget(attrs={"class": "form-select"}),
+            'created_at':forms.DateInput(attrs={"class":"form-control date-picker","placeholder":"dd-mm-yyyy"},format="%Y-%m-%d"),
             'fat_rate':forms.NumberInput(attrs={"class": "form-control","placeholder":"enter fat rate"}),
             # 'bonous_amount':forms.NumberInput(attrs={'class':'form-control'})
             # 'dairy':forms.ChoiceField(widget=forms.ModelChoiceIterator())
@@ -56,9 +64,11 @@ import datetime
 class CreateMilkRecordForm(forms.ModelForm):
     shiftinfo = getShift()
     # if 
+    print("shift info",shiftinfo)
+    milk_fat = forms.FloatField(label="Milk Fat",initial=0,widget=forms.NumberInput(attrs={"class":"form-control"}))
     user = forms.ModelChoiceField(label=_("User"),queryset=None,initial=1,widget=forms.Select(attrs={"class":"form-select"}))
-    dairy = forms.ModelChoiceField(label=_("Dairy"),queryset=None,initial=1,widget=forms.HiddenInput(attrs={"class":"form-select"}))
-    date = forms.DateField(label=_("Date"),initial=datetime.datetime.now(),widget=DateInput(attrs={"class":"form-control date-picker","placeholder":"dd-mm-yyyy"},format="%Y-%m-%d"))
+    dairy = forms.ModelChoiceField(label=_("Dairy"),queryset=None,initial=1,widget=forms.Select(attrs={"class":"form-select"}))
+    date = forms.DateField(label=_("Date"),widget=forms.DateInput(attrs={"class":"form-control date-picker","placeholder":"dd-mm-yyyy","data-single":'true'},format="%Y-%m-%d"))
     shift = forms.ChoiceField(label=_("Shift"),widget=forms.Select(attrs={"class":"form-select"}),initial=shiftinfo,choices=MilkRecord.shift_choices)
     # input_formats=['%Y%m%d']
     class Meta:
@@ -67,6 +77,7 @@ class CreateMilkRecordForm(forms.ModelForm):
 
         widgets = {
             # 'shift':forms.Select(attrs={"class":"form-select"}),
+            # 'date':forms.DateInput()
             'milk_weight':forms.NumberInput(attrs={"class":"form-control"}),
             'milk_fat':forms.NumberInput(attrs={"class":"form-control","min":"0"}),
         }
@@ -97,6 +108,7 @@ class UpdateMilkRecord(forms.ModelForm):
     # date = forms.DateField(initial=datetime.datetime.now(),widget=DateInput(attrs={"class":"form-control date-picker","placeholder":"dd-mm-yyyy"},format="%Y-%m-%d"))
     # shift = forms.ChoiceField(widget=forms.Select(attrs={"class":"form-select"}),choices=MilkRecord.shift_choices)
     # input_formats=['%Y%m%d']
+    date = forms.DateField(label=_("Date"),widget=forms.DateInput(attrs={"class":"form-control date-picker","placeholder":"dd-mm-yyyy","data-single":'true'},format="%Y-%m-%d"))
     class Meta:
         model = MilkRecord
         fields = ["shift","dairy","user","milk_weight","milk_fat","date"]

@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser,AbstractUser,BaseUserManager,PermissionsMixin
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
-
+from basemodels.models import BaseModel
 
 
 class MyUserManager(BaseUserManager):
@@ -81,7 +81,7 @@ class MyUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-class User(AbstractBaseUser,PermissionsMixin):
+class User(AbstractBaseUser,PermissionsMixin,BaseModel):
     first_name = models.CharField(_("First name"),max_length=40)
     middle_name = models.CharField(_("Middle name"),max_length=40,blank=True,null=True)
     last_name = models.CharField(_("Last name"),max_length=40)

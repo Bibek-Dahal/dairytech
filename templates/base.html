@@ -1,5 +1,6 @@
 {%load static%}
 {% load i18n %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,87 +8,133 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{%block title%} {%endblock%}</title>
-    <!-- <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}"> -->
+    <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="{%static 'css/nepali-date-picker.min.css'%}">
-    <link rel="stylesheet" href="{%static 'css/base.css'%}">
+    <link rel="stylesheet" href="{%static 'css/nepali-date-picker.min.css'%}" type="text/css">
+    <link rel="stylesheet" href="{%static 'css/variables.css'%}" type="text/css">
+    <link rel="stylesheet" href="{%static 'css/base.css'%}" type="text/css">
+    <link rel="stylesheet" href="{%static 'css/btn_icon.css'%}" type="text/css">
+    <!-- fontawesome links -->
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
 
-    <!-- <script src="{%static 'js/bootstrap.min.js'%}"></script> -->
-    <script src="{%static 'js/fontawesome.min.js'%}"></script>
+    <!-- htmx-link -->
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+    <script src="{%static 'js/bootstrap.min.js'%}"></script>
+
     <script src="{%static 'js/jquery.min.js'%}"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+
     {%block additionalcss%}
-    <link rel="stylesheet" href="{%static 'css/CustomCSS/navbar.css'%}">
+
     {%endblock%}
     {%block additionaljs%} {%endblock%}
+
+
 </head>
 
 <body>
     {%include './includes/partial_lang_sel.html'%}
     {%block navbar%}
     {%if request.user.is_authenticated%}
-        {%include './includes/authenticated_nav.html'%}
-        {%else%}
-            {%include './includes/anonymous_nav.html'%}
+    {%include './includes/authenticated_nav.html'%}
+    {%else%}
+    {%include './includes/anonymous_nav.html'%}
 
     {%endif%}
     {%endblock navbar%}
 
-    {%block content%}
+    <div class="container-fluid">
+        {%block messageinfo%}
 
-    <div class="col">
-        {%block messageinfo%}{%endblock%}
-        {%block table_data%}
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            {%if message.tags == 'error'%}
+
+            <div class="text-center msginfo alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>{{message}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {%elif message.tags == 'success'%}
+            <div class="text-center msginfo alert alert-primary alert-dismissible fade show" role="alert">
+                <strong>{{message}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <script>
+                let messageDivs = document.getElementsByClassName("messages");
+
+                for (let i = 0; i < messageDivs.length; i++) {
+                    (function (index) {
+                        setTimeout(function () {
+                            messageDivs[index].style.display = "none";
+                        }, 3000); // Remove the message after 5 seconds (5000 milliseconds)
+                    })(i);
+                }
+
+            </script>
+
+            {%endif%}
+            <!-- <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li> -->
+            {% endfor %}
+        </ul>
+        {% endif %}
+
         {%endblock%}
 
-    </div>
-
-    {%block pagination%}
-    {%if is_paginated%}
-    <div class="pagination">
-        <ul class="pagination justify-content-center flex-wrap mt-2 mb-4">
-            {% if page_obj.has_previous %}
-            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-            {% else %}
-            <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
-            {% endif %}
-            {% for i in page_range|default_if_none:page_obj.paginator.get_elided_page_range %}
-            {% if page_obj.number == i %}
-            <li class="active page-item"><span class="page-link">{{ i }} <span class="sr-only"></span></span>
-            </li>
-            {% else %}
-            {% if i == page_obj.paginator.ELLIPSIS %}
-            <li class="page-item"><span class="page-link">{{ i }}</span></li>
-            {% else %}
-            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-            {% endif %}
-            {% endif %}
-            {% endfor %}
-            {% if page_obj.has_next %}
-            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-            {% else %}
-            <li class="disabled page-item"><span class="page-link">&raquo;</span></li>
-            {% endif %}
-        </ul>
 
     </div>
-    {%endif%}
-    {%endblock pagination%}
 
+    {%block content%}
 
-
+    {%block table_data%}
+    {%endblock%}
 
     {%endblock content%}
 
 
+    {%block pagination%}
+    {%if is_paginated%}
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <div class="pagination">
+                <ul class="pagination justify-content-center flex-wrap mt-2 mb-4">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link"
+                            href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                    {% else %}
+                    <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
+                    {% endif %}
+                    {% for i in page_range|default_if_none:page_obj.paginator.get_elided_page_range %}
+                    {% if page_obj.number == i %}
+                    <li class="active page-item"><span class="page-link">{{ i }} <span class="sr-only"></span></span>
+                    </li>
+                    {% else %}
+                    {% if i == page_obj.paginator.ELLIPSIS %}
+                    <li class="page-item"><span class="page-link">{{ i }}</span></li>
+                    {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+                    </li>
+                    {% else %}
+                    <li class="disabled page-item"><span class="page-link">&raquo;</span></li>
+                    {% endif %}
+                </ul>
 
+            </div>
+        </div>
+    </div>
+
+    {%endif%}
+    {%endblock pagination%}
     {%block footer%} {%endblock%}
     <script src="{%static 'js/lang_select.js'%}"></script>
 </body>

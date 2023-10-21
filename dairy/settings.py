@@ -18,6 +18,10 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(os.environ.get('DEBUG')))
+# DEBUG = os.environ.get('DEBUG')   
+# DEBUG = False
+print('DEBUG===',DEBUG)
+print(os.environ.get('DB_USER'))
 
 
 
@@ -27,6 +31,7 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(',')
 # Application definition
 
 INSTALLED_APPS = [
+    # 'clearcache',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,6 +43,12 @@ INSTALLED_APPS = [
     'allauth.account',
     'user',
     'dairyapp',
+    'django_nepali',
+    'fontawesomefree',
+    
+
+    
+    
     
     
 ]
@@ -77,23 +88,25 @@ WSGI_APPLICATION = 'dairy.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
+#     "default": {
+#         "ENGINE": os.environ.get("DB_ENGINE"),
+#         "NAME": os.environ.get("DB_NAME"),
+#         "USER": os.environ.get("DB_ROOT_USER"),
+#         "PASSWORD": os.environ.get("DB_ROOT_PASSWORD"),
+#         "HOST": os.environ.get("DB_HOST"),
+#         "PORT": os.environ.get("DB_PORT")
 #     }
 # }
 
-DATABASES = {
-    "default": {
-        "ENGINE": os.environ.get("DB_ENGINE"),
-        "NAME": os.environ.get("DB_NAME"),
-        "USER": os.environ.get("DB_ROOT_USER"),
-        "PASSWORD": os.environ.get("DB_ROOT_PASSWORD"),
-        "HOST": "db",
-        "PORT": os.environ.get("DB_PORT")
-    }
-}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -149,10 +162,21 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "my_account.User"
 
-# STATIC_URL = "static/"
+STATIC_URL = '/static/'
+STATIC_ROOT = '/home/merodairy/public_html/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR/'media'
+# STORAGES = {
+#     # ...
+#     "staticfiles": {
+#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+#     },
+# }
 
 
 #allauth
@@ -167,6 +191,7 @@ ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
 LOGIN_REDIRECT_URL = 'dairyapp:homepage'
 LOGIN_URL = 'account_login'
+
 # LOGOUT_REDIRECT_URL = 'account_login'
 
 # EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
@@ -200,9 +225,9 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = os.environ.get('EMAIL_PORT')
 
 
-#Celery 
-CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
-CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND')
+# #Celery 
+# CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
+# CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND')
 
-
+DATE_FORMAT = 'Y-m-d'
 

@@ -1,8 +1,102 @@
 body {
-    background-color: rgb(245, 238, 238);
+    /* background-color: rgb(245, 238, 238); */
+    /* background-color: var(--background-color) !important ; */
+
 }
 
 *{
-    box-sizing: border-box;
-    margin: 0px;
+    box-sizing: border-box !important;
+    
+
 }
+
+.btn{
+    background-color: var(--primary-color) !important;
+    font-weight: bold !important;
+    color: white !important;
+}
+
+.second-btn{
+    background-color: var(--third-color) !important;
+    font-weight: bold !important;
+    color: white !important;
+}
+
+
+.btn:hover{
+    background-color: var(--secondary-color) !important;
+}
+
+.second-btn:hover {
+    background-color: var(--hover-third-color) !important;
+}
+
+.lang-btn{
+    background-color: var(--secondary-color) !important;
+}
+
+.dropdown-menu li  a:hover{
+    background-color: var(--secondary-color)!important;
+}
+
+input{
+    border: 1px solid rgb(171, 137, 137) !important;
+}
+
+input:focus {
+    border: 1px solid var(--primary-color) !important;
+    box-shadow: none !important;
+    /* Add any other custom styles you want */
+}
+
+/* nav ul li a.active {
+    background-color: var(--secondary-color) !important;
+    
+    color: #fff;
+    border-radius: 10%;
+    
+} */
+
+.avatar-wrapper img{
+    width: 100% !important;
+}
+
+.avatar-wrapper{
+    width: 40px !important;
+    height: 40px !important;
+    /* object-fit: cover !important; */
+}
+
+.rounded-circle {
+    width: 100%;
+    height: 100%;
+}
+
+.custom-circular-image {
+    width: 40px;
+    /* Adjust the size of the circle as needed */
+    height: 40px;
+    /* Make it square for a perfect circle */
+    background-color: var(--secondary-color);
+    /* Background color for the circle */
+    border-radius: 50%;
+    /* Create a circular shape */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    /* Text color for the initial letter */
+    font-size: 24px;
+    /* Adjust the font size as needed */
+    font-weight: bold;
+    /* Adjust font-weight as needed */
+    text-transform: uppercase;
+    /* Convert the text to uppercase */
+}
+
+.create-milk-form{
+    background-color: var(--secondary-color) !important;
+    margin: 4px;
+}
+
+
