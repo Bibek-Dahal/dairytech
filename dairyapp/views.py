@@ -766,26 +766,24 @@ class SendMilkReportEmialView(View):
             morning_milk_records = MilkRecord.objects.filter(dairy__user=self.request.user,dairy=dairy,shift="morning",user=user,date__gte=start_date, date__lte=end_date)
             night_milk_records = MilkRecord.objects.filter(dairy__user=self.request.user,date__gte=start_date, date__lte=end_date,shift="night",user=user)
 
-
-            # if not morning_milk_records or not night_milk_records:
-            #     messages.error(request, _("Please select valid information before genarating milk report"))
-            #     return redirect("dairyapp:member_milk_record",id=user_id,dairy=dairy_name)
+            milk_wg = 0
+            avg_fat = 0
+            nmilk_wg = 0
+            navg_fat = 0
             
-            # print(morning_milk_records)
-            milk_wg = morning_milk_records.aggregate(Sum("milk_weight")).get('milk_weight__sum')
-            print("milk_wg",milk_wg)
-            if milk_wg is None:
-                milk_wg = 0
+
+            if morning_milk_records.exists():
+            
+                milk_wg = morning_milk_records.aggregate(Sum("milk_weight")).get('milk_weight__sum')
+                print("milk_wg",milk_wg)
+            
+                avg_fat = morning_milk_records.aggregate(Avg("milk_fat")).get('milk_fat__avg')
 
             
-            avg_fat = morning_milk_records.aggregate(Avg("milk_fat")).get('milk_fat__avg')
-
-            if avg_fat is None:
-                avg_fat = 0
                 
             fat_rate = get_fat_rate_fun(self,start_date=start_date,end_date=end_date,dairy=dairy,fat_rate_obj=fat_rate_obj)
 
-            if fat_rate != 0:
+            if fat_rate != 0 and night_milk_records.exists():
                 total_price = fat_rate['fat_rate']*milk_wg*avg_fat
 
                 print("before nmilk_wg")
