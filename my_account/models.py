@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser,AbstractUser,BaseUserMan
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from basemodels.models import BaseModel
+from django.utils.html import mark_safe
 
 
 class MyUserManager(BaseUserManager):
@@ -106,7 +107,15 @@ class User(AbstractBaseUser,PermissionsMixin,BaseModel):
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
 
     def __str__(self):
-        return self.get_name()
+        full_name = self.get_name()
+        # profile = self.profile
+        
+        # print(profile)
+        # print()
+        # if profile.profile_pic:
+        #     print("exists")
+        #     full_name = mark_safe(f'<img src="{profile.profile_pic.url}" width="50" style="border-radius: 50%;" />')
+        return full_name
     
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["first_name","last_name","phone_number"]
@@ -114,9 +123,10 @@ class User(AbstractBaseUser,PermissionsMixin,BaseModel):
     objects = MyUserManager()
 
     def get_name(self) -> str:
+        
         if self.middle_name:
-            return f"{self.first_name} {self.middle_name} {self.last_name}"
-        return f"{self.first_name} {self.last_name}"
+            return f"{self.first_name} {self.middle_name} {self.last_name} {self.phone_number}"
+        return f"{self.first_name} {self.last_name} {self.phone_number}"
 
     
     

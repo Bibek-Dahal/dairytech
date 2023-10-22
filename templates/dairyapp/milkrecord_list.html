@@ -72,15 +72,17 @@
                                             style="color: var(--primary-color);"></i> </button>
 
                                 </form>
-                                <form id="delete-milk-form"
-                                    action="{% url 'dairyapp:delete_milk_record' userid=id name=dairy.slug%}"
+
+                                <form id="del-form"
+                                    action="{% url 'dairyapp:delete_milk_record' userid=milkrecord.user.id name=dairy milkid=milkrecord.id%}"
                                     method="POST" class="d-inline">
                                     {% csrf_token %}
-                                    <button type="submit" class="button-with-icon"><i class="fa-solid fa-trash fa-xl"
+                                    <button type="button" class="button-with-icon"><i class="fa-solid fa-trash fa-xl"
                                             style="color: #e10e0e;"></i></i>
                                     </button>
                                     <!-- <button type="submit" class="btn btn-primary">{%trans 'delete'%}</button> -->
                                 </form>
+
                             </td>
 
                         </tr>
@@ -152,6 +154,31 @@
                 <!-- Dateq<input type="text" data-single="true" class="date-picker" placeholder="Select Date(s)"> -->
             </div>
         </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">{%trans 'Delete Milk Record'%}</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>{% trans 'Are you sure you want to delete?'%}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" id="yes-button">{%trans 'Yes'%}</button>
+                        <button type="button" class="btn" data-bs-dismiss="modal">{%trans 'No'%}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById('yes-button').addEventListener("click", () => {
+                //console.log("hello")
+                document.getElementById("del-form").submit()
+            })
+        </script>
 
 
         <script>
