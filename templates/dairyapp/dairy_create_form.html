@@ -12,7 +12,7 @@
 <div class="container mt-5">
     <div class="row d-flex justify-content-center">
         <div class="col-md-6 col-sm-8 col-lg-5 col-11">
-
+            {%if request.user.has_verified_dairy%}
             <form method="POST" novalidate class="shadow p-sm-4 p-4 p-lg-5">
                 {% csrf_token%}
                 {% if form.non_field_errors%}
@@ -45,7 +45,9 @@
 
                 </div>
             </form>
-
+            {%else%}
+            <h1>Please contact bibekdahal479@gmail.com | contact@merodairy.com for being able to add dairy</h1>
+            {%endif%}
 
             {%comment%}
 
