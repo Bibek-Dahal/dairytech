@@ -166,7 +166,14 @@ AUTH_USER_MODEL = "my_account.User"
 
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR/'static'
+
+if bool(int(os.environ.get('PRODUCTION'))):
+    STATIC_ROOT = BASE_DIR/'static'
+
+if not bool(int(os.environ.get('PRODUCTION'))):
+    STATICFILES_DIRS = [
+        BASE_DIR/'static'
+    ]
 
 
 

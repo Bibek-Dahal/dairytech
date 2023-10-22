@@ -72,7 +72,9 @@
                                             style="color: var(--primary-color);"></i> </button>
 
                                 </form>
-                                <form action="#" method="POST" class="d-inline">
+                                <form id="delete-milk-form"
+                                    action="{% url 'dairyapp:delete_milk_record' userid=id name=dairy.slug%}"
+                                    method="POST" class="d-inline">
                                     {% csrf_token %}
                                     <button type="submit" class="button-with-icon"><i class="fa-solid fa-trash fa-xl"
                                             style="color: #e10e0e;"></i></i>

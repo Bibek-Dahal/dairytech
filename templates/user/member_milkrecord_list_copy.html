@@ -35,7 +35,7 @@
                             <th scope="col">{% trans 'Milk Weight' %}</th>
                             <th scope="col">{% trans 'Milk Fat' %}</th>
                             <th scope="col">{% trans 'Date' %}</th>
-                            <th scope="col">{% trans 'Actions' %}</th>
+
 
                         </tr>
                     </thead>
@@ -50,24 +50,7 @@
                             <td>{{milkrecord.milk_weight}}</td>
                             <td>{{milkrecord.milk_fat}}</td>
                             <td>{{milkrecord.date|convert_to_nepali}}</td>
-                            <td>
-                                <form action="{% url 'dairyapp:update_milk_record' id=milkrecord.id dairy=dairy%}"
-                                    class="d-inline">
 
-                                    <!-- <button type="submit" class="btn btn-primary">{%trans 'edit' %}</button> -->
-                                    <button type="submit" class="button-with-icon"><i
-                                            class="fa-solid fa-pen-to-square fa-xl"
-                                            style="color: var(--primary-color);"></i> </button>
-
-                                </form>
-                                <form action="#" method="POST" class="d-inline">
-                                    {% csrf_token %}
-                                    <button type="submit" class="button-with-icon"><i class="fa-solid fa-trash fa-xl"
-                                            style="color: #e10e0e;"></i></i>
-                                    </button>
-                                    <!-- <button type="submit" class="btn btn-primary">{%trans 'delete'%}</button> -->
-                                </form>
-                            </td>
 
                         </tr>
 

@@ -607,8 +607,18 @@ class ListMemberMilkRecord(ListView):
             print(e)
             raise BadRequest("Bad Request")
    
-
-    
+@method_decorator(login_required(login_url='account_login'),name="dispatch")
+class DeleteMilkRecordView(View):
+    def post(self,request,*args,**kwargs):
+        dairy = get_object_or_404(Dairy,user=self.request.user)
+        user = get_object_or_404(User,id=kwargs.get('userid'))
+        milkrecord = get_object_or_404(MilkRecord,id=kwargs.get('milkid'))
+        
+        milkrecord.delete()
+        return redirect("dairyapp:member_milk_record",id=user.id,dairy=dairy.slug)
+        
+        print(user)
+        print(dairy)
     
     
 @method_decorator(login_required(login_url='account_login'),name="dispatch")
@@ -685,8 +695,9 @@ class ListDairyMembers(ListView):
         
         context['dairy'] = get_object_or_404(Dairy,slug=self.kwargs['dairy'],user=self.request.user)
         return context
-    
-    
+
+from xhtml2pdf import pisa
+from django.template.loader import get_template
 
 @method_decorator(login_required(login_url='account_login'),name="dispatch")
 @method_decorator(verified_dairy_user,name="dispatch")
@@ -782,13 +793,14 @@ class SendMilkReportEmialView(View):
             
                 
             fat_rate = get_fat_rate_fun(self,start_date=start_date,end_date=end_date,dairy=dairy,fat_rate_obj=fat_rate_obj)
-
-            if fat_rate != 0 and night_milk_records.exists():
-                total_price = fat_rate['fat_rate']*milk_wg*avg_fat
-
-                print("before nmilk_wg")
+            if night_milk_records.exists():
                 nmilk_wg = night_milk_records.aggregate(Sum("milk_weight")).get('milk_weight__sum')
                 navg_fat = night_milk_records.aggregate(Avg("milk_fat")).get('milk_fat__avg')
+            
+            if fat_rate:
+                print("before nmilk_wg")
+                
+                total_price = fat_rate['fat_rate']*milk_wg*avg_fat
                 nfat_rate = fat_rate['fat_rate']
 
                 # print(f"nmilk_wg:{nmilk_wg} navg_fat:{navg_fat} nfat_rate:{nfat_rate}")
@@ -839,7 +851,20 @@ class SendMilkReportEmialView(View):
 
                 filename = 'test.pdf'
                 mimetype_pdf = 'application/pdf'
-                # print(rendered_mail_template)
+                
+
+                # template_path = "dairyapp/email/report.html"
+                # response = HttpResponse(content_type = 'application/pdf')
+                # template = get_template(template_path)
+                # html = template.render(context)
+                # print(html)
+                # pisa_status = pisa.CreatePDF(
+                #     html,data=response
+                # )
+                # if pisa_status.err:
+                #     return HttpResponse('error occoured')
+                # return response
+
 
                 try:
 
@@ -866,6 +891,7 @@ class SendMilkReportEmialView(View):
                 messages.success(request,_("milk report email sent"))
                 return redirect("dairyapp:member_milk_record",id=user_id,dairy=dairy_name)
             else:
+                print("inside else man")
                 return redirect("dairyapp:member_milk_record",id=user_id,dairy=dairy_name)
                 
 
