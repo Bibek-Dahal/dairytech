@@ -26,6 +26,7 @@
                     <th scope="col">{%trans 'First Name'%}</th>
                     <th scope="col">{%trans 'Middle Name'%}</th>
                     <th scope="col">{%trans 'Last Name'%}</th>
+                    <th scope="col">{%trans 'Email'%}</th>
                     <th scope="col">{%trans 'Phone Number'%}</th>
                     <th scope="col">{%trans 'Profile'%}</th>
                     <th scope="col">{%trans 'Actions'%}</th>
@@ -48,6 +49,7 @@
                             {%endif%}
                         </td>
                         <td>{{member.last_name}}</td>
+                        <td>{{member.email}}</td>
                         <td>{{member.phone_number}}</td>
                         <td>
                             <div class="avatar-wrapper">
