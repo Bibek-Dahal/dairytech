@@ -62,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+ 
 ]
 
 ROOT_URLCONF = 'dairy.urls'
@@ -69,7 +70,7 @@ ROOT_URLCONF = 'dairy.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR/'templates'],
+        'DIRS': [BASE_DIR/'templates','django.template.context_processors.request',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -233,4 +234,6 @@ EMAIL_PORT = os.environ.get('EMAIL_PORT')
 # CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND')
 
 DATE_FORMAT = 'Y-m-d'
+
+
 

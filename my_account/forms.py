@@ -173,6 +173,9 @@ class MyUserCreationForm(SignupForm):
         email =  super().clean_email()
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError(_('User with email address already exists.'))
+        if not email.split('@')[1] == 'gmail.com':
+            raise forms.ValidationError(_('Enter a valid email address.'))
+
         return email
         
 
