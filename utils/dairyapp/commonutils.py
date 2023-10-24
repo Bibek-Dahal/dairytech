@@ -57,10 +57,7 @@ def getFatBasedOnDate(start_date,end_date,dairy,req):
     
     print("inside while")
     print(objs.first())
-    print(objs.first().created_at.date())
-    print(start_date_date)
     if objs and (start_date_date >= objs.first().created_at.date()):
-        print("inside if man")
         return objs.first()
         
         
@@ -110,40 +107,36 @@ def get_fat_rate_fun(self,start_date,end_date,dairy,fat_rate_obj):
         """
             New Logic
         """
-        filter_obj = fat_rate_obj.filter(created_at__gte=start_date)
-        if filter_obj.count()>1:
-            
+        if fat_rate_obj.count()>1:
             #raise error if multiple fat range exists within date range
             messages.error(self.request, _("Cannot apply filter witin date range. Multiple fat rate exists."))
             return 0
-        elif filter_obj.count() == 1:
-            print("inside second elif")
-            fat_rate = filter_obj.first().get_fat_rate
-            self.kwargs['fat_rate'] = filter_obj.first().fat_rate
-            self.kwargs['bonous'] = filter_obj.first().bonous_amount
+        elif fat_rate_obj.count() == 1:
+            fat_rate = fat_rate_obj.first().get_fat_rate
+            self.kwargs['fat_rate'] = fat_rate_obj.first().fat_rate
+            self.kwargs['bonous'] = fat_rate_obj.first().bonous_amount
             self.kwargs['total_fat_rate'] = fat_rate
             print("fat rate===",fat_rate)
             # return fat_rate
             return {
                 'fat_rate':fat_rate,
-                'fat_rate_obj':filter_obj.first()
+                'fat_rate_obj':fat_rate_obj.first()
             }
 
-        # elif getFatBasedOnDate(start_date,end_date,dairy,self.request) is not None:
+        elif getFatBasedOnDate(start_date,end_date,dairy,self.request) is not None:
             
-        #     print("inside third")
-        #     fat_rate_obj = getFatBasedOnDate(start_date,end_date,dairy,self.request)
-        #     fat_rate = fat_rate_obj.get_fat_rate
-        #     self.kwargs['fat_rate'] = fat_rate_obj.fat_rate
-        #     self.kwargs['bonous'] = fat_rate_obj.bonous_amount
-        #     self.kwargs['total_fat_rate'] = fat_rate
-        #     return {
-        #         'fat_rate':fat_rate,
-        #         'fat_rate_obj':fat_rate_obj
-        #     }
+            print("inside first elif")
+            fat_rate_obj = getFatBasedOnDate(start_date,end_date,dairy,self.request)
+            fat_rate = fat_rate_obj.get_fat_rate
+            self.kwargs['fat_rate'] = fat_rate_obj.fat_rate
+            self.kwargs['bonous'] = fat_rate_obj.bonous_amount
+            self.kwargs['total_fat_rate'] = fat_rate
+            return {
+                'fat_rate':fat_rate,
+                'fat_rate_obj':fat_rate_obj
+            }
 
         # elif FatRate.objects.filter(dairy=dairy,dairy__user=self.request.user).order_by("created_at").exists():
-        #     print("inside foruth elif")
         #     fat_rate_obj = FatRate.objects.filter(dairy=dairy,dairy__user=self.request.user).order_by("created_at").first()
         #     fat_rate = fat_rate_obj.get_fat_rate
         #     self.kwargs['fat_rate'] = fat_rate_obj.fat_rate

@@ -585,7 +585,7 @@ class ListMemberMilkRecord(ListView):
                     print("milk_weight",milk_wg)
                     print("average_fat",avg_fat)
 
-                    fat_rate_obj = FatRate.objects.filter(dairy=dairy,dairy__user=self.request.user)
+                    fat_rate_obj = FatRate.objects.filter(dairy=dairy,dairy__user=self.request.user,created_at__range=(start_date,end_date))
                     print("count obj---",fat_rate_obj.count())
                 
                     
@@ -737,7 +737,7 @@ class SendMilkReportEmialView(View):
             
             
             
-            fat_rate_obj = FatRate.objects.filter(dairy=dairy,dairy__user=self.request.user)
+            fat_rate_obj = FatRate.objects.filter(dairy=dairy,dairy__user=self.request.user,created_at__range=(start_date,end_date))
             print("count obj---",fat_rate_obj.count())
 
 
