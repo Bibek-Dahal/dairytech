@@ -47,11 +47,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'google_translate',
     
-
-    
-    
-    
-    
+  
 ]
 
 MIDDLEWARE = [

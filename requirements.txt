@@ -23,7 +23,6 @@ django-autoslug==1.9.9
 django-clearcache==1.2.1
 django-dotenv==1.4.2
 django-extensions==3.2.3
-django-google-translate==1.1
 django-nepali==0.1.0
 fontawesomefree==6.4.2
 fonttools==4.42.1
