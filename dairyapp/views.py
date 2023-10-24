@@ -737,7 +737,7 @@ class SendMilkReportEmialView(View):
             
             
             
-            fat_rate_obj = FatRate.objects.filter(dairy=dairy,dairy__user=self.request.user,created_at__range=(start_date,end_date))
+            fat_rate_obj = FatRate.objects.filter(dairy=dairy,dairy__user=self.request.user)
             print("count obj---",fat_rate_obj.count())
 
 

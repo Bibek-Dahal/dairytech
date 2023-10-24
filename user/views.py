@@ -171,7 +171,7 @@ class MemberMilkRecord(ListView):
                     print("average_fat",avg_fat)
 
 
-                    fat_rate_obj = FatRate.objects.filter(dairy=dairy,created_at__range=(start_date,end_date))
+                    fat_rate_obj = FatRate.objects.filter(dairy=dairy)
                     print("count obj---",fat_rate_obj.count())
 
                     ft = get_fat_rate_fun(self,start_date=start_date,end_date=end_date,dairy=dairy,fat_rate_obj=fat_rate_obj)
