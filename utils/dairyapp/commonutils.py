@@ -126,7 +126,7 @@ def get_fat_rate_fun(self,start_date,end_date,dairy,fat_rate_obj):
             # return fat_rate
             return {
                 'fat_rate':fat_rate,
-                'fat_rate_obj':fat_rate_obj.first()
+                'fat_rate_obj':filter_obj.first()
             }
 
         # elif getFatBasedOnDate(start_date,end_date,dairy,self.request) is not None:
