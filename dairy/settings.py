@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django_nepali',
     'fontawesomefree',
     'django_extensions',
+    'google_translate',
     
 
     

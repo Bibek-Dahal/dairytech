@@ -1,5 +1,6 @@
 {% load i18n %}
 {%load static%}
+{% load google_translate %}
 
 <nav class="sticky-top navbar navbar-expand-lg navbar-expand-md navbar-expand-sm bg-body-tertiary"
     style="background-color: var(--primary-color) !important">
@@ -54,12 +55,13 @@
                 {%endif%}
 
                 <li class="nav-item">
-                    <a class="nav-link">{%include './lang_select.html'%}</a>
+                    <a class="nav-link">{% google_translate %}</a>
 
 
                 </li>
 
             </ul>
+
             <div class="d-flex justify-content-end">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
@@ -82,11 +84,11 @@
                             <a href="{%url 'user:profile'%}"><img class="rounded-circle" src="{{pic.url}}"
                                     alt="No img"></a>
                             {%else%}
-                                <div class="custom-circular-image">
-                                    <a style="text-decoration: none;" href="{%url 'user:profile'%}"><span
-                                            class="initial-letter fw-bold"
-                                            style="color:#ffffff;">{{request.user.first_name|slice:":1"}}{{request.user.last_name|slice:":1"}}</span></a>
-                                </div>
+                            <div class="custom-circular-image">
+                                <a style="text-decoration: none;" href="{%url 'user:profile'%}"><span
+                                        class="initial-letter fw-bold"
+                                        style="color:#ffffff;">{{request.user.first_name|slice:":1"}}{{request.user.last_name|slice:":1"}}</span></a>
+                            </div>
 
                             {%endif%}
                             {%endwith%}
