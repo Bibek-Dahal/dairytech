@@ -585,13 +585,17 @@ class ListMemberMilkRecord(ListView):
                     print("milk_weight",milk_wg)
                     print("average_fat",avg_fat)
 
-                    fat_rate_obj = FatRate.objects.filter(dairy=dairy,dairy__user=self.request.user,created_at__range=(start_date,end_date))
+                    fat_rate_obj = FatRate.objects.filter(dairy=dairy,dairy__user=self.request.user)
                     print("count obj---",fat_rate_obj.count())
                 
                     
                     try:
                         print("inside try") 
-                        total_price = get_fat_rate_fun(self,start_date=start_date,end_date=end_date,dairy=dairy,fat_rate_obj=fat_rate_obj)['fat_rate']*milk_wg*avg_fat
+                        if fat_rate_obj != 0:
+
+                            total_price = get_fat_rate_fun(self,start_date=start_date,end_date=end_date,dairy=dairy,fat_rate_obj=fat_rate_obj)['fat_rate']*milk_wg*avg_fat
+                        else:
+                            toatl_price = 0
                     except Exception as e:
                         print("e==",e)
                         total_price = 0
