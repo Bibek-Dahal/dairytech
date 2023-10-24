@@ -136,16 +136,16 @@ def get_fat_rate_fun(self,start_date,end_date,dairy,fat_rate_obj):
                 'fat_rate_obj':fat_rate_obj
             }
 
-        # elif FatRate.objects.filter(dairy=dairy,dairy__user=self.request.user).order_by("created_at").exists():
-        #     fat_rate_obj = FatRate.objects.filter(dairy=dairy,dairy__user=self.request.user).order_by("created_at").first()
-        #     fat_rate = fat_rate_obj.get_fat_rate
-        #     self.kwargs['fat_rate'] = fat_rate_obj.fat_rate
-        #     self.kwargs['bonous'] = fat_rate_obj.bonous_amount
-        #     self.kwargs['total_fat_rate'] = fat_rate
-        #     return {
-        #         'fat_rate':fat_rate,
-        #         'fat_rate_obj':fat_rate_obj.first()
-        #     }
+        elif FatRate.objects.filter(dairy=dairy,dairy__user=self.request.user).order_by("created_at").exists():
+            fat_rate_obj = FatRate.objects.filter(dairy=dairy,dairy__user=self.request.user).order_by("created_at").first()
+            fat_rate = fat_rate_obj.get_fat_rate
+            self.kwargs['fat_rate'] = fat_rate_obj.fat_rate
+            self.kwargs['bonous'] = fat_rate_obj.bonous_amount
+            self.kwargs['total_fat_rate'] = fat_rate
+            return {
+                'fat_rate':fat_rate,
+                'fat_rate_obj':fat_rate_obj.first()
+            }
         else:
             print("inside last else")
             messages.error(self.request, _("Cannot find fat rate witin date range.Fat rate doesnot exists."))
